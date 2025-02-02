@@ -148,6 +148,6 @@ public DireccionDTO(String callePrincipal, String calleSecundaria, Integer idCli
         + "\n NombreCliente         : "+ getNombreCliente()
         + "\n ApellidoCliente       : "+ getApellidoCliente()
         + "\n NombreBibliotecario   : "+ getNombreBibliotecario()
-        + "\n ApellidoBibliotecario : "+ getApellidoBibliotecario() ;
+        + "\n ApellidoBibliotecario : "+ getApellidoBibliotecario() +"\n";
     }
 }

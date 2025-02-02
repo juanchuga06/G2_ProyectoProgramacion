@@ -69,6 +69,6 @@ public class SexoDTO  {
         + "\n Nombre            : "+ getNombre           ()
         + "\n Estado            : "+ getEstado           ()
         + "\n FechaCreacion     : "+ getFechaCreacion    ()
-        + "\n FechaModificacion : "+ getFechaModificacion();
+        + "\n FechaModificacion : "+ getFechaModificacion() +"\n";
     }
 }

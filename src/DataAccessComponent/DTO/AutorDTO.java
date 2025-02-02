@@ -69,7 +69,7 @@ public class AutorDTO {
         + "\n NombreAutor       : "+ getNombreAutor      ()
         + "\n Estado            : "+ getEstado           ()
         + "\n FechaCreacion     : "+ getFechaCreacion    ()
-        + "\n FechaModificacion : "+ getFechaModificacion();
+        + "\n FechaModificacion : "+ getFechaModificacion() + "\n";
     }
 
 }

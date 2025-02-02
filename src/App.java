@@ -1,18 +1,18 @@
-import DataAccessComponent.DAO.ClienteDAO;
-import DataAccessComponent.DTO.ClienteDTO;
+import DataAccessComponent.DAO.SexoDAO;
+import DataAccessComponent.DTO.SexoDTO;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // try {
-        //     SexoDAO sDao = new SexoDAO();
-        //     for (SexoDTO s :  sDao.readAll())
-        //         System.out.println(s.toString());
-        //     System.out.println("-------------");
-        //     System.out.println(sDao.readBy(2));
-        //     System.out.println(sDao.readBy(3));
-        // } catch (Exception e) {
-        //     System.out.println(e.toString());
-        // }
+        try {
+            SexoDAO sDao = new SexoDAO();
+            for (SexoDTO s :  sDao.readAll())
+                System.out.println(s.toString());
+            System.out.println("-------------");
+            System.out.println(sDao.readBy(2));
+            System.out.println(sDao.readBy(3));
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
         // try {
         //     AutorDAO aDao = new AutorDAO();
@@ -36,15 +36,15 @@ public class App {
         //     System.out.println(e.toString());
         // }
 
-        try {
-            ClienteDAO dDao = new ClienteDAO();
-            for (ClienteDTO d :  dDao.readAll())
-                System.out.println(d.toString());
-            System.out.println("-------------");
-            System.out.println(dDao.readBy(2));
-            System.out.println(dDao.readBy(10));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        // try {
+        //     ClienteDAO dDao = new ClienteDAO();
+        //     for (ClienteDTO d :  dDao.readAll())
+        //         System.out.println(d.toString());
+        //     System.out.println("-------------");
+        //     System.out.println(dDao.readBy(2));
+        //     System.out.println(dDao.readBy(10));
+        // } catch (Exception e) {
+        //     System.out.println(e.toString());
+        // }
     }
 }

@@ -160,6 +160,6 @@ public class ClienteDTO {
         + "\n FechaCreacion         : "+ getFechaCreacion()
         + "\n FechaModificacion     : "+ getFechaModificacion()
         + "\n EstadoCivil           : "+ getNombreEstadoCivil()
-        + "\n Sexo                  : "+ getNombreSexo() ;
+        + "\n Sexo                  : "+ getNombreSexo() + "\n";
     }
 }
