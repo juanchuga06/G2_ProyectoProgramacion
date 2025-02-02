@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS Editorial;
 DROP TABLE IF EXISTS GeneroLibro;
 
 
+
 CREATE TABLE GeneroLibro(
     IdGeneroLibro           INTEGER PRIMARY KEY AUTOINCREMENT,
     NombreGeneroLibro       VARCHAR(15) NOT NULL,
@@ -167,5 +168,4 @@ CREATE TABLE Factura (
     FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdVenta)    REFERENCES Venta(IdVenta)
 );
-
 
