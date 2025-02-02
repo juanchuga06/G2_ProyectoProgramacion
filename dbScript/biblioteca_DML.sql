@@ -299,3 +299,18 @@ FROM Factura as f
 INNER JOIN Venta as v on f.IdVenta = v.IdVenta
 INNER JOIN Cliente as c on v.IdCliente = c.IdCliente;
 
+SELECT IdSexo
+    ,Nombre
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+    FROM Sexo
+    WHERE   Estado ='A';
+
+SELECT IdAutor
+    ,NombreAutor
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+FROM    Autor
+WHERE   Estado ='A';
