@@ -11,12 +11,11 @@ public class App {
     public static void main(String[] args) throws Exception {
          
         try {
-            EstadoCivilDAO sDao = new EstadoCivilDAO();
-            EstadoCivilDTO sd = new EstadoCivilDTO();
+            LibroDAO sDao = new LibroDAO();
+            // EstadoCivilDTO sd = new EstadoCivilDTO();
            
-            sDao.delete(6);
         //sDao.create(5);
-            for (EstadoCivilDTO s :  sDao.readAll())
+            for (LibroDTO s :  sDao.readAll())
                 System.out.println(s.toString());
             System.out.println("-------------");
             System.out.println(sDao.readBy(2));

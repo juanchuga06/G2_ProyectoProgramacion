@@ -25,9 +25,9 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                      +" , l.Estado             "
                      +" , l.FechaCreacion      "
                      +" , l.FechaModificacion  "
-                     +" , gl.NombreGeneroLibro "
-                     +" , e.NombreEditorial    "
-                     +" , a.NombreAutor        "
+                     +" , gl.IdGeneroLibro "
+                     +" , e.IdEditorial    "
+                     +" , a.IdAutor        "
                      +" , l.CodigoBarras       "
                      +" , l.CodigoISBN         "
                      +" FROM Libro as l        "
@@ -48,9 +48,9 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                                 ,rs.getString(6)
                                 ,rs.getString(7)
                                 ,rs.getString(8)
-                                ,rs.getString(9)
-                                ,rs.getString(10)
-                                ,rs.getString(11)
+                                ,rs.getInt(9)
+                                ,rs.getInt(10)
+                                ,rs.getInt(11)
                                 ,rs.getString(12)
                                 ,rs.getString(13));
             }
@@ -65,16 +65,16 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
     public List<LibroDTO> readAll() throws Exception {
         List <LibroDTO> lst = new ArrayList<>();
         String query =" SELECT l.IdLibro       "
-                     +" , l.titulo            "
-                     +" , l.numeroEdicion     "
+                     +" , l.titulo             "
+                     +" , l.numeroEdicion      "
                      +" , l.numeroEjemplares   "
-                     +" , l.fechaPublicacion    "
+                     +" , l.fechaPublicacion   "
                      +" , l.estado             "
                      +" , l.fechaCreacion      "
                      +" , l.fechaModificacion  "
-                     +" , gl.nombreGeneroLibro "
-                     +" , e.nombreEditorial    "
-                     +" , a.nombreAutor        "
+                     +" , gl.IdGeneroLibro     "
+                     +" , e.IdEditorial        "
+                     +" , a.IdAutor            "
                      +" , l.codigoBarras       "
                      +" , l.codigoISBN         "
                      +" FROM Libro as l        "
@@ -96,9 +96,9 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                                 ,rs.getString(6)
                                 ,rs.getString(7)
                                 ,rs.getString(8)
-                                ,rs.getString(9)
-                                ,rs.getString(10)
-                                ,rs.getString(11)
+                                ,rs.getInt(9)
+                                ,rs.getInt(10)
+                                ,rs.getInt(11)
                                 ,rs.getString(12)
                                 ,rs.getString(13));
             lst.add(l);

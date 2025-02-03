@@ -2,18 +2,16 @@ package DataAccessComponent.DTO;
 
 public class BibliotecarioDTO {
     private Integer idBibliotecario;    
-    private String Nombre;             
-    private String Apellido;           
-    private String Cedula;             
-    private String Telefono;           
-    private String CorreoElectronico;  
-    private String Usuario;            
-    private String Contrasenia ;       
-    private String Estado;             
-    private String FechaCreacion;      
-    private String FechaModificacion;  
-    private String NombreEstadoCivil;            
-    private String NombreSexo;
+    private String  Nombre;             
+    private String  Apellido;           
+    private String  Cedula;             
+    private String  Telefono;           
+    private String  CorreoElectronico;  
+    private String  Usuario;            
+    private String  Contrasenia ;       
+    private String  Estado;             
+    private String  FechaCreacion;      
+    private String  FechaModificacion;  
     private Integer IdEstadoCivil;
     private Integer IdSexo;
 
@@ -37,7 +35,7 @@ public class BibliotecarioDTO {
     
     public BibliotecarioDTO(Integer idBibliotecario, String nombre, String apellido, String cedula, String telefono,
             String correoElectronico, String usuario, String contrasenia, String estado, String fechaCreacion,
-            String fechaModificacion, String nombreEstadoCivil, String nombreSexo) {
+            String fechaModificacion, Integer nombreEstadoCivil, Integer nombreSexo) {
 
                 
         setIdBibliotecario(idBibliotecario);
@@ -51,8 +49,8 @@ public class BibliotecarioDTO {
         setEstado(estado);
         setFechaCreacion(fechaCreacion);
         setFechaModificacion(fechaModificacion);
-        setNombreEstadoCivil(nombreEstadoCivil);
-        setNombreSexo(nombreSexo);
+        setIdEstadoCivil(nombreEstadoCivil);
+        setIdSexo(nombreSexo);
     }
 
     
@@ -189,27 +187,6 @@ public class BibliotecarioDTO {
     public void setFechaModificacion(String fechaModificacion) {
         FechaModificacion = fechaModificacion;
     }
-
-
-    public String getNombreEstadoCivil() {
-        return NombreEstadoCivil;
-    }
-
-
-    public void setNombreEstadoCivil(String nombreEstadoCivil) {
-        NombreEstadoCivil = nombreEstadoCivil;
-    }
-
-
-    public String getNombreSexo() {
-        return NombreSexo;
-    }
-
-
-    public void setNombreSexo(String nombreSexo) {
-        NombreSexo = nombreSexo;
-    }
-
     
     public String toString(){
         return getClass().getName() 
@@ -224,8 +201,8 @@ public class BibliotecarioDTO {
         + "\n Estado              :"+ getEstado           ()
         + "\n FechaCreacion       :"+ getFechaCreacion    ()
         + "\n FechaModificacion   :"+ getFechaModificacion()
-        + "\n EstadoCivil         :"+ getNombreEstadoCivil()
-        + "\n Sexo                :"+ getNombreSexo       () + "\n";
+        + "\n EstadoCivil         :"+ getIdEstadoCivil    ()
+        + "\n Sexo                :"+ getIdSexo           () + "\n";
 
     }
 }

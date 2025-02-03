@@ -27,7 +27,7 @@ public class LibroDTO {
     
     public LibroDTO(Integer idLibro, String titulo, Integer numeroEdicion, Integer numeroEjemplares,
             String fechaPublicacion, String estado, String fechaCreacion, String fechaModificacion,
-            String nombreGeneroLibro, String nombreEditorial, String nombreAutor, String codigoBarras, String codigoISBN) {
+            Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN) {
         setIdLibro(idLibro);
         setTitulo(titulo);
         setNumeroEdicion(numeroEdicion);
@@ -36,9 +36,9 @@ public class LibroDTO {
         setEstado(estado);
         setFechaCreacion(fechaCreacion);
         setFechaModificacion(fechaModificacion);
-        setNombreGeneroLibro(nombreGeneroLibro);
-        setNombreEditorial(nombreEditorial);
-        setNombreAutor(nombreAutor);
+        setIdGeneroLibro(idGeneroLibro);
+        setIdEditorial(idEditorial);
+        setIdAutor(idAutor);
         setCodigoBarras(codigoBarras);
         setCodigoISBN(codigoISBN);
     }
@@ -196,11 +196,11 @@ public class LibroDTO {
         + "\n Estado            :"+ getEstado           ()
         + "\n FechaCreacion     :"+ getFechaCreacion    ()
         + "\n FechaModificacion :"+ getFechaModificacion()
-        + "\n NombreGeneroLibro :"+ getNombreGeneroLibro()
-        + "\n NombreEditorial   :"+ getNombreEditorial  ()
-        + "\n NombreAutor       :"+ getNombreAutor      ()
+        + "\n IdGeneroLibro     :"+ getIdGeneroLibro    ()
+        + "\n IdEditorial       :"+ getIdEditorial      ()
+        + "\n IdAutor           :"+ getIdAutor          ()
         + "\n CodigoBarras      :"+ getCodigoBarras     ()   
         + "\n CodigoISBN        :"+ getCodigoISBN       () + "\n";
-
+        
     }
 }
