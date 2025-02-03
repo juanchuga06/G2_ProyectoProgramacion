@@ -299,3 +299,13 @@ FROM Factura as f
 INNER JOIN Venta as v on f.IdVenta = v.IdVenta
 INNER JOIN Cliente as c on v.IdCliente = c.IdCliente;
 
+
+SELECT IdEstadoAlquiler
+    ,Nombre
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+FROM EstadoAlquiler
+WHERE Estado = 'A';
+
+

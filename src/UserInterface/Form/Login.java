@@ -1,11 +1,15 @@
-package UserInterface.Form;
+//PROYECTO BIBLIOTECA
+//GRUPO 2
+//ANTHONY GAMBOA  02-02-2025
 
+
+package UserInterface.Form;
 import java.awt.*;
 import javax.swing.*;
 import UserInterface.CustomerControl.PatLabel;
 import UserInterface.CustomerControl.PatTextBox;
 
-public class Login extends JPanel {
+public class Login extends JPanel {                                
     private PatLabel lblUsername, lblPassword;
     private PatTextBox txtUsername;
     private JPasswordField txtPassword;
