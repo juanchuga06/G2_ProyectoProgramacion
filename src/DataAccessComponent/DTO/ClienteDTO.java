@@ -10,8 +10,6 @@ public class ClienteDTO {
     private String  Estado;
     private String  FechaCreacion;
     private String  FechaModificacion;
-    private String  NombreEstadoCivil;
-    private String  NombreSexo;
     private Integer IdEstadoCivil;
     private Integer IdSexo;
 
@@ -19,7 +17,7 @@ public class ClienteDTO {
 
     public ClienteDTO(Integer idCliente, String nombre, String apellido, String cedula, String telefono,
             String correoElectronico, String estado, String fechaCreacion, String fechaModificacion,
-            String nombreEstadoCivil, String nombreSexo) {
+            Integer IdEstadoCivil, Integer IdSexo) {
             setIdCliente(idCliente);
             setNombre(nombre);
             setApellido(apellido);
@@ -29,8 +27,8 @@ public class ClienteDTO {
             setEstado(estado);
             setFechaCreacion(fechaCreacion);
             setFechaModificacion(fechaModificacion);
-            setNombreEstadoCivil(nombreEstadoCivil);
-            setNombreSexo(nombreSexo);
+            setIdEstadoCivil(IdEstadoCivil);
+            setIdSexo(IdSexo);
     }
 
     public ClienteDTO(String nombre, String apellido, String cedula, String telefono, String correoElectronico, Integer idEstadoCivil, Integer idSexo){
@@ -115,22 +113,6 @@ public class ClienteDTO {
         this.FechaModificacion = FechaModificacion;
     }
 
-    public String getNombreEstadoCivil() {
-        return NombreEstadoCivil;
-    }
-
-    public void setNombreEstadoCivil(String INombreEstadoCivil) {
-        this.NombreEstadoCivil = INombreEstadoCivil;
-    }
-
-    public String getNombreSexo() {
-        return NombreSexo;
-    }
-
-    public void setNombreSexo(String NombreSexo) {
-        this.NombreSexo = NombreSexo;
-    }
-
     public Integer getIdEstadoCivil() {
         return IdEstadoCivil;
     }
@@ -159,7 +141,7 @@ public class ClienteDTO {
         + "\n Estado                : "+ getEstado()
         + "\n FechaCreacion         : "+ getFechaCreacion()
         + "\n FechaModificacion     : "+ getFechaModificacion()
-        + "\n EstadoCivil           : "+ getNombreEstadoCivil()
-        + "\n Sexo                  : "+ getNombreSexo() + "\n";
+        + "\n EstadoCivil           : "+ getIdEstadoCivil()
+        + "\n Sexo                  : "+ getIdSexo() + "\n";
     }
 }

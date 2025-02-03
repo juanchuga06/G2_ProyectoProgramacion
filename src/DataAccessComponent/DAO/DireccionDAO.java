@@ -23,10 +23,8 @@ public class DireccionDAO extends SQLiteDataHelper implements IDAO<DireccionDTO>
                     +" ,d.Estado                                                             "
                     +" ,d.FechaCreacion                                                      "
                     +" ,d.FechaModificacion                                                  "
-                    +" ,c.Nombre                                                             "
-                    +" ,c.Apellido                                                           "
-                    +" ,b.Nombre                                                             "
-                    +" ,b.Apellido                                                           "
+                    +" ,c.IdCliente                                                          "
+                    +" ,b.IdBibliotecario                                                    "
                     +" FROM Direccion as d                                                   "
                     +" LEFT JOIN Cliente as c ON d.IdCliente = c.IdCliente                   "
                     +" LEFT JOIN Bibliotecario as b ON d.IdBibliotecario = b.IdBibliotecario "
@@ -44,10 +42,8 @@ public class DireccionDAO extends SQLiteDataHelper implements IDAO<DireccionDTO>
                                     ,rs.getString(4)
                                     ,rs.getString(5)
                                     ,rs.getString(6)
-                                    ,rs.getString(7)
-                                    ,rs.getString(8)
-                                    ,rs.getString(9)
-                                    ,rs.getString(10));
+                                    ,rs.getInt(7)
+                                    ,rs.getInt(8));
             }
         }
         catch (SQLException e) {
@@ -59,16 +55,14 @@ public class DireccionDAO extends SQLiteDataHelper implements IDAO<DireccionDTO>
     @Override
     public List<DireccionDTO> readAll() throws Exception{
         List<DireccionDTO> lst = new ArrayList<>();
-        String query = "SELECT IdDireccion                                                     "
+        String query = "SELECT IdDireccion                                                    "
                     +"  ,d.CallePrincipal                                                     "
                     +"  ,d.CalleSecundaria                                                    "
                     +"  ,d.Estado                                                             "
                     +"  ,d.FechaCreacion                                                      "
                     +"  ,d.FechaModificacion                                                  "
-                    +"  ,c.Nombre                                                             "
-                    +"  ,c.Apellido                                                             "
-                    +"  ,b.Nombre                                                             "
-                    +"  ,b.Apellido                                                             "
+                    +"  ,c.IdCliente                                                          "
+                    +"  ,b.IdBibliotecario                                                    "
                     +" FROM Direccion AS d                                                    "
                     +" LEFT JOIN Cliente AS c ON d.IdCliente = c.IdCliente                    "
                     +" LEFT JOIN Bibliotecario AS b ON d.IdBibliotecario = b.IdBibliotecario  "
@@ -85,10 +79,8 @@ public class DireccionDAO extends SQLiteDataHelper implements IDAO<DireccionDTO>
                                                 , rs.getString(4)
                                                 , rs.getString(5)
                                                 , rs.getString(6)
-                                                , rs.getString(7)
-                                                , rs.getString(8)
-                                                , rs.getString(9)
-                                                ,rs.getString(10));
+                                                , rs.getInt(7)
+                                                , rs.getInt(8));
                 lst.add(d);
             }
         } catch (SQLException e) {

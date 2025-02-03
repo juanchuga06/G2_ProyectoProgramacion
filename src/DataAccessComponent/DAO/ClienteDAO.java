@@ -17,21 +17,21 @@ public class ClienteDAO extends SQLiteDataHelper implements IDAO<ClienteDTO> {
     @Override
     public ClienteDTO readBy(Integer id) throws Exception {
         ClienteDTO cl = new ClienteDTO();
-        String query ="SELECT   c.IdCliente                                          "
-                    +" ,c.Nombre                                                     "
-                    +" ,c.Apellido                                                   "
-                    +" ,c.Cedula                                                     "
-                    +" ,c.Telefono                                                   "
-                    +" ,c.CorreoElectronico                                          "
-                    +" ,c.Estado                                                     "
-                    +" ,c.FechaCreacion                                              "
-                    +" ,c.FechaModificacion                                          "
-                    +" ,ec.Nombre                                                    "
-                    +" ,s.Nombre                                                     "
-                    +" FROM Cliente           as c                                   "
-                    +" LEFT JOIN EstadoCivil  as ec  ON c.IdEstadoCivil = ec.IdEstadoCivil"
-                    +" LEFT JOIN Sexo         as s   ON c.IdSexo = s.IdSexo"
-                    +" WHERE c.Estado = 'A'    AND IdCliente=                        "  + id.toString();
+        String query ="SELECT   c.IdCliente                                                 "
+                    +" ,c.Nombre                                                            "
+                    +" ,c.Apellido                                                          "
+                    +" ,c.Cedula                                                            "
+                    +" ,c.Telefono                                                          "
+                    +" ,c.CorreoElectronico                                                 "
+                    +" ,c.Estado                                                            "
+                    +" ,c.FechaCreacion                                                     "
+                    +" ,c.FechaModificacion                                                 "
+                    +" ,ec.IdEstadoCivil                                                    "
+                    +" ,s.IdSexo                                                            "
+                    +" FROM Cliente           as c                                          "
+                    +" LEFT JOIN EstadoCivil  as ec  ON c.IdEstadoCivil = ec.IdEstadoCivil  "
+                    +" LEFT JOIN Sexo         as s   ON c.IdSexo = s.IdSexo                 "
+                    +" WHERE c.Estado = 'A'    AND IdCliente=                               "  + id.toString();
 
         try {
             Connection conn = openConnection();
@@ -47,8 +47,8 @@ public class ClienteDAO extends SQLiteDataHelper implements IDAO<ClienteDTO> {
                                         , rs.getString(7)
                                         , rs.getString(8)
                                         , rs.getString(9)
-                                        , rs.getString(10)
-                                        , rs.getString(11));
+                                        , rs.getInt(10)
+                                        , rs.getInt(11));
             }
         }
         catch (SQLException e) {
@@ -69,8 +69,8 @@ public class ClienteDAO extends SQLiteDataHelper implements IDAO<ClienteDTO> {
                     +" ,c.Estado                                                              "
                     +" ,c.FechaCreacion                                                       "
                     +" ,c.FechaModificacion                                                   "
-                    +" ,ec.Nombre                                                              "
-                    +" ,s.Nombre                                                               "
+                    +" ,ec.IdEstadoCivil                                                      "
+                    +" ,s.IdSexo                                                              "
                     +" FROM Cliente             as c                                          "
                     +" INNER JOIN EstadoCivil   as ec   ON c.IdEstadoCivil = ec.IdEstadoCivil "
                     +" INNER JOIN Sexo          as s    ON c.IdSexo = s.IdSexo                "
@@ -90,8 +90,8 @@ public class ClienteDAO extends SQLiteDataHelper implements IDAO<ClienteDTO> {
                                                 , rs.getString(7)
                                                 , rs.getString(8)
                                                 , rs.getString(9)
-                                                , rs.getString(10)
-                                                , rs.getString(11));
+                                                , rs.getInt(10)
+                                                , rs.getInt(11));
                 lst.add(c);
             }
         } catch (SQLException e) {

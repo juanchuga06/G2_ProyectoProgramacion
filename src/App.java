@@ -1,24 +1,22 @@
-import DataAccessComponent.DAO.SexoDAO;
-import DataAccessComponent.DTO.SexoDTO;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        try {
-            SexoDAO sDao = new SexoDAO();
+        // try {
+        //     SexoDAO sDao = new SexoDAO();
             
-            // SexoDTO sexo = new SexoDTO();
-            // // sexo.setIdSexo(5);
-            // //sDao.create(sexo);
-            // sDao.update(sexo);
-            sDao.delete(4);
-            for (SexoDTO s :  sDao.readAll())
-                System.out.println(s.toString());
-            System.out.println("-------------");
-            System.out.println(sDao.readBy(2));
-            System.out.println(sDao.readBy(3));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        //     // SexoDTO sexo = new SexoDTO();
+        //     // // sexo.setIdSexo(5);
+        //     // //sDao.create(sexo);
+        //     // sDao.update(sexo);
+        //     sDao.delete(4);
+        //     for (SexoDTO s :  sDao.readAll())
+        //         System.out.println(s.toString());
+        //     System.out.println("-------------");
+        //     System.out.println(sDao.readBy(2));
+        //     System.out.println(sDao.readBy(3));
+        // } catch (Exception e) {
+        //     System.out.println(e.toString());
+        // }
 
         // try {
         //     AutorDAO aDao = new AutorDAO();

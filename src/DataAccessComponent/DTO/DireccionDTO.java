@@ -7,28 +7,21 @@ public class DireccionDTO {
     private String  Estado;
     private String  FechaCreacion;
     private String  FechaModificacion;
-    private String  NombreCliente;
-    private String  ApellidoCliente;
-    private String  NombreBibliotecario;
-    private String  ApellidoBibliotecario;
     private Integer IdCliente;
     private Integer IdBibliotecario;
 
     public DireccionDTO(){ }
 
     public DireccionDTO(Integer idDireccion, String callePrincipal, String calleSecundaria, String estado,
-            String fechaCreacion, String fechaModificacion, String nombreCliente, String apellidoCliente,
-            String nombreBibliotecario, String apellidoBibliotecario) {
+            String fechaCreacion, String fechaModificacion, Integer idCliente, Integer idBibliotecario) {
         setIdDireccion(idDireccion);
         setCallePrincipal(callePrincipal);
         setCalleSecundaria(calleSecundaria);
         setEstado(estado);
         setFechaCreacion(fechaCreacion);
         setFechaModificacion(fechaModificacion);
-        setNombreCliente(nombreCliente);
-        setApellidoCliente(apellidoCliente);
-        setNombreBibliotecario(nombreBibliotecario);
-        setApellidoBibliotecario(apellidoBibliotecario);
+        setIdCliente(idCliente);
+        setIdBibliotecario(idBibliotecario);
     }
 
 
@@ -88,38 +81,6 @@ public DireccionDTO(String callePrincipal, String calleSecundaria, Integer idCli
         FechaModificacion = fechaModificacion;
     }
 
-    public String getNombreCliente() {
-        return NombreCliente;
-    }
-
-    public void setNombreCliente(String nombreCliente) {
-        NombreCliente = nombreCliente;
-    }
-
-    public String getApellidoCliente() {
-        return ApellidoCliente;
-    }
-
-    public void setApellidoCliente(String apellidoCliente) {
-        ApellidoCliente = apellidoCliente;
-    }
-
-    public String getNombreBibliotecario() {
-        return NombreBibliotecario;
-    }
-
-    public void setNombreBibliotecario(String nombreBibliotecario) {
-        NombreBibliotecario = nombreBibliotecario;
-    }
-
-    public String getApellidoBibliotecario() {
-        return ApellidoBibliotecario;
-    }
-
-    public void setApellidoBibliotecario(String apellidoBibliotecario) {
-        ApellidoBibliotecario = apellidoBibliotecario;
-    }
-
     public Integer getIdCliente() {
         return IdCliente;
     }
@@ -145,9 +106,7 @@ public DireccionDTO(String callePrincipal, String calleSecundaria, Integer idCli
         + "\n Estado                : "+ getEstado()
         + "\n FechaCreacion         : "+ getFechaCreacion()
         + "\n FechaModificacion     : "+ getFechaModificacion()
-        + "\n NombreCliente         : "+ getNombreCliente()
-        + "\n ApellidoCliente       : "+ getApellidoCliente()
-        + "\n NombreBibliotecario   : "+ getNombreBibliotecario()
-        + "\n ApellidoBibliotecario : "+ getApellidoBibliotecario() +"\n";
+        + "\n IdCliente             : "+ getIdCliente()
+        + "\n IdBibliotecario       : "+ getIdBibliotecario() +"\n";
     }
 }
