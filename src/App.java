@@ -2,8 +2,10 @@ import javax.swing.SwingUtilities;
 
 import DataAccessComponent.DAO.AlquilerDAO;
 import DataAccessComponent.DAO.EstadoAlquilerDAO;
+import DataAccessComponent.DAO.GeneroLibroDAO;
 import DataAccessComponent.DTO.AlquilerDTO;
 import DataAccessComponent.DTO.EstadoAlquilerDTO;
+import DataAccessComponent.DTO.GeneroLibroDTO;
 import UserInterface.Form.LoginFrame;
 
 public class App {
@@ -37,24 +39,46 @@ public class App {
         
 
 
+         //try {
+         //   EstadoAlquilerDAO eA = new EstadoAlquilerDAO();
+         //   EstadoAlquilerDTO eA1 = new EstadoAlquilerDTO();
+         //    eA1.setNombre("jaja");
+         //    eA1.setEstado("A");
+         //    eA1.setFechaCreacion("12/04/7777");
+         //    eA1.setFechaModificaion("10/12/3333");
+         //    eA1.setIdEstadoAlquiler(4);
+         //    eA.update(eA1);
+         //   eA.create(eA1);
+         //   eA.delete(3);
+//
+//
+         //   for(EstadoAlquilerDTO e : eA.readAll())
+         //   System.out.println(e.toString());
+         //   System.out.println("-----------------");
+         //   System.out.println(eA.readBy(2));
+         //   System.out.println(eA.readBy(7));
+         //} catch (Exception e) {
+         //   System.err.println(e.toString());
+         //}
+
          try {
-            EstadoAlquilerDAO eA = new EstadoAlquilerDAO();
-            EstadoAlquilerDTO eA1 = new EstadoAlquilerDTO();
-            // eA1.setNombre("jaja");
-             //eA1.setEstado("A");
-             //eA1.setFechaCreacion("12/04/7777");
-             //eA1.setFechaModificaion("10/12/3333");
-             //eA1.setIdEstadoAlquiler(4);
-             //eA.update(eA1);
+            GeneroLibroDAO gL = new GeneroLibroDAO();
+            GeneroLibroDTO gL1 = new GeneroLibroDTO();
+             //gL1.setNombreGeneroLibro("ASDAD");
+             gL1.setEstado("MALO");
+             //gL1.setFechaCreacion("12/04/7777");
+             //gL1.setFechaModificaion("10/12/3333");
+             //gL1.setIdGeneroLibro(1);;
+             //gL.update(gL1);
             //eA.create(eA1);
-            eA.delete(3);
+            gL.delete(2);
 
 
-            for(EstadoAlquilerDTO e : eA.readAll())
+            for(GeneroLibroDTO e : gL.readAll())
             System.out.println(e.toString());
             System.out.println("-----------------");
-            System.out.println(eA.readBy(2));
-            System.out.println(eA.readBy(7));
+            System.out.println(gL.readBy(2));
+            System.out.println(gL.readBy(2));
          } catch (Exception e) {
             System.err.println(e.toString());
          }

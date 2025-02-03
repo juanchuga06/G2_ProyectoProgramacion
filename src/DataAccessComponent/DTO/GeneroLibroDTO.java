@@ -18,6 +18,10 @@ public class GeneroLibroDTO {
         setFechaModificaion(fM);
     }
 
+    public GeneroLibroDTO(String nombreGeneroLibro){
+        NombreGeneroLibro = nombreGeneroLibro;
+    }
+
     public Integer getIdGeneroLibro() {
         return IdGeneroLibro;
     }

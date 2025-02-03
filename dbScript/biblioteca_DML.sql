@@ -308,4 +308,12 @@ SELECT IdEstadoAlquiler
 FROM EstadoAlquiler
 WHERE Estado = 'A';
 
+SELECT IdGeneroLibro
+    ,NombreGeneroLibro
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+FROM GeneroLibro
+WHERE Estado = 'A';
+
 
