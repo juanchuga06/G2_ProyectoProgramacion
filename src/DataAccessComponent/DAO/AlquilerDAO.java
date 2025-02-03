@@ -19,21 +19,21 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
     @Override
     public AlquilerDTO readBy(Integer id) throws Exception {
         AlquilerDTO oA = new AlquilerDTO();
-        String query = " SELECT  a.IdAlquiler                                                                         "
+        String query = " SELECT  a.IdAlquiler                                                                        "
                         +" ,a.Estado                                                                                 "
                         +" ,a.FechaAlquiler                                                                          "
                         +" ,a.FechaDevolucion                                                                        "
                         +" ,a.FechaModificacion                                                                      "
-                        +" ,l.Titulo                                                                                 "
-                        +" ,c.Nombre                                                                                 "
-                        +" ,b.Nombre                                                                                 "
-                        +" ,ea.Nombre                                                                                "
-                        +" FROM Alquiler as a                                                                       "
-                        +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                           "
-                        +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                     "
-                        +" INNER JOIN Bibliotecario as b ON a.IdBibliotecario = b.IdBibliotecario                   "
-                        +" INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler              "
-                        +" WHERE a.Estado = 'A' AND IdAlquiler =                                                    "  +  id.toString();
+                        +" ,l.IdLibro                                                                                "
+                        +" ,c.IdCliente                                                                              "
+                        +" ,b.IdBibliotecario                                                                        "
+                        +" ,ea.IdEstadoAlquiler                                                                      "
+                        +" FROM Alquiler as a                                                                        "
+                        +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                            "
+                        +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                      "
+                        +" INNER JOIN Bibliotecario as b ON a.IdBibliotecario = b.IdBibliotecario                    "
+                        +" INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler               "
+                        +" WHERE a.Estado = 'A' AND IdAlquiler =                                                     "  +  id.toString();
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
@@ -45,10 +45,10 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
                      rs.getString(3), 
                      rs.getString(4), 
                      rs.getString(5), 
-                     rs.getString(6), 
-                     rs.getString(7), 
-                     rs.getString(8), 
-                     rs.getString(9));
+                     rs.getInt(6), 
+                     rs.getInt(7), 
+                     rs.getInt(8), 
+                     rs.getInt(9));
             }
         } catch (SQLException e) {
             throw e;
@@ -60,14 +60,14 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
     public List<AlquilerDTO> readAll() throws Exception {
         List<AlquilerDTO> lst = new ArrayList<>();
         String query = "SELECT  a.IdAlquiler                                                                        "
-                        +" ,a.Estado                                                                                 "
-                        +" ,a.FechaAlquiler                                                                          "
-                        +" ,a.FechaDevolucion                                                                        "
-                        +" ,a.FechaModificacion                                                                      "
-                        +" ,l.Titulo                                                                                 "
-                        +" ,c.Nombre                                                                                 "
-                        +" ,b.Nombre                                                                                 "
-                        +" ,ea.Nombre                                                                                "
+                        +" ,a.Estado                                                                                "
+                        +" ,a.FechaAlquiler                                                                         "
+                        +" ,a.FechaDevolucion                                                                       "
+                        +" ,a.FechaModificacion                                                                     "
+                        +" ,l.IdLibro                                                                               "
+                        +" ,c.IdCliente                                                                             "
+                        +" ,b.IdBibliotecario                                                                       "
+                        +" ,ea.IdEstadoAlquiler                                                                     "
                         +" FROM Alquiler as a                                                                       "
                         +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                           "
                         +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                     "
@@ -85,10 +85,10 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
                      rs.getString(3), 
                      rs.getString(4), 
                      rs.getString(5), 
-                     rs.getString(6), 
-                     rs.getString(7), 
-                     rs.getString(8), 
-                     rs.getString(9));
+                     rs.getInt(6), 
+                     rs.getInt(7), 
+                     rs.getInt(8), 
+                     rs.getInt(9));
                 lst.add(a);
             }
         } catch (SQLException e) {

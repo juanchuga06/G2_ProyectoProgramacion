@@ -6,10 +6,6 @@ public class AlquilerDTO {
     private String  FechaAlquiler;
     private String  FechaDevolucion;
     private String  FechaModificacion;
-    private String  LibroTitulo;
-    private String  ClienteNombre;
-    private String  BibliotecarioNombre;
-    private String  EstadoAlquilerNombre;
     
     private Integer  IdLibro;
     private Integer  IdCliente;
@@ -19,16 +15,16 @@ public class AlquilerDTO {
     public AlquilerDTO(){ }
     
     public AlquilerDTO(Integer idA, String estado, String fechaAlquiler, String fechaDevolucion, String fechaModificacion,
-                       String libroTitulo, String clienteNombre, String bibliotecarioNombre, String estadoAlquilerNombre){
+                       Integer idLibro, Integer idCliente, Integer idBibliotecario, Integer idEstadoAlquiler){
         setIdAlquiler(idA);
         setEstado(estado);
         setFechaAlquiler(fechaAlquiler);
         setFechaDevolucion(fechaDevolucion);
         setFechaModificaion(fechaModificacion);
-        setLibroTitulo(libroTitulo);
-        setClienteNombre(clienteNombre);
-        setBibliotecarioNombre(bibliotecarioNombre);
-        setEstadoAlquilerNombre(estadoAlquilerNombre);
+        setIdLibro(idLibro);
+        setIdCliente(idCliente);
+        setIdBibliotecario(idBibliotecario);
+        setIdEstadoAlquiler(idEstadoAlquiler);
     }
     
     public AlquilerDTO(String fechaAlquiler, String fechaDevolucion, Integer idLibro, Integer idCliente, Integer idBibliotecario, Integer idEstadoAlquiler){
@@ -94,37 +90,6 @@ public class AlquilerDTO {
     public void setIdEstadoAlquiler(Integer idEstadoAlquiler) {
         IdEstadoAlquiler = idEstadoAlquiler;
     }
-    public String getLibroTitulo() {
-        return LibroTitulo;
-    }
-    
-    public void setLibroTitulo(String libroTitulo) {
-        LibroTitulo = libroTitulo;
-    }
-    
-    public String getClienteNombre() {
-        return ClienteNombre;
-    }
-    
-    public void setClienteNombre(String clienteNombre) {
-        ClienteNombre = clienteNombre;
-    }
-    
-    public String getBibliotecarioNombre() {
-        return BibliotecarioNombre;
-    }
-    
-    public void setBibliotecarioNombre(String bibliotecarioNombre) {
-        BibliotecarioNombre = bibliotecarioNombre;
-    }
-    
-    public String getEstadoAlquilerNombre() {
-        return EstadoAlquilerNombre;
-    }
-    
-    public void setEstadoAlquilerNombre(String estadoAlquilerNombre) {
-        EstadoAlquilerNombre = estadoAlquilerNombre;
-    }
     
     @Override
     public String toString(){
@@ -134,10 +99,10 @@ public class AlquilerDTO {
         +"\n FechaAlquiler                  : " + getFechaAlquiler()
         +"\n FechaDevolucion                : " + getFechaDevolucion()
         +"\n FechaModificacion              : " + getFechaModificaion()
-        +"\n LibroTitulo                    : " + getLibroTitulo()
-        +"\n ClienteNombre                  : " + getClienteNombre()
-        +"\n BibliotecarioNombre            : " + getBibliotecarioNombre()
-        +"\n EstadoAlquilerNombre           : " + getEstadoAlquilerNombre();
+        +"\n LibroTitulo                    : " + getIdLibro()
+        +"\n ClienteNombre                  : " + getIdCliente()
+        +"\n BibliotecarioNombre            : " + getIdBibliotecario()
+        +"\n EstadoAlquilerNombre           : " + getIdEstadoAlquiler();
     }
     
     
