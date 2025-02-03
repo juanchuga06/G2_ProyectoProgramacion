@@ -5,6 +5,12 @@ public class App {
     public static void main(String[] args) throws Exception {
         try {
             SexoDAO sDao = new SexoDAO();
+            
+            // SexoDTO sexo = new SexoDTO();
+            // // sexo.setIdSexo(5);
+            // //sDao.create(sexo);
+            // sDao.update(sexo);
+            sDao.delete(4);
             for (SexoDTO s :  sDao.readAll())
                 System.out.println(s.toString());
             System.out.println("-------------");

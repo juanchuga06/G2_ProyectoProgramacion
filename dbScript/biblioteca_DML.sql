@@ -312,5 +312,7 @@ SELECT IdAutor
     ,Estado
     ,FechaCreacion
     ,FechaModificacion
-FROM    Autor
-WHERE   Estado ='A';
+FROM    Autor;
+
+
+SELECT * FROM Sexo WHERE Estado = ?;
