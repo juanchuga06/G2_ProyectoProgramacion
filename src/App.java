@@ -1,5 +1,36 @@
 public class App {
     public static void main(String[] args) throws Exception {
+
+        //  JFrame frame = new JFrame("Ejemplo de Selector");
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(300, 200);
+        
+        // // Crear un JComboBox con opciones
+        // String[] opciones = {"Opción 1", "Opción 2", "Opción 3"};
+        // JComboBox<String> comboBox = new JComboBox<>(opciones);
+        
+        // // Crear un botón para mostrar la opción seleccionada
+        // JButton button = new JButton("Mostrar Opción Seleccionada");
+        
+        // // Agregar un ActionListener al botón
+        // button.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         // Obtener la opción seleccionada
+        //         String seleccion = (String) comboBox.getSelectedItem();
+        //         JOptionPane.showMessageDialog(frame, "Opción seleccionada: " + seleccion);
+        //     }
+        // });
+        
+        // // Agregar el JComboBox y el botón al marco
+        // JPanel panel = new JPanel();
+        // panel.add(comboBox);
+        // panel.add(button);
+        
+        // frame.add(panel);
+        // frame.setVisible(true);
+        // LoginFrame lf = new LoginFrame();
+
         // try {
         //     SexoDAO sDao = new SexoDAO();
         //     for (SexoDTO s :  sDao.readAll())
