@@ -4,6 +4,9 @@ public class GeneroLibro {
     private Integer IdGeneroLibro;
     private String Nombre;
     
+    public GeneroLibro() {
+    }
+
     public GeneroLibro(Integer idGeneroLibro, String nombre) {
         setIdGeneroLibro(idGeneroLibro);
         setNombre(nombre);

@@ -1,53 +1,52 @@
 package BusinessLogic.entities.Gestores;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import BusinessLogic.BLFactory;
 import BusinessLogic.entities.Personas.*;
-import DataAccessComponent.DAO.ClienteDAO;
+import DataAccessComponent.DAO.BibliotecarioDAO;
 import DataAccessComponent.DAO.DireccionDAO;
 import DataAccessComponent.DAO.EstadoCivilDAO;
 import DataAccessComponent.DAO.SexoDAO;
-import DataAccessComponent.DTO.ClienteDTO;
+import DataAccessComponent.DTO.BibliotecarioDTO;
 import DataAccessComponent.DTO.DireccionDTO;
 import DataAccessComponent.DTO.EstadoCivilDTO;
 import DataAccessComponent.DTO.SexoDTO;
 
-public class GestorClientes {
-    public List<Cliente> ClienteList;
+public class GestorBibliotecarios {
+    public List<Bibliotecario> BibliotecarioList;
     public List<Sexo> SexoList;
     public List <EstadoCivil> EstadoCivilList;
     public List <Direccion> DireccionList;
 
-    private BLFactory<ClienteDTO> ClienteBL;
+    private BLFactory<BibliotecarioDTO> BibliotecarioBL;
     private BLFactory<SexoDTO> SexoBl;
     private BLFactory<EstadoCivilDTO> EstadoCivilBL;
     private BLFactory<DireccionDTO> DireccionBL;
 
 
-    public GestorClientes(){
-        this.ClienteList = new ArrayList<>();
+    public GestorBibliotecarios(){
+        this.BibliotecarioList = new ArrayList<>();
         this.SexoList = new ArrayList<>();
         this.EstadoCivilList = new ArrayList<>();
         this.DireccionList = new ArrayList<>();
 
-        this.ClienteBL = new BLFactory<>(ClienteDAO::new);
+        this.BibliotecarioBL = new BLFactory<>(BibliotecarioDAO::new);
         this.SexoBl = new BLFactory<>(SexoDAO::new);
         this.EstadoCivilBL = new BLFactory<>(EstadoCivilDAO::new);
         this.DireccionBL = new BLFactory<>(DireccionDAO::new);
 
-        cargarClientes();
+        cargarBibliotecarios();
     }
 
-    public void cargarClientes(){
-        this.ClienteList.clear();
+    public void cargarBibliotecarios(){
+        this.BibliotecarioList.clear();
         this.DireccionList.clear();
         this.EstadoCivilList.clear();
         this.SexoList.clear();
 
-        Cliente clienteaux;
+        Bibliotecario bibliotecarioaux;
         Direccion direccionaux;
         EstadoCivil estadocivilaux;
         Sexo sexoaux;
@@ -69,26 +68,26 @@ public class GestorClientes {
                 System.out.println("Error al cargar los estados Civiles");
             }
             try {
-                for(ClienteDTO c: ClienteBL.getAll()){
-                    clienteaux = new Cliente(c.getIdCliente(), c.getNombre(), c.getApellido(), c.getCedula(), 
-                                             c.getTelefono(), c.getCorreoElectronico(), 
-                                             getECByID(c.getIdEstadoCivil()), getSexoByID(c.getIdSexo()));
-                    this.ClienteList.add(clienteaux);
+                for(BibliotecarioDTO b: BibliotecarioBL.getAll()){
+                    bibliotecarioaux = new Bibliotecario(b.getIdBibliotecario(), b.getNombre(), b.getApellido(), b.getCedula(), 
+                                                         b.getTelefono(), b.getCorreoElectronico(), getECByID(b.getIdEstadoCivil()), 
+                                                         getSexoByID(b.getIdSexo()), b.getUsuario(), b.getContrasenia());
+                    this.BibliotecarioList.add(bibliotecarioaux);
                 }
             } catch (Exception e) {
-                System.out.println("Error al cargar los clientes");
+                System.out.println("Error al cargar los bibliotecarios");
             }
             try {
                 for(DireccionDTO d: DireccionBL.getAll()){
-                    direccionaux = new Direccion(d.getIdDireccion(), d.getCallePrincipal(), d.getCalleSecundaria(), getClienteByID(d.getIdCliente()));
+                    direccionaux = new Direccion(d.getIdDireccion(), d.getCallePrincipal(), d.getCalleSecundaria(), getBibliotecarioByID(d.getIdBibliotecario()));
                     this.DireccionList.add(direccionaux);
                 }
 
                 // Se añaden las direcciones a cada cliente
-                for(Cliente c: ClienteList){
+                for(Bibliotecario b: BibliotecarioList){
                     for(Direccion d: DireccionList){
-                        if(d.getCliente().getIdPersona() == c.getIdPersona()){
-                            c.Direcciones.add(d);
+                        if(d.getBibliotecario().getIdPersona() == b.getIdPersona()){
+                            b.Direcciones.add(d);
                         }
                     }
                 }
@@ -97,39 +96,39 @@ public class GestorClientes {
             }
     }
 
-    public void registrarCliente(Cliente cliente){
-        if(cliente == null)
+    public void registrarBibliotecario(Bibliotecario bibliotecario){
+        if(bibliotecario == null)
             return;
         try {
-                ClienteBL.add(new ClienteDTO(cliente.getNombre(), cliente.getApellido(), 
-                                             cliente.getCedula(), cliente.getTelefono(), 
-                                             cliente.getCorreoElectronico(), cliente.getEstadoCivil().getIdEstadoCivil(), 
-                                             cliente.getSexo().getIdSexo()));
+                BibliotecarioBL.add(new BibliotecarioDTO(bibliotecario.getNombre(), bibliotecario.getApellido(), 
+                                             bibliotecario.getCedula(), bibliotecario.getTelefono(), 
+                                             bibliotecario.getCorreoElectronico(), bibliotecario.getUsuario(), bibliotecario.getContrasena(),
+                                             bibliotecario.getEstadoCivil().getIdEstadoCivil(), bibliotecario.getSexo().getIdSexo()));
             } catch (Exception e) {
-                System.out.println("Error al registrar al cliente");
+                System.out.println("Error al registrar al bibliotecario");
         }
     }
 
-    public void actualizarCliente(Cliente cliente){
-        if(cliente == null)
+    public void actualizarCliente(Bibliotecario bibliotecario){
+        if(bibliotecario == null)
             return;
-        try{
-            ClienteBL.upd(new ClienteDTO(cliente.getIdPersona(), cliente.getNombre(), cliente.getApellido(), 
-                                         cliente.getCedula(), cliente.getTelefono(), cliente.getCorreoElectronico(), 
-                                         cliente.getEstadoCivil().getIdEstadoCivil(), cliente.getSexo().getIdSexo(), 
-                                         LocalDate.now().toString()));   
-        } catch (Exception e) {
-            System.out.println("Error al registrar al cliente");
+        try {
+                BibliotecarioBL.add(new BibliotecarioDTO(bibliotecario.getIdPersona(), bibliotecario.getNombre(), bibliotecario.getApellido(), 
+                                            bibliotecario.getCedula(), bibliotecario.getTelefono(), bibliotecario.getCorreoElectronico(), 
+                                            bibliotecario.getUsuario(), bibliotecario.getContrasena(),bibliotecario.getEstadoCivil().getIdEstadoCivil(),
+                                            bibliotecario.getSexo().getIdSexo()));
+            } catch (Exception e) {
+                System.out.println("Error al actualizar al bibliotecario");
         }
     }
 
     public void eliminarCliente(Integer id) throws Exception{
-        if(id == null || id > ClienteBL.getMax() || id <= 0)
+        if(id == null || id > BibliotecarioBL.getMax() || id <= 0)
             return;
         try{
-            ClienteBL.del(id);
+            BibliotecarioBL.del(id);
         } catch (Exception e) {
-            System.out.println("Error al eliminar al cliente");
+            System.out.println("Error al eliminar al bibliotecario");
         }
     }
     
@@ -155,15 +154,16 @@ public class GestorClientes {
         return saux;
     }
 
-    public Cliente getClienteByID(Integer ID){
-        Cliente claux = new Cliente();
-        for(Cliente c: ClienteList){
-            if(c.getIdPersona().equals(ID)){
-                claux = c;
+    public Bibliotecario getBibliotecarioByID(Integer ID){
+        Bibliotecario baux = new Bibliotecario();
+        for(Bibliotecario b: BibliotecarioList){
+            if(b.getIdPersona().equals(ID)){
+                baux = b;
                 break;
             }
         }
-        return claux;
+        return baux;
     }
 
 }
+

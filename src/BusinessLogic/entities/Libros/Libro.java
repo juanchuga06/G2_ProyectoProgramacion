@@ -12,6 +12,8 @@ public class Libro {
     private String CodigoBarras;
     private String CodigoISBN;
 
+    public Libro() {
+        }
     public Libro(Integer idLibro, String titulo, Integer numeroEdicion, Integer numeroEjemplares,
             String fechaPublicacion, GeneroLibro generoLibro, Editorial editorial, Autor autor,
             String codigoBarras, String codigoISBN) {
@@ -25,6 +27,7 @@ public class Libro {
         setAutor(autor);
         setCodigoISBN(codigoISBN);
     }
+
 
     public Libro(String titulo, Integer numeroEdicion, Integer numeroEjemplares,
             String fechaPublicacion, GeneroLibro generoLibro, Editorial editorial, Autor autor, String codigoISBN) {

@@ -4,6 +4,9 @@ public class Editorial {
     private Integer IdEditorial;
     private String Nombre;
     
+    public Editorial() {
+    }
+
     public Editorial(Integer idEditorial, String nombre) {
         setIdEditorial(idEditorial);
         setNombre(nombre);

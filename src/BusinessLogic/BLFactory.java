@@ -34,4 +34,8 @@ public class BLFactory<T>  {
 
     }
 
+    public Integer getMax() throws Exception{
+        return oDAO.getMaxRow();
+    }
+
 }

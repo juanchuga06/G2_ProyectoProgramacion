@@ -4,6 +4,9 @@ public class EstadoAlquiler {
     private Integer IdEstadoAlquiler;
     private String Nombre;
 
+    public EstadoAlquiler() {
+    }
+
     public EstadoAlquiler(Integer idEstadoAlquiler, String nombre) {
         setIdEstadoAlquiler(idEstadoAlquiler);
         setNombre(nombre);

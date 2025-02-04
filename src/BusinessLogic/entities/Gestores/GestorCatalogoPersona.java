@@ -104,8 +104,8 @@ public class GestorCatalogoPersona {
         }
     }
 
-    public void eliminarSexo(Integer id){
-        if((id == null || (id>= 1 && id <= 2) || id <= 0 || id > SexoList.size())){
+    public void eliminarSexo(Integer id) throws Exception{
+        if((id == null || (id>= 1 && id <= 2) || id <= 0 || id > SexoBl.getMax())){
             return;
         }
         try{
@@ -115,8 +115,8 @@ public class GestorCatalogoPersona {
         }
     }
 
-    public void eliminarEstadoCivil(Integer id){
-        if((id == null || (id >= 1 && id <= 5) || id <= 0 || id > EstadoCivilList.size())){
+    public void eliminarEstadoCivil(Integer id) throws Exception{
+        if((id == null || (id >= 1 && id <= 5) || id <= 0 || id > EstadoCivilBL.getMax())){
             return;
         }
         try{

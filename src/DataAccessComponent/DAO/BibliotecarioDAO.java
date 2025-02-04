@@ -18,7 +18,7 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
     public BibliotecarioDTO readBy(Integer id) throws Exception {
         BibliotecarioDTO bb = new BibliotecarioDTO();
         String query =" SELECT b.idBibliotecario                 "
-                     +" ,b.Nombre                               "
+                     +" ,b.Nombre                                "
                      +" ,b.Apellido                              "
                      +" ,b.Cedula                                "
                      +" ,b.Telefono                              "
@@ -28,9 +28,9 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
                      +" ,b.Estado                                "
                      +" ,b.FechaCreacion                         "
                      +" ,b.FechaModificacion                     "
-                     +" ,ec.Nombre                               "
-                     +" ,s.Nombre                                "
-                     +" FROM Bibliotecario as b                 "
+                     +" ,ec.IdEstadoCivil                        "
+                     +" ,s.IdSexo                                "
+                     +" FROM Bibliotecario as b                  "
                      +" INNER JOIN EstadoCivil as ec ON b.IdEstadoCivil = ec.IdEstadoCivil"
                      +" INNER JOIN Sexo as s ON b.IdSexo = s.IdSexo       "
                      +" WHERE   b.Estado ='A'  AND IdBibliotecario =   " + id.toString() ;
@@ -50,8 +50,8 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
                                 ,rs.getString(9)
                                 ,rs.getString(10)
                                 ,rs.getString(11)
-                                ,rs.getString(12)
-                                ,rs.getString(13));
+                                ,rs.getInt(12)
+                                ,rs.getInt(13));
             }
         } 
         catch (SQLException e) {
@@ -64,7 +64,7 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
     public List<BibliotecarioDTO> readAll() throws Exception {
          List <BibliotecarioDTO> lst = new ArrayList<>();
          String query ="SELECT  b.idBibliotecario                 "
-                      +" ,b.Nombre                               "
+                      +" ,b.Nombre                                "
                       +" ,b.Apellido                              "
                       +" ,b.Cedula                                "
                       +" ,b.Telefono                              "
@@ -74,9 +74,9 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
                       +" ,b.Estado                                "
                       +" ,b.FechaCreacion                         "
                       +" ,b.FechaModificacion                     "
-                      +" ,ec.Nombre                               "
-                      +" ,s.Nombre                                "
-                      +" FROM Bibliotecario as b                 "
+                      +" ,ec.IdEstadoCivil                        "
+                      +" ,s.IdSexo                                "
+                      +" FROM Bibliotecario as b                  "
                       +" INNER JOIN EstadoCivil as ec ON b.IdEstadoCivil = ec.IdEstadoCivil"
                       +" INNER JOIN Sexo as s ON b.IdSexo = s.IdSexo  "
                       +" WHERE   b.Estado ='A'";
@@ -97,8 +97,8 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
                                 ,rs.getString(9)
                                 ,rs.getString(10)
                                 ,rs.getString(11)
-                                ,rs.getString(12)
-                                ,rs.getString(13));
+                                ,rs.getInt(12)
+                                ,rs.getInt(13));
                 lst.add(bb);
             }
         }

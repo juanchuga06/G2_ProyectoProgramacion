@@ -35,6 +35,16 @@ public class AlquilerDTO {
         IdBibliotecario = idBibliotecario;
         IdEstadoAlquiler = idEstadoAlquiler;
     }
+
+    public AlquilerDTO(Integer idA, String fechaAlquiler, String fechaDevolucion, Integer idLibro, Integer idCliente, Integer idBibliotecario, Integer idEstadoAlquiler){
+        IdAlquiler = idA;
+        FechaAlquiler = fechaAlquiler;
+        FechaDevolucion = fechaDevolucion;
+        IdLibro = idLibro;
+        IdCliente = idCliente;
+        IdBibliotecario = idBibliotecario;
+        IdEstadoAlquiler = idEstadoAlquiler;
+    }
     
     public Integer getIdAlquiler() {
         return IdAlquiler;

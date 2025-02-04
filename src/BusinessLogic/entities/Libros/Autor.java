@@ -4,6 +4,9 @@ public class Autor {
     private Integer IdAutor;
     private String Nombre;
     
+    public Autor() {
+    }
+
     public Autor(Integer idAutor, String nombre) {
         setIdAutor(idAutor);
         setNombre(nombre);

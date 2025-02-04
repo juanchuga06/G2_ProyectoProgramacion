@@ -55,8 +55,8 @@ public class GestorDirecciones {
         }
     }
 
-    public void eliminarDireccion(Integer id){
-        if(id == null || id > DireccionList.size() || id <= 0)
+    public void eliminarDireccion(Integer id) throws Exception{
+        if(id == null || id > DireccionBL.getMax() || id <= 0)
             return;
         try{
             DireccionBL.del(id);
