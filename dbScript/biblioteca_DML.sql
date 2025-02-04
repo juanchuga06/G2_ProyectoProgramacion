@@ -5,20 +5,6 @@ Maye_Ana
 DML : Llenar datos en la tablas correspondientes
 */
 
-DROP TABLE IF EXISTS Factura;
-DROP TABLE IF EXISTS Venta;
-DROP TABLE IF EXISTS Direccion;
-DROP TABLE IF EXISTS Alquiler;
-DROP TABLE IF EXISTS Bibliotecario;
-DROP TABLE IF EXISTS Cliente;
-DROP TABLE IF EXISTS Libro;
-DROP TABLE IF EXISTS EstadoAlquiler;
-DROP TABLE IF EXISTS EstadoCivil;
-DROP TABLE IF EXISTS Sexo;
-DROP TABLE IF EXISTS Autor;
-DROP TABLE IF EXISTS Editorial;
-DROP TABLE IF EXISTS GeneroLibro;
-
 INSERT INTO GeneroLibro(NombreGeneroLibro)VALUES
 ('Accion'),
 ('Terror'),
@@ -299,3 +285,18 @@ FROM Factura as f
 INNER JOIN Venta as v on f.IdVenta = v.IdVenta
 INNER JOIN Cliente as c on v.IdCliente = c.IdCliente;
 
+SELECT IdSexo
+    ,Nombre
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+    FROM Sexo
+    WHERE   Estado ='A';
+
+SELECT IdAutor
+    ,NombreAutor
+    ,Estado
+    ,FechaCreacion
+    ,FechaModificacion
+FROM    Autor
+WHERE   Estado ='A';

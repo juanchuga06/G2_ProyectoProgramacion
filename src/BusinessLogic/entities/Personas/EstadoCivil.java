@@ -5,6 +5,8 @@ public class EstadoCivil {
     private String Nombre;
     
     
+    public EstadoCivil() {}
+
     public EstadoCivil(Integer idEstadoCivil, String nombre) {
         setIdEstadoCivil(idEstadoCivil);
         setNombre(nombre);

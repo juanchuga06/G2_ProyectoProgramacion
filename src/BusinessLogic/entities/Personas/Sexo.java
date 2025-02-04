@@ -4,6 +4,8 @@ public class Sexo {
     private Integer IdSexo;
     private String Nombre;
     
+    public Sexo() {}
+
     public Sexo(Integer idSexo, String nombre) {
         setIdSexo(idSexo);
         setNombre(nombre);

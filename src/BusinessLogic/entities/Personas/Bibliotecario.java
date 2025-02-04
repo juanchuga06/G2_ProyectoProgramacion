@@ -6,10 +6,11 @@ public class Bibliotecario extends Persona{
     private String Usuario;
     private String Contrasena;
 
+    public Bibliotecario(){}
+
     public Bibliotecario(Integer idPersona, String nombre, String apellido, String cedula, String telefono,
-            String correoElectronico, EstadoCivil estadoCivil,Sexo sexo, List<Direccion> direcciones, 
-            String usuario, String contrasena) {
-        super(idPersona, nombre, apellido, cedula, telefono, correoElectronico, estadoCivil, sexo, direcciones);
+            String correoElectronico, EstadoCivil estadoCivil,Sexo sexo, String usuario, String contrasena) {
+        super(idPersona, nombre, apellido, cedula, telefono, correoElectronico, estadoCivil, sexo);
         setUsuario(usuario);
         setContrasena(contrasena);
     }

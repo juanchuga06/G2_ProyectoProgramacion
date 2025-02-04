@@ -1,4 +1,5 @@
 package BusinessLogic.entities.Personas;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Persona {
@@ -13,8 +14,10 @@ public abstract class Persona {
     public List<Direccion> Direcciones;
 
 
+    public Persona() {}
+
     public Persona(Integer idPersona, String nombre, String apellido, String cedula, String telefono,
-            String correoElectronico, EstadoCivil estadoCivil,Sexo sexo, List<Direccion> direcciones) {
+            String correoElectronico, EstadoCivil estadoCivil,Sexo sexo) {
         setIdPersona(idPersona);
         setNombre(nombre);
         setApellido(apellido);
@@ -22,7 +25,7 @@ public abstract class Persona {
         setTelefono(telefono);
         setCorreoElectronico(correoElectronico);
         setSexo(sexo);
-        setDirecciones(direcciones);
+        Direcciones = new ArrayList<Direccion>();
     }
 
     public Persona(String nombre, String apellido, String cedula, String telefono,
@@ -33,7 +36,7 @@ public abstract class Persona {
         setTelefono(telefono);
         setCorreoElectronico(correoElectronico);
         setSexo(sexo);
-        setDirecciones(direcciones);
+        Direcciones = new ArrayList<Direccion>();
     }
     public Integer getIdPersona() {
         return IdPersona;
@@ -114,7 +117,6 @@ public abstract class Persona {
     //Para hacer esta parte debo tomar los registros de direcciones DAO que
     // tengan la id del Cliente, transformarlas a la claseDireccion
     //  y añadirla en la lista propia del cliente
-    public void setDirecciones(List<Direccion> direcciones) {}
     
     
 }
