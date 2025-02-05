@@ -27,7 +27,7 @@ import UserInterface.CustomerControl.PatTextBox;
 
 public class ClienteForm extends JPanel {
     private JTextField nombreField, apellidoField, cedulaField, telefonoField, correoField;
-    private JComboBox<String> sexoBox, estadoCivilBox;
+    private JComboBox<String> sexoBox, estadoCivilBox, direccionesBox;
     private JButton guardarBtn, cancelarBtn, eliminarBtn;
     private PatLabel nombreLabel, apellidoLabel, cedulaLabel, telefonoLabel, correoLabel, sexoLabel, estadoCivilLabel, labelAux;
     private PanelClientes parentFrame;
@@ -164,8 +164,7 @@ public class ClienteForm extends JPanel {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(parentFrame, "Error al eliminar...!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-    
+    }   
 
     private void cancelarBtnClick() {
         try {
@@ -195,6 +194,8 @@ public class ClienteForm extends JPanel {
                 cedulaField.setText(cliente.getCedula());
                 telefonoField.setText(cliente.getTelefono());
                 correoField.setText(cliente.getCorreoElectronico());
+                sexoBox.setSelectedIndex(cliente.getSexo().getIdSexo() - 1);
+                estadoCivilBox.setSelectedIndex(cliente.getEstadoCivil().getIdEstadoCivil() - 1);
             }
             else{
                 limpiarCampos();
@@ -231,7 +232,7 @@ public class ClienteForm extends JPanel {
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        nombreLabel = new PatLabel("Nombre:");
+        nombreLabel = new PatLabel("Nombres:");
         centerPanel.add(nombreLabel, gbc);
 
         gbc.gridx = 1;
@@ -246,7 +247,7 @@ public class ClienteForm extends JPanel {
         
         gbc.gridy = 2;
         gbc.gridx = 0;
-        apellidoLabel = new PatLabel("Apellido:");
+        apellidoLabel = new PatLabel("Apellidos:");
         centerPanel.add(apellidoLabel, gbc);
 
         gbc.gridx = 1;
@@ -304,12 +305,29 @@ public class ClienteForm extends JPanel {
         correoField.setToolTipText("Ingresa la cedula");
         centerPanel.add(correoField, gbc);
 
+        if(cliente != null){
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            correoLabel = new PatLabel("Direcciones:");
+            centerPanel.add(correoLabel, gbc);
+
+            String[] nombreDirecciones = new String[cliente.Direcciones.size()];
+            for (int i = 0; i < nombreDirecciones.length; i++) {
+                nombreDirecciones[i] = cliente.Direcciones.get(i).getCallePrimaria() + "  y " + cliente.Direcciones.get(i).getCalleSecundaria();
+            }
+            gbc.gridx = 1;
+            direccionesBox = new JComboBox<>(nombreDirecciones);
+            direccionesBox.setPreferredSize(new Dimension(250, 30));
+            direccionesBox.setBackground(Color.WHITE);
+            direccionesBox.setForeground(Color.BLACK);
+            direccionesBox.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            centerPanel.add(direccionesBox, gbc);
+        }
         // Selectores
         gbc.gridx = 2;
         gbc.gridy = 1;
         sexoLabel = new PatLabel("Sexo:");
         centerPanel.add(sexoLabel, gbc);
-
 
         String[] nombreSexos = new String[this.parentFrame.gestorClientes.SexoList.size()];
         for (int i = 0; i < nombreSexos.length; i++) {
@@ -332,6 +350,7 @@ public class ClienteForm extends JPanel {
         String[] nombreEC = new String[this.parentFrame.gestorClientes.EstadoCivilList.size()];
         for (int i = 0; i < nombreEC.length; i++) {
             nombreEC[i] = this.parentFrame.gestorClientes.EstadoCivilList.get(i).getNombre();
+            System.out.println(nombreEC[i]);
         }
         gbc.gridx = 3;
         estadoCivilBox = new JComboBox<>(nombreEC);
@@ -374,7 +393,7 @@ public class ClienteForm extends JPanel {
             cancelarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             centerPanel.add(cancelarBtn, gbc);
 
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         gbc.gridx = 1;
         labelAux = new PatLabel("                             ");
         centerPanel.add(labelAux, gbc);

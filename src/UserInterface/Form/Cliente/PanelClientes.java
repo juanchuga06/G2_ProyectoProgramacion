@@ -59,7 +59,8 @@ public class PanelClientes extends JFrame {
     }
 
     protected void recargarClientes() {
-        this.buscando = false;
+        if(buscando)
+           buscando = false;
         actualizarBoton(false);
         gestorClientes.cargarClientes();
         mostrarClientes();
@@ -153,7 +154,7 @@ public class PanelClientes extends JFrame {
 
         if (encontrado) {
             this.buscando = true;
-            actualizarBoton(true);
+            actualizarBoton(buscando);
             topPanel.revalidate();
             topPanel.repaint();
         }
