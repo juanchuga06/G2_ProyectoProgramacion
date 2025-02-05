@@ -1,6 +1,24 @@
+import BusinessLogic.entities.Gestores.*;
+import BusinessLogic.entities.Personas.Cliente;
+import BusinessLogic.entities.Personas.EstadoCivil;
+import UserInterface.Form.Cliente.PanelClientes;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
+        // GestorClientes gc = new GestorClientes();
+        // for(Cliente c: gc.ClienteList){
+        //     System.out.println(c.getNombre());
+        //     System.out.println(c.getApellido());
+        //     System.out.println(c.getCedula());
+        //     System.out.println(c.getCorreoElectronico());
+        //     System.out.println(c.getTelefono());
+        //     System.out.println(c.getSexo().getNombre());
+        //     System.out.println(c.getEstadoCivil().getNombre());
+        // }
+
+
+       PanelClientes pc = new PanelClientes();
         //  JFrame frame = new JFrame("Ejemplo de Selector");
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setSize(300, 200);

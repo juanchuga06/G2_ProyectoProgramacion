@@ -26,7 +26,6 @@ public class GestorClientes {
     private BLFactory<EstadoCivilDTO> EstadoCivilBL;
     private BLFactory<DireccionDTO> DireccionBL;
 
-
     public GestorClientes(){
         this.ClienteList = new ArrayList<>();
         this.SexoList = new ArrayList<>();
@@ -51,62 +50,60 @@ public class GestorClientes {
         Direccion direccionaux;
         EstadoCivil estadocivilaux;
         Sexo sexoaux;
-            try {
-                for(SexoDTO s: SexoBl.getAll()){
-                    sexoaux = new Sexo(s.getIdSexo(),s.getNombre());
-                    this.SexoList.add(sexoaux);
-                }
-                
-            } catch (Exception e) {
-                System.out.println("Error al cargar los sexos");
+        try {
+            for(SexoDTO s: SexoBl.getAll()){
+                sexoaux = new Sexo(s.getIdSexo(),s.getNombre());
+                this.SexoList.add(sexoaux);
             }
-            try {
-                for(EstadoCivilDTO ec: EstadoCivilBL.getAll()){
-                    estadocivilaux = new EstadoCivil(ec.getIdEstadoCivil(),ec.getNombre());
-                    this.EstadoCivilList.add(estadocivilaux);
-                }
-            } catch (Exception e) {
-                System.out.println("Error al cargar los estados Civiles");
+        } catch (Exception e) {
+            System.out.println("Error al cargar los sexos");
+        }
+        try {
+            for(EstadoCivilDTO ec: EstadoCivilBL.getAll()){
+                estadocivilaux = new EstadoCivil(ec.getIdEstadoCivil(),ec.getNombre());
+                this.EstadoCivilList.add(estadocivilaux);
             }
-            try {
-                for(ClienteDTO c: ClienteBL.getAll()){
-                    clienteaux = new Cliente(c.getIdCliente(), c.getNombre(), c.getApellido(), c.getCedula(), 
-                                             c.getTelefono(), c.getCorreoElectronico(), 
-                                             getECByID(c.getIdEstadoCivil()), getSexoByID(c.getIdSexo()));
-                    this.ClienteList.add(clienteaux);
-                }
-            } catch (Exception e) {
-                System.out.println("Error al cargar los clientes");
+        } catch (Exception e) {
+            System.out.println("Error al cargar los estados Civiles");
+        }
+        try {
+            for(ClienteDTO c: ClienteBL.getAll()){
+                clienteaux = new Cliente(c.getIdCliente(), c.getNombre(), c.getApellido(), c.getCedula(), 
+                                         c.getTelefono(), c.getCorreoElectronico(), getECByID(c.getIdEstadoCivil()), getSexoByID(c.getIdSexo()));
+                this.ClienteList.add(clienteaux);
             }
-            try {
-                for(DireccionDTO d: DireccionBL.getAll()){
-                    direccionaux = new Direccion(d.getIdDireccion(), d.getCallePrincipal(), d.getCalleSecundaria(), getClienteByID(d.getIdCliente()));
-                    this.DireccionList.add(direccionaux);
-                }
+        } catch (Exception e) {
+            System.out.println("Error al cargar los clientes");
+        }
+        try {
+            for(DireccionDTO d: DireccionBL.getAll()){
+                direccionaux = new Direccion(d.getIdDireccion(), d.getCallePrincipal(), d.getCalleSecundaria(), getClienteByID(d.getIdCliente()));
+                this.DireccionList.add(direccionaux);
+            }
 
-                // Se añaden las direcciones a cada cliente
-                for(Cliente c: ClienteList){
-                    for(Direccion d: DireccionList){
-                        if(d.getCliente().getIdPersona() == c.getIdPersona()){
-                            c.Direcciones.add(d);
-                        }
+            // Se añaden las direcciones a cada cliente
+            for(Cliente c: ClienteList){
+                for(Direccion d: DireccionList){
+                    if(d.getCliente().getIdPersona() == c.getIdPersona()){
+                        c.Direcciones.add(d);
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Error al cargar las direcciones");
             }
+        } catch (Exception e) {
+            System.out.println("Error al cargar las direcciones");
+        }
     }
 
     public void registrarCliente(Cliente cliente){
         if(cliente == null)
             return;
         try {
-                ClienteBL.add(new ClienteDTO(cliente.getNombre(), cliente.getApellido(), 
-                                             cliente.getCedula(), cliente.getTelefono(), 
-                                             cliente.getCorreoElectronico(), cliente.getEstadoCivil().getIdEstadoCivil(), 
-                                             cliente.getSexo().getIdSexo()));
-            } catch (Exception e) {
-                System.out.println("Error al registrar al cliente");
+            ClienteBL.add(new ClienteDTO(cliente.getNombre(), cliente.getApellido(), 
+                                         cliente.getCedula(), cliente.getTelefono(), 
+                                         cliente.getCorreoElectronico(), cliente.getEstadoCivil() != null ? cliente.getEstadoCivil().getIdEstadoCivil() : null, 
+                                         cliente.getSexo() != null ? cliente.getSexo().getIdSexo() : null));
+        } catch (Exception e) {
+            System.out.println("Error al registrar al cliente");
         }
     }
 
@@ -116,32 +113,34 @@ public class GestorClientes {
         try{
             ClienteBL.upd(new ClienteDTO(cliente.getIdPersona(), cliente.getNombre(), cliente.getApellido(), 
                                          cliente.getCedula(), cliente.getTelefono(), cliente.getCorreoElectronico(), 
-                                         cliente.getEstadoCivil().getIdEstadoCivil(), cliente.getSexo().getIdSexo(), 
+                                         cliente.getEstadoCivil() != null ? cliente.getEstadoCivil().getIdEstadoCivil() : null, 
+                                         cliente.getSexo() != null ? cliente.getSexo().getIdSexo() : null, 
                                          LocalDate.now().toString()));   
         } catch (Exception e) {
             System.out.println("Error al registrar al cliente");
         }
     }
 
-    public void eliminarCliente(Integer id) throws Exception{
+    public boolean eliminarCliente(Integer id) throws Exception{
         if(id == null || id > ClienteBL.getMax() || id <= 0)
-            return;
+            return false;
         try{
             ClienteBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar al cliente");
+            return false;
         }
     }
     
     public EstadoCivil getECByID(Integer id){
-        EstadoCivil eaux = new EstadoCivil();
         for(EstadoCivil ec: EstadoCivilList){
             if(ec.getIdEstadoCivil().equals(id)){
-                eaux = ec;
-                break;
+                return ec; // Return the found EstadoCivil
             }
         }
-        return eaux;
+        System.out.println("EstadoCivil not found for ID: " + id); // Debugging output
+        return null; // Return null if not found
     }
 
     public Sexo getSexoByID(Integer id){
@@ -165,5 +164,4 @@ public class GestorClientes {
         }
         return claux;
     }
-
 }

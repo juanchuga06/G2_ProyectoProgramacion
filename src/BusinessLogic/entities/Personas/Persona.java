@@ -24,6 +24,7 @@ public abstract class Persona {
         setCedula(cedula);
         setTelefono(telefono);
         setCorreoElectronico(correoElectronico);
+        setEstadoCivil(estadoCivil);
         setSexo(sexo);
         Direcciones = new ArrayList<Direccion>();
     }
@@ -60,7 +61,7 @@ public abstract class Persona {
         return Apellido;
     }
     public void setApellido(String apellido) {
-        if(Apellido == null || Apellido.isEmpty())
+        if(apellido == null || apellido.isEmpty())
             this.Apellido = "ApellidoComun";
         else
             this.Apellido = apellido;
