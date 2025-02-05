@@ -105,7 +105,7 @@ public class GestorCatalogoPersona {
     }
 
     public void eliminarSexo(Integer id) throws Exception{
-        if((id == null || (id>= 1 && id <= 2) || id <= 0 || id > SexoBl.getMax())){
+        if((id == null || (id>= 1 && id <= 2) || id <= 0)){
             return;
         }
         try{
@@ -116,7 +116,7 @@ public class GestorCatalogoPersona {
     }
 
     public void eliminarEstadoCivil(Integer id) throws Exception{
-        if((id == null || (id >= 1 && id <= 5) || id <= 0 || id > EstadoCivilBL.getMax())){
+        if((id == null || (id >= 1 && id <= 5) || id <= 0)){
             return;
         }
         try{

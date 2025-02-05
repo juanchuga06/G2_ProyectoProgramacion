@@ -12,7 +12,6 @@ import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -22,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import BusinessLogic.entities.Personas.Cliente;
-import UserInterface.CustomerControl.PatButton;
 import UserInterface.CustomerControl.PatLabel;
 import UserInterface.CustomerControl.PatTextBox;
 
@@ -31,13 +29,12 @@ public class ClienteForm extends JPanel {
     private JTextField nombreField, apellidoField, cedulaField, telefonoField, correoField;
     private JComboBox<String> sexoBox, estadoCivilBox;
     private JButton guardarBtn, cancelarBtn, eliminarBtn;
-    private PatLabel nombreLabel, apellidoLabel, cedulaLabel, telefonoLabel, correoLabel, sexoLabel, estadoCivilLabel;
+    private PatLabel nombreLabel, apellidoLabel, cedulaLabel, telefonoLabel, correoLabel, sexoLabel, estadoCivilLabel, labelAux;
     private PanelClientes parentFrame;
     private Image backgroundImage;
 
     private Cliente cliente = null;
     Integer idCliente = 0;
-    private Integer idMaxCliente = 0;
 
     public ClienteForm(PanelClientes parentFrame, Cliente cliente, Integer idCliente) {
         this.parentFrame = parentFrame;
@@ -56,8 +53,6 @@ public class ClienteForm extends JPanel {
         cancelarBtn.addActionListener(e -> cancelarBtnClick());
         eliminarBtn.addActionListener(e -> eliminarBtnClick());
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterface/Resource/MRBOOKLG.png"));
-        backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
     }
 
     public ClienteForm(PanelClientes parentFrame, Cliente cliente) {
@@ -70,10 +65,8 @@ public class ClienteForm extends JPanel {
 
         guardarBtn.addActionListener(e -> guardarBtnClick());
         cancelarBtn.addActionListener(e -> cancelarBtnClick());
-        eliminarBtn.addActionListener(e -> eliminarBtnClick());
-
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterface/Resource/MRBOOKLG.png"));
-        backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
+        if(cliente != null)
+            eliminarBtn.addActionListener(e -> eliminarBtnClick());
     }
 
     @Override 
@@ -115,7 +108,18 @@ public class ClienteForm extends JPanel {
                     cliente.setCedula(cedulaField.getText());
                     cliente.setTelefono(telefonoField.getText());
                     cliente.setCorreoElectronico(correoField.getText());
+                    cliente.setEstadoCivil(this.parentFrame.gestorClientes.EstadoCivilList.get(estadoCivilBox.getSelectedIndex()));
+                    cliente.setSexo(this.parentFrame.gestorClientes.SexoList.get(sexoBox.getSelectedIndex()));
                     // Poner la parte de sexo y estado civil
+                }
+                else {
+                    cliente.setNombre(nombreField.getText());
+                    cliente.setApellido(apellidoField.getText());
+                    cliente.setCedula(cedulaField.getText());
+                    cliente.setTelefono(telefonoField.getText());
+                    cliente.setCorreoElectronico(correoField.getText());
+                    cliente.setEstadoCivil(this.parentFrame.gestorClientes.EstadoCivilList.get(estadoCivilBox.getSelectedIndex()));
+                    cliente.setSexo(this.parentFrame.gestorClientes.SexoList.get(sexoBox.getSelectedIndex()));
                 }
     
                 // Eliminamos la asignación a "exito" porque los métodos devuelven void
@@ -133,35 +137,42 @@ public class ClienteForm extends JPanel {
         }
         cargarCliente();
         mostrarCliente();
+
+        this.parentFrame.recargarClientes();
     }
     
-    private void eliminarBtnClick(){
-        try{
+    private void eliminarBtnClick() {
+        try {
             int opcion = JOptionPane.showConfirmDialog(
-            parentFrame, 
-            "¿Seguro que desea eliminar ?", 
-            "Eliminacion", 
-            JOptionPane.YES_NO_OPTION
-             );
-
-             if(!this.parentFrame.gestorClientes.eliminarCliente(cliente.getIdPersona())){
-                throw new Exception("Error al eliminar...!");
-             } else{
-                JOptionPane.showMessageDialog(this, "Cliente eliminado.");
-                 cargarCliente();
-                mostrarCliente();
+                parentFrame, 
+                "¿Seguro que desea eliminar ?", 
+                "Eliminación", 
+                JOptionPane.YES_NO_OPTION
+            );
+    
+            if (opcion == JOptionPane.YES_OPTION) {
+                if (!this.parentFrame.gestorClientes.eliminarCliente(cliente.getIdPersona())) {
+                    System.out.println(cliente.getIdPersona());
+                    throw new Exception("Error al eliminar");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cliente eliminado.");
+                    
+                    this.parentFrame.recargarClientes();
+                }
             }
-           
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(parentFrame, "Error al eliminar...!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
 
     private void cancelarBtnClick() {
         try {
             if(cliente == null)
                 cargarCliente();
             mostrarCliente();
+            this.parentFrame.recargarClientes();
         } catch (Exception e) {}
     }
 
@@ -169,7 +180,6 @@ public class ClienteForm extends JPanel {
         if(cliente != null){
         try{
             cliente = this.parentFrame.gestorClientes.ClienteList.get(idCliente);
-            idMaxCliente = this.parentFrame.gestorClientes.ClienteList.size();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(parentFrame, "Error al cargar cliente...!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -300,8 +310,14 @@ public class ClienteForm extends JPanel {
         sexoLabel = new PatLabel("Sexo:");
         centerPanel.add(sexoLabel, gbc);
 
+
+        String[] nombreSexos = new String[this.parentFrame.gestorClientes.SexoList.size()];
+        for (int i = 0; i < nombreSexos.length; i++) {
+            nombreSexos[i] = this.parentFrame.gestorClientes.SexoList.get(i).getNombre();
+        }
+        
         gbc.gridx = 3;
-        sexoBox = new JComboBox<>(new String[]{"Masculino", "Femenino", "Otros"});
+        sexoBox = new JComboBox<>(nombreSexos);
         sexoBox.setPreferredSize(new Dimension(250, 30));
         sexoBox.setBackground(Color.WHITE);
         sexoBox.setForeground(Color.BLACK);
@@ -313,8 +329,12 @@ public class ClienteForm extends JPanel {
         estadoCivilLabel = new PatLabel("Estado Civil:");
         centerPanel.add(estadoCivilLabel, gbc);
         
+        String[] nombreEC = new String[this.parentFrame.gestorClientes.EstadoCivilList.size()];
+        for (int i = 0; i < nombreEC.length; i++) {
+            nombreEC[i] = this.parentFrame.gestorClientes.EstadoCivilList.get(i).getNombre();
+        }
         gbc.gridx = 3;
-        estadoCivilBox = new JComboBox<>(new String[]{"Soltero", "Casado", "Union Libre", "Divorciado", "Viudo"});
+        estadoCivilBox = new JComboBox<>(nombreEC);
         estadoCivilBox.setPreferredSize(new Dimension(250, 30));
         estadoCivilBox.setBackground(Color.WHITE);
         estadoCivilBox.setForeground(Color.BLACK);
@@ -326,31 +346,38 @@ public class ClienteForm extends JPanel {
         guardarBtn = new JButton("Guardar");
         guardarBtn.setPreferredSize(new Dimension(200, 40));
         guardarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        guardarBtn.setBackground(Color.BLACK);
+        guardarBtn.setBackground(Color.GREEN);
         guardarBtn.setForeground(Color.WHITE);
         guardarBtn.setFocusPainted(false);
         guardarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         centerPanel.add(guardarBtn, gbc);
 
         gbc.gridy = 4;
-        cancelarBtn = new JButton("Cancelar");
-        cancelarBtn.setPreferredSize(new Dimension(200, 40));
-        cancelarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        cancelarBtn.setBackground(Color.BLACK);
-        cancelarBtn.setForeground(Color.WHITE);
-        cancelarBtn.setFocusPainted(false);
-        cancelarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        centerPanel.add(cancelarBtn, gbc);
+        if(cliente != null){
+            eliminarBtn = new JButton("Eliminar");
+            eliminarBtn.setPreferredSize(new Dimension(200, 40));
+            eliminarBtn.setFont(new Font("Arial", Font.BOLD, 14));
+            eliminarBtn.setBackground(Color.BLACK);
+            eliminarBtn.setForeground(Color.WHITE);
+            eliminarBtn.setFocusPainted(false);
+            eliminarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            centerPanel.add(eliminarBtn, gbc);
+            gbc.gridy = 5;
+        }
 
-        gbc.gridy = 5;
-        eliminarBtn = new JButton("Eliminar");
-        eliminarBtn.setPreferredSize(new Dimension(200, 40));
-        eliminarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        eliminarBtn.setBackground(Color.BLACK);
-        eliminarBtn.setForeground(Color.WHITE);
-        eliminarBtn.setFocusPainted(false);
-        eliminarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        centerPanel.add(eliminarBtn, gbc);
+            cancelarBtn = new JButton("Cancelar");
+            cancelarBtn.setPreferredSize(new Dimension(200, 40));
+            cancelarBtn.setFont(new Font("Arial", Font.BOLD, 14));
+            cancelarBtn.setBackground(Color.RED);
+            cancelarBtn.setForeground(Color.WHITE);
+            cancelarBtn.setFocusPainted(false);
+            cancelarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            centerPanel.add(cancelarBtn, gbc);
+
+        gbc.gridy = 6;
+        gbc.gridx = 1;
+        labelAux = new PatLabel("                             ");
+        centerPanel.add(labelAux, gbc);
 
         add(centerPanel, BorderLayout.CENTER);
     }

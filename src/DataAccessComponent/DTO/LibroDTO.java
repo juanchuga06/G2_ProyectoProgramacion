@@ -1,24 +1,22 @@
 package DataAccessComponent.DTO;
 
+import java.math.BigDecimal;
+
 public class LibroDTO {
     private Integer IdLibro;             
     private String Titulo;              
     private Integer NumeroEdicion;       
     private Integer NumeroEjemplares;    
-    private String FechaPublicacion;    
+    private String FechaPublicacion; 
+    private BigDecimal  Precio;   
     private String Estado;              
     private String FechaCreacion;       
-    private String FechaModificacion; 
-    private String NombreGeneroLibro;       
-    private String NombreEditorial;         
-    private String NombreAutor; 
+    private String FechaModificacion;  
     private Integer IdGeneroLibro;       
     private Integer IdEditorial;         
     private Integer IdAutor;            
     private String CodigoBarras;        
     private String CodigoISBN;
-
-    
 
     public LibroDTO(){
 
@@ -26,13 +24,14 @@ public class LibroDTO {
 
     
     public LibroDTO(Integer idLibro, String titulo, Integer numeroEdicion, Integer numeroEjemplares,
-            String fechaPublicacion, String estado, String fechaCreacion, String fechaModificacion,
+            String fechaPublicacion, BigDecimal precio, String estado, String fechaCreacion, String fechaModificacion,
             Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN) {
         setIdLibro(idLibro);
         setTitulo(titulo);
         setNumeroEdicion(numeroEdicion);
         setNumeroEjemplares(numeroEjemplares);
         setFechaPublicacion(fechaPublicacion);
+        setPrecio(precio);
         setEstado(estado);
         setFechaCreacion(fechaCreacion);
         setFechaModificacion(fechaModificacion);
@@ -43,14 +42,24 @@ public class LibroDTO {
         setCodigoISBN(codigoISBN);
     }
 
-    public LibroDTO(String titulo, String fechaPublicacion, Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN){
+    public LibroDTO(String titulo, String fechaPublicacion, BigDecimal precio, Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN){
         Titulo = titulo;
         FechaPublicacion = fechaPublicacion;
+        Precio = precio;
         IdGeneroLibro = idGeneroLibro;
         IdEditorial = idEditorial;
         IdAutor = idAutor;
         CodigoBarras = codigoBarras;
         CodigoISBN = codigoISBN;
+    }
+
+    public BigDecimal getPrecio() {
+        return Precio;
+    }
+
+
+    public void setPrecio(BigDecimal precio) {
+        Precio = precio;
     }
 
     public Integer getIdGeneroLibro() {
@@ -146,30 +155,6 @@ public class LibroDTO {
         FechaModificacion = fechaModificacion;
     }
 
-    public String getNombreGeneroLibro() {
-        return NombreGeneroLibro;
-    }
-
-    public void setNombreGeneroLibro(String nombreGeneroLibro) {
-        NombreGeneroLibro = nombreGeneroLibro;
-    }
-
-    public String getNombreEditorial() {
-        return NombreEditorial;
-    }
-
-    public void setNombreEditorial(String nombreEditorial) {
-        NombreEditorial = nombreEditorial;
-    }
-
-    public String getNombreAutor() {
-        return NombreAutor;
-    }
-
-    public void setNombreAutor(String nombreAutor) {
-        NombreAutor = nombreAutor;
-    }
-
     public String getCodigoBarras() {
         return CodigoBarras;
     }
@@ -193,6 +178,7 @@ public class LibroDTO {
         + "\n NumeroEdicion     :"+ getNumeroEdicion    ()
         + "\n NumeroEjemplares  :"+ getNumeroEjemplares ()
         + "\n FechaPublicacion  :"+ getFechaPublicacion ()
+        + "\n Precio            :"+ getPrecio           ()
         + "\n Estado            :"+ getEstado           ()
         + "\n FechaCreacion     :"+ getFechaCreacion    ()
         + "\n FechaModificacion :"+ getFechaModificacion()

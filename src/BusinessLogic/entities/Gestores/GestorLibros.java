@@ -1,5 +1,6 @@
 package BusinessLogic.entities.Gestores;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class GestorLibros {
         try{
             for(LibroDTO l: LibroBL.getAll()){
                 Libro libroaux = new Libro(l.getIdLibro(), l.getTitulo(), l.getNumeroEdicion(), l.getNumeroEjemplares(),
-                                           l.getFechaPublicacion(), getGeneroByID(l.getIdGeneroLibro()), 
+                                           l.getFechaPublicacion(), l.getPrecio().doubleValue(), getGeneroByID(l.getIdGeneroLibro()), 
                                            getEditorialByID(l.getIdEditorial()), getAutorByID(l.getIdAutor()), 
                                            l.getCodigoBarras(), l.getCodigoISBN());
                 this.LibroList.add(libroaux);
@@ -91,7 +92,7 @@ public class GestorLibros {
         if(libro == null)
             return;
         try{
-            LibroBL.add(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), 
+            LibroBL.add(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), (new BigDecimal(libro.getPrecio().toString())),
                                      libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
                                      libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
         } catch(Exception e){
@@ -101,7 +102,7 @@ public class GestorLibros {
 
     public void actualizarLibro(Libro libro){
         try{
-            LibroBL.upd(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), 
+            LibroBL.upd(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), (new BigDecimal(libro.getPrecio().toString())),
                                         libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
                                         libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
 
@@ -111,7 +112,7 @@ public class GestorLibros {
     }  
 
     public void eliminarLibro(Integer id) throws Exception{
-        if(id == null || id > LibroBL.getMax() || id <= 0)
+        if(id == null || id <= 0)
             return;
         try{
             LibroBL.del(id);

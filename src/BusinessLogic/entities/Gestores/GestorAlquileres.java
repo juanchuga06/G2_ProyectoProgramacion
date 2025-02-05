@@ -96,7 +96,7 @@ public class GestorAlquileres {
     }
 
     public void eliminarAlquiler(Integer id) throws Exception{
-        if(id == null || id > AlquilerBL.getMax() || id <= 0)
+        if(id == null || id <= 0)
             return;
         try{
             AlquilerBL.del(id);

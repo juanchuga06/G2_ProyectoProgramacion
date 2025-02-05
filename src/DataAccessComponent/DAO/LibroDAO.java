@@ -18,16 +18,17 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
     public LibroDTO readBy(Integer id) throws Exception {
         LibroDTO l = new LibroDTO();
         String query =" SELECT l.IdLibro       "
-                     +" , l.Titulo            "
-                     +" , l.NumeroEdicion     "
+                     +" , l.Titulo             "
+                     +" , l.NumeroEdicion      "
                      +" , l.NumeroEjemplares   "
-                     +" , l.FechaPublicacion    "
+                     +" , l.FechaPublicacion   "
+                     +" , l.Precio             "
                      +" , l.Estado             "
                      +" , l.FechaCreacion      "
                      +" , l.FechaModificacion  "
-                     +" , gl.IdGeneroLibro "
-                     +" , e.IdEditorial    "
-                     +" , a.IdAutor        "
+                     +" , gl.IdGeneroLibro     "
+                     +" , e.IdEditorial        "
+                     +" , a.IdAutor            "
                      +" , l.CodigoBarras       "
                      +" , l.CodigoISBN         "
                      +" FROM Libro as l        "
@@ -45,16 +46,17 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                                 ,rs.getInt(3)
                                 ,rs.getInt(4)
                                 ,rs.getString(5)
-                                ,rs.getString(6)
+                                ,rs.getBigDecimal(6)
                                 ,rs.getString(7)
                                 ,rs.getString(8)
-                                ,rs.getInt(9)
+                                ,rs.getString(9)
                                 ,rs.getInt(10)
                                 ,rs.getInt(11)
-                                ,rs.getString(12)
-                                ,rs.getString(13));
-            }
-        } 
+                                ,rs.getInt(12)
+                                ,rs.getString(13)
+                                ,rs.getString(14));
+            } 
+        }
         catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -69,6 +71,7 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                      +" , l.numeroEdicion      "
                      +" , l.numeroEjemplares   "
                      +" , l.fechaPublicacion   "
+                     +" , l.Precio             "
                      +" , l.estado             "
                      +" , l.fechaCreacion      "
                      +" , l.fechaModificacion  "
@@ -93,14 +96,15 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
                                 ,rs.getInt(3)
                                 ,rs.getInt(4)
                                 ,rs.getString(5)
-                                ,rs.getString(6)
+                                ,rs.getBigDecimal(6)
                                 ,rs.getString(7)
                                 ,rs.getString(8)
-                                ,rs.getInt(9)
+                                ,rs.getString(9)
                                 ,rs.getInt(10)
                                 ,rs.getInt(11)
-                                ,rs.getString(12)
-                                ,rs.getString(13));
+                                ,rs.getInt(12)
+                                ,rs.getString(13)
+                                ,rs.getString(14));
             lst.add(l);
            }
        }
@@ -112,7 +116,7 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
 
     @Override
     public boolean create(LibroDTO entity) throws Exception {
-        String query = " INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, IdGeneroLibro,  IdEditorial,  IdAutor, CodigoBarras, CodigoISBN)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+        String query = " INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Precio, IdGeneroLibro,  IdEditorial,  IdAutor, CodigoBarras, CodigoISBN)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -120,11 +124,12 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
             pstmt.setInt(2, entity.getNumeroEdicion());
             pstmt.setInt(3, entity.getNumeroEjemplares());
             pstmt.setString(4, entity.getFechaPublicacion());
-            pstmt.setInt(8, entity.getIdGeneroLibro());
-            pstmt.setInt(9, entity.getIdEditorial());
-            pstmt.setInt(10, entity.getIdAutor());
-            pstmt.setString(11, entity.getCodigoBarras());
-            pstmt.setString(12, entity.getCodigoISBN());
+            pstmt.setBigDecimal(5, entity.getPrecio());
+            pstmt.setInt(6, entity.getIdGeneroLibro());
+            pstmt.setInt(7, entity.getIdEditorial());
+            pstmt.setInt(8, entity.getIdAutor());
+            pstmt.setString(9, entity.getCodigoBarras());
+            pstmt.setString(10, entity.getCodigoISBN());
             pstmt.executeUpdate();
             return true;
         } 
@@ -137,7 +142,7 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
     public boolean update(LibroDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-DD  HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE Libro SET titulo = ?, numeroEdicion = ?, numeroEjemplares = ?, fechaPublicacion = ?, fechaModificacion = ?, IdGeneroLibro = ?, IdEditorial = ?, IdAutor = ?,"
+        String query = "UPDATE Libro SET titulo = ?, numeroEdicion = ?, numeroEjemplares = ?, fechaPublicacion = ?, Precio = ? fechaModificacion = ?, IdGeneroLibro = ?, IdEditorial = ?, IdAutor = ?,"
         +" codigoBarras = ?, codigoISBN = ? WHERE idLibro = ?";
         try {
             Connection        conn  = openConnection();
@@ -146,12 +151,13 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
             pstmt.setInt(2, entity.getNumeroEdicion());
             pstmt.setInt(3, entity.getNumeroEjemplares());
             pstmt.setString(4, entity.getFechaPublicacion());
-            pstmt.setString(7, dtf.format(now));
-            pstmt.setInt(8, entity.getIdGeneroLibro());
-            pstmt.setInt(9, entity.getIdEditorial());
-            pstmt.setInt(10, entity.getIdAutor());
-            pstmt.setString(11, entity.getCodigoBarras());
-            pstmt.setString(12, entity.getCodigoISBN());
+            pstmt.setBigDecimal(5, entity.getPrecio());
+            pstmt.setString(6, dtf.format(now));
+            pstmt.setInt(7, entity.getIdGeneroLibro());
+            pstmt.setInt(8, entity.getIdEditorial());
+            pstmt.setInt(9, entity.getIdAutor());
+            pstmt.setString(10, entity.getCodigoBarras());
+            pstmt.setString(11, entity.getCodigoISBN());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {

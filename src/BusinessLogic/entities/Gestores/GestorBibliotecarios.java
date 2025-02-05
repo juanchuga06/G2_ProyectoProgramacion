@@ -122,8 +122,8 @@ public class GestorBibliotecarios {
         }
     }
 
-    public void eliminarCliente(Integer id) throws Exception{
-        if(id == null || id > BibliotecarioBL.getMax() || id <= 0)
+    public void eliminarBibliotecario(Integer id) throws Exception{
+        if(id == null || id <= 0)
             return;
         try{
             BibliotecarioBL.del(id);

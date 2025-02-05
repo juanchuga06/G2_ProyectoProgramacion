@@ -1,10 +1,9 @@
-import BusinessLogic.entities.Gestores.*;
-import BusinessLogic.entities.Personas.Cliente;
-import BusinessLogic.entities.Personas.EstadoCivil;
+
 import UserInterface.Form.Cliente.PanelClientes;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
 
         // GestorClientes gc = new GestorClientes();
         // for(Cliente c: gc.ClienteList){
@@ -18,7 +17,8 @@ public class App {
         // }
 
 
-       PanelClientes pc = new PanelClientes();
+       @SuppressWarnings("unused")
+        PanelClientes pc = new PanelClientes();
         //  JFrame frame = new JFrame("Ejemplo de Selector");
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setSize(300, 200);

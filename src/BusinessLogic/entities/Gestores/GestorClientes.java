@@ -122,8 +122,9 @@ public class GestorClientes {
     }
 
     public boolean eliminarCliente(Integer id) throws Exception{
-        if(id == null || id > ClienteBL.getMax() || id <= 0)
+        if(id == null || id <= 0){
             return false;
+        }
         try{
             ClienteBL.del(id);
             return true;

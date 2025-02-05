@@ -147,7 +147,7 @@ public class GestorCatalogoLibro {
     }
 
     public void eliminarAutor(Integer id) throws Exception{
-        if(id == null || id <= 0 || id > AutorBL.getMax())
+        if(id == null || id <= 0)
             return;
         try{
             AutorBL.del(id);
@@ -157,7 +157,7 @@ public class GestorCatalogoLibro {
     }
 
     public void eliminarEditorial(Integer id) throws Exception{
-        if(id == null || id <= 0 || id > EditorialBL.getMax())
+        if(id == null || id <= 0)
             return;
         try{
             EditorialBL.del(id);
@@ -167,7 +167,7 @@ public class GestorCatalogoLibro {
     }
 
     public void eliminarGeneroLibro(Integer id) throws Exception{
-        if(id == null || id <= 0 || id > GeneroLibroBL.getMax())
+        if(id == null || id <= 0)
             return;
         try{
             GeneroLibroBL.del(id);

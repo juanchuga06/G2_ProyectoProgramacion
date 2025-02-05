@@ -6,6 +6,7 @@ public class Libro {
     private Integer NumeroEdicion;
     private Integer NumeroEjemplares;
     private String FechaPublicacion;
+    private Double Precio;
     private GeneroLibro GeneroLibro;
     private Editorial Editorial;
     private Autor Autor;
@@ -15,13 +16,14 @@ public class Libro {
     public Libro() {
         }
     public Libro(Integer idLibro, String titulo, Integer numeroEdicion, Integer numeroEjemplares,
-            String fechaPublicacion, GeneroLibro generoLibro, Editorial editorial, Autor autor,
+            String fechaPublicacion, Double precio, GeneroLibro generoLibro, Editorial editorial, Autor autor,
             String codigoBarras, String codigoISBN) {
         setIdLibro(idLibro);
         setTitulo(titulo);
         setNumeroEdicion(numeroEdicion);
         setNumeroEjemplares(numeroEjemplares);
         setFechaPublicacion(fechaPublicacion);
+        setPrecio(precio);
         setGeneroLibro(generoLibro);
         setEditorial(editorial);
         setAutor(autor);
@@ -30,11 +32,12 @@ public class Libro {
 
 
     public Libro(String titulo, Integer numeroEdicion, Integer numeroEjemplares,
-            String fechaPublicacion, GeneroLibro generoLibro, Editorial editorial, Autor autor, String codigoISBN) {
+            String fechaPublicacion, Double precio, GeneroLibro generoLibro, Editorial editorial, Autor autor, String codigoISBN) {
         setTitulo(titulo);
         setNumeroEdicion(numeroEdicion);
         setNumeroEjemplares(numeroEjemplares);
         setFechaPublicacion(fechaPublicacion);
+        setPrecio(precio);
         setGeneroLibro(generoLibro);
         setEditorial(editorial);
         setAutor(autor);
@@ -43,6 +46,16 @@ public class Libro {
 
     public void AsocialCodigoBarras(String codigoBarras) {
         setCodigoBarras(codigoBarras);
+    }
+
+    public Double getPrecio() {
+        return Precio;
+    }
+    public void setPrecio(Double precio) {
+        if(precio == null || precio < 0)
+            return;
+        else
+            this.Precio = precio;
     }
 
     public Integer getIdLibro() {
