@@ -72,17 +72,17 @@ INSERT INTO EstadoAlquiler(Nombre)VALUES
 ('Devuelto'),
 ('Invalido');
 
-INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, IdGeneroLibro, IdEditorial, IdAutor, CodigoBarras, CodigoISBN)VALUES
-('El diario de Ana Frank',   '1',  '4', '1947', 3, 5, 10, '9789584277954', '978-95842-7795-4'),
-('Matar a un ruiseñor',      '3',  '5', '1960', 5, 4,  3, '9788418271809', '978-84182-7180-9'),
-('Orgullo y prejuicio',      '7',  '8', '1567', 8, 7,  5, '9786562390476', '978-65623-9047-6'),
-('Don Quijote de la Mancha', '5',  '7', '1605', 3, 2,  4, '9785392561292', '978-53925-6129-2'),
-('Dune',                     '9',  '4', '1965', 8, 8,  8, '9788641700442', '978-86417-0044-2'),
-('El señor de los anillos',  '1',  '5', '1954', 4, 5,  2, '9781646228409', '978-16462-2840-9'),
-('Los Fuegos del Hambre',    '4',  '3', '1988', 6, 7, 10, '9785907151031', '978-59071-5103-1'),
-('El alquimista',            '6',  '2', '1988', 6, 4,  5, '9782545898687', '978-25458-8986-7'),
-('1984',                     '9',  '4', '2000', 9,10,  8, '9787791409953', '978-77914-0995-3'),
-('El código Da Vinci',       '7',  '1', '1777', 3, 1,  1, '9785958639663', '978-59586-3966-3');
+INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Precio, IdGeneroLibro, IdEditorial, IdAutor, CodigoBarras, CodigoISBN)VALUES
+('El diario de Ana Frank',   '1',  '4', '1947','35.00', 3, 5, 10, '9789584277954', '978-95842-7795-4'),
+('Matar a un ruiseñor',      '3',  '5', '1960','42.00', 5, 4,  3, '9788418271809', '978-84182-7180-9'),
+('Orgullo y prejuicio',      '7',  '8', '1567','51.00', 8, 7,  5, '9786562390476', '978-65623-9047-6'),
+('Don Quijote de la Mancha', '5',  '7', '1605','21.00', 3, 2,  4, '9785392561292', '978-53925-6129-2'),
+('Dune',                     '9',  '4', '1965','18.00', 8, 8,  8, '9788641700442', '978-86417-0044-2'),
+('El señor de los anillos',  '1',  '5', '1954','24.00', 4, 5,  2, '9781646228409', '978-16462-2840-9'),
+('Los Fuegos del Hambre',    '4',  '3', '1988','30.00', 6, 7, 10, '9785907151031', '978-59071-5103-1'),
+('El alquimista',            '6',  '2', '1988','45.99', 6, 4,  5, '9782545898687', '978-25458-8986-7'),
+('1984',                     '9',  '4', '2000','12.00', 9,10,  8, '9787791409953', '978-77914-0995-3'),
+('El código Da Vinci',       '7',  '1', '1777','35.00', 3, 1,  1, '9785958639663', '978-59586-3966-3');
 
 INSERT INTO Bibliotecario(Nombre, Apellido, Cedula, Telefono, CorreoElectronico, Usuario, Contrasenia, IdEstadoCivil, IdSexo)VALUES
 ('Juan Andres',     'Lopez Arrelano', '1745896238',  '0962748173', 'andres.IO@gmail.com',        'Andres_Lopez', '123456Guapo',    1, 1),
@@ -134,30 +134,30 @@ INSERT INTO Alquiler(FechaAlquiler, FechaDevolucion, IdLibro, IdCliente, IdBibli
 ('05/01/2025', '30/01/2025',  3, 2, 5, 2),
 ('03/02/2024', '10/02/2024',  5, 3, 2, 2);
 
-INSERT INTO Venta (CantidadLibros, TotalLibros, Descuento, TotalPagar, FechaVenta, FechaDevolucion, IdLibro, IdCliente, IdBibliotecario) VALUES
-(2, 50.00, 'Si', 45.00, '2025-01-15', '2025-02-15', 1, 3, 2),
-(1, 30.00, 'No', 30.00, '2025-01-20', '2025-02-20', 2, 5, 1),
-(3, 75.00, 'Si', 65.00, '2025-01-25', '2025-02-25', 3, 7, 4),
-(5, 120.00, 'Si', 105.00, '2025-02-01', '2025-03-01', 4, 2, 3),
-(4, 90.00, 'No', 90.00, '2025-02-05', '2025-03-05', 5, 6, 5),
-(2, 40.00, 'No', 40.00, '2025-02-10', '2025-03-10', 6, 1, 2),
-(1, 20.00, 'Si', 18.00, '2025-02-15', '2025-03-15', 7, 8, 3),
-(6, 150.00, 'Si', 130.00, '2025-02-18', '2025-03-18', 8, 4, 1),
-(3, 70.00, 'No', 70.00, '2025-02-20', '2025-03-20', 9, 9, 4),
-(2, 45.00, 'Si', 40.00, '2025-02-25', '2025-03-25', 10, 10, 5);
+INSERT INTO Venta (CantidadLibros, TotalLibros, Descuento, TotalPagar, FechaVenta, IdLibro, IdCliente, IdBibliotecario) VALUES
+(2, 50.00, 'Si', 45.00, '2025-01-15', 1, 3, 2),
+(1, 30.00, 'No', 30.00, '2025-01-20', 2, 5, 1),
+(3, 75.00, 'Si', 65.00, '2025-01-25', 3, 7, 4),
+(5, 120.00, 'Si', 105.00, '2025-02-01', 4, 2, 3),
+(4, 90.00, 'No', 90.00, '2025-02-05', 5, 6, 5),
+(2, 40.00, 'No', 40.00, '2025-02-10', 6, 1, 2),
+(1, 20.00, 'Si', 18.00, '2025-02-15', 7, 8, 3),
+(6, 150.00, 'Si', 130.00, '2025-02-18', 8, 4, 1),
+(3, 70.00, 'No', 70.00, '2025-02-20', 9, 9, 4),
+(2, 45.00, 'Si', 40.00, '2025-02-25', 10, 10, 5);
 
 
-INSERT INTO Factura(DireccionLocal, TelefonoLocal, CorreoElectronico, FechaEmision, NumeroFactura, IdCliente, DetallesCompra, IdVenta)VALUES
-('Av. Amazonas 123',        '0998745632', 'contacto@libreriaquito.com',       '2025-01-15', 'FAC-2025-001', 3, '2 libros de literatura',  1),
-('Calle 10 de Agosto 456',  '0987456123', 'info@bibliotecacentral.com',       '2025-01-20', 'FAC-2025-002', 5, '1 libro de historia',     2),
-('Av. Naciones Unidas 789', '0974123658', 'ventas@librosguayaquil.com',       '2025-01-25', 'FAC-2025-003', 7, '3 libros de ciencia',     3),
-('Calle Sucre 321',         '0965234789', 'facturacion@bibliotecacuenca.com', '2025-02-01', 'FAC-2025-004', 2, '5 libros de matematicas', 4),
-('Av. Simon Bolivar 852',   '0958741236', 'contacto@libreriacuenca.com',      '2025-02-05', 'FAC-2025-005', 6, '4 libros de arte',        5),
-('Calle Rocafuerte 741',    '0945214783', 'info@bibliotecaesmeraldas.com',    '2025-02-10', 'FAC-2025-006', 1, '2 libros de filosofia',   6),
-('Av. Pichincha 369',       '0936587412', 'ventas@librosloja.com',            '2025-02-15', 'FAC-2025-007', 8, '1 libro de economia',     7),
-('Calle Olmedo 258',        '0923658741', 'facturas@bibliotecamanabi.com',    '2025-02-18', 'FAC-2025-008', 4, '6 libros de tecnologia',  8),
-('Av. 6 de Diciembre 147',  '0914785236', 'info@libreriatunja.com',           '2025-02-20', 'FAC-2025-009', 9, '3 libros de ingenieria',  9),
-('Calle Bolivar 963',       '0902365874', 'contacto@bibliotecapasto.com',     '2025-02-25', 'FAC-2025-010', 10, '2 libros de medicina',  10);
+INSERT INTO Factura(DireccionLocal, TelefonoLocal, CorreoElectronico, NumeroFactura, IdCliente, DetallesCompra, IdVenta)VALUES
+('Av. Amazonas 123',        '0998745632', 'contacto@libreriaquito.com',      'FAC-2025-001', 3, '2 libros de literatura',  1),
+('Calle 10 de Agosto 456',  '0987456123', 'info@bibliotecacentral.com',      'FAC-2025-002', 5, '1 libro de historia',     2),
+('Av. Naciones Unidas 789', '0974123658', 'ventas@librosguayaquil.com',      'FAC-2025-003', 7, '3 libros de ciencia',     3),
+('Calle Sucre 321',         '0965234789', 'facturacion@bibliotecacuenca.com','FAC-2025-004', 2, '5 libros de matematicas', 4),
+('Av. Simon Bolivar 852',   '0958741236', 'contacto@libreriacuenca.com',     'FAC-2025-005', 6, '4 libros de arte',        5),
+('Calle Rocafuerte 741',    '0945214783', 'info@bibliotecaesmeraldas.com',   'FAC-2025-006', 1, '2 libros de filosofia',   6),
+('Av. Pichincha 369',       '0936587412', 'ventas@librosloja.com',           'FAC-2025-007', 8, '1 libro de economia',     7),
+('Calle Olmedo 258',        '0923658741', 'facturas@bibliotecamanabi.com',   'FAC-2025-008', 4, '6 libros de tecnologia',  8),
+('Av. 6 de Diciembre 147',  '0914785236', 'info@libreriatunja.com',          'FAC-2025-009', 9, '3 libros de ingenieria',  9),
+('Calle Bolivar 963',       '0902365874', 'contacto@bibliotecapasto.com',    'FAC-2025-010', 10, '2 libros de medicina',  10);
 
 
 SELECT
@@ -279,25 +279,19 @@ WHERE v.Estado = 'A';
 
 
 SELECT
-    f.IdFactura          as Codigo,
-    f.DireccionLocal,
-    f.TelefonoLocal,
-    f.CorreoElectronico,
-    f.FechaEmision,
-    f.NumeroFactura,
-    c.Nombre             as Nombre,
-    c.Apellido           as Apellido,
-    c.Cedula             as Cedula,
-    c.Telefono           as Telefono,
-    c.CorreoElectronico  as CorreoElectronico,
-    f.DetallesCompra,
-    v.CantidadLibros     as Detalles,
-    v.TotalLibros        as Subtotal,
-    v.Descuento          as Descuento,
-    v.TotalPagar         as TotalPagar
+    f.IdFactura                   ,
+    f.DireccionLocal              ,
+    f.TelefonoLocal               ,
+    f.CorreoElectronico           ,
+    f.FechaEmision                ,
+    f.NumeroFactura               ,
+    f.DetallesCompra              ,
+    c.IdCliente                   ,
+    v.IdVenta                     
 FROM Factura as f
 INNER JOIN Venta as v on f.IdVenta = v.IdVenta
-INNER JOIN Cliente as c on v.IdCliente = c.IdCliente;
+INNER JOIN Cliente as c on v.IdCliente = c.IdCliente
+WHERE  f.Estado = 'A';
 
 
 
