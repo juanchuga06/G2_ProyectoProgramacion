@@ -1,5 +1,5 @@
 
-import UserInterface.Form.Cliente.PanelClientes;
+import UserInterfaceComponent.Form.Cliente.PanelClientes;
 
 public class App {
     public static void main(String[] args) throws Exception {
