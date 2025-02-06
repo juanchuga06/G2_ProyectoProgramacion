@@ -1,5 +1,5 @@
 
-import UserInterfaceComponent.Form.Cliente.PanelClientes;
+import UserInterfaceComponent.Form.Libros.PanelLibros;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -18,7 +18,7 @@ public class App {
 
 
        @SuppressWarnings("unused")
-        PanelClientes pc = new PanelClientes();
+        PanelLibros pl = new PanelLibros();
         //  JFrame frame = new JFrame("Ejemplo de Selector");
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setSize(300, 200);

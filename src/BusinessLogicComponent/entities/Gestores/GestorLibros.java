@@ -44,6 +44,11 @@ public class GestorLibros {
     }
 
     public void cargarLibros(){
+        AutorList.clear();
+        EditorialList.clear();
+        GeneroLibroList.clear();
+        LibroList.clear();
+        
         Autor autoraux;
         Editorial editorialaux;
         GeneroLibro generoaux;
@@ -92,7 +97,7 @@ public class GestorLibros {
         if(libro == null)
             return;
         try{
-            LibroBL.add(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), (new BigDecimal(libro.getPrecio().toString())),
+            LibroBL.add(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), libro.getNumeroEdicion(), libro.getNumeroEjemplares(), (new BigDecimal(libro.getPrecio().toString())),
                                      libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
                                      libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
         } catch(Exception e){
@@ -102,7 +107,7 @@ public class GestorLibros {
 
     public void actualizarLibro(Libro libro){
         try{
-            LibroBL.upd(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), (new BigDecimal(libro.getPrecio().toString())),
+            LibroBL.upd(new LibroDTO(libro.getIdLibro(),libro.getTitulo(), libro.getFechaPublicacion(), libro.getNumeroEdicion(), libro.getNumeroEjemplares(), (new BigDecimal(libro.getPrecio().toString())),
                                         libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
                                         libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
 
@@ -111,14 +116,16 @@ public class GestorLibros {
         }
     }  
 
-    public void eliminarLibro(Integer id) throws Exception{
+    public boolean eliminarLibro(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             LibroBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar al Libro");
         }
+        return false;
     }
 
     private Autor getAutorByID(Integer ID){

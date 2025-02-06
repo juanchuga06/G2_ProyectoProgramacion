@@ -146,34 +146,40 @@ public class GestorCatalogoLibro {
         }
     }
 
-    public void eliminarAutor(Integer id) throws Exception{
+    public boolean eliminarAutor(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             AutorBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar el autor");
         }
+        return false;
     }
 
-    public void eliminarEditorial(Integer id) throws Exception{
+    public boolean eliminarEditorial(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             EditorialBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar la editorial");
         }
+        return false;
     }
 
-    public void eliminarGeneroLibro(Integer id) throws Exception{
+    public boolean eliminarGeneroLibro(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             GeneroLibroBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar el genero de libro");
         }
+        return false;
     }
 
 }

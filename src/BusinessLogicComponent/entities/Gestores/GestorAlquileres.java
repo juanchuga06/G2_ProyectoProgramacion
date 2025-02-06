@@ -95,14 +95,16 @@ public class GestorAlquileres {
         }
     }
 
-    public void eliminarAlquiler(Integer id) throws Exception{
+    public boolean eliminarAlquiler(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             AlquilerBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar el alquiler");
         }
+        return false;
     }
     
     public void marcarDevuelto(Alquiler alquiler){

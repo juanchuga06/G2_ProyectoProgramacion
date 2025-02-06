@@ -95,36 +95,42 @@ public class GestorCatalogoPersona {
         }
     }
 
-    public void actualizarEstadoCivil(EstadoCivil estadoCivil){
+    public boolean actualizarEstadoCivil(EstadoCivil estadoCivil){
         if(estadoCivil == null || (estadoCivil.getIdEstadoCivil() >= 1 && estadoCivil.getIdEstadoCivil() <= 5))
-            return;
+            return false;
         try{
             EstadoCivilBL.upd(new EstadoCivilDTO(estadoCivil.getIdEstadoCivil(), estadoCivil.getNombre()));
+            return true;
         } catch (Exception e) {
             System.out.println("Error al registrar el estadoCivil");
         }
+        return false;
     }
 
-    public void eliminarSexo(Integer id) throws Exception{
+    public boolean eliminarSexo(Integer id) throws Exception{
         if((id == null || (id>= 1 && id <= 2) || id <= 0)){
-            return;
+            return false;
         }
         try{
             SexoBl.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar el sexo");
         }
+        return false;
     }
 
-    public void eliminarEstadoCivil(Integer id) throws Exception{
+    public boolean eliminarEstadoCivil(Integer id) throws Exception{
         if((id == null || (id >= 1 && id <= 5) || id <= 0)){
-            return;
+            return false;
         }
         try{
             EstadoCivilBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar el sexo");
         }
+        return false;
     }
 }
 

@@ -81,14 +81,16 @@ public class GestorDevoluciones {
         }
     }
 
-    public void eliminarDevolucion(Integer id) throws Exception{
+    public boolean eliminarDevolucion(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             AlquilerBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar la devolucion");
         }
+        return false;
     }
     
     public void marcarNoDevuelto(Alquiler alquiler){

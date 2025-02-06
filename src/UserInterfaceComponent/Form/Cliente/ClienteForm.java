@@ -152,7 +152,6 @@ public class ClienteForm extends JPanel {
         // Si la opción es si, se elimina al cliente de forma lógico
             if (opcion == JOptionPane.YES_OPTION) {
                 if (!this.parentFrame.gestorClientes.eliminarCliente(cliente.getIdPersona())) {
-                    System.out.println(cliente.getIdPersona());
                     throw new Exception("Error al eliminar");
                 } else {
                     JOptionPane.showMessageDialog(this, "Cliente eliminado.");
@@ -179,7 +178,7 @@ public class ClienteForm extends JPanel {
     }
 
     private void cargarCliente(){
-        if(cliente != null){
+        if(cliente != null && idCliente != null){
         try{
             cliente = this.parentFrame.gestorClientes.ClienteList.get(idCliente);
         }
@@ -262,7 +261,7 @@ public class ClienteForm extends JPanel {
         centerPanel.add(cedulaLabel, gbc);
 
         gbc.gridx = 1;
-        cedulaField = new PatTextBox();
+        cedulaField = new PatTextBox(10);
         cedulaField.setToolTipText("Ingresa la cedula");
         centerPanel.add(cedulaField, gbc);
 
@@ -272,7 +271,7 @@ public class ClienteForm extends JPanel {
         centerPanel.add(telefonoLabel, gbc);
 
         gbc.gridx = 1;
-        telefonoField = new PatTextBox();
+        telefonoField = new PatTextBox(10);
         telefonoField.setToolTipText("Ingresa el telefono");
         centerPanel.add(telefonoField, gbc);
 
@@ -283,7 +282,7 @@ public class ClienteForm extends JPanel {
 
         gbc.gridx = 1;
         correoField = new PatTextBox();
-        correoField.setToolTipText("Ingresa la cedula");
+        correoField.setToolTipText("Ingresa el correo");
         centerPanel.add(correoField, gbc);
 
         if(cliente != null){

@@ -148,7 +148,7 @@ public class BibliotecarioDAO extends SQLiteDataHelper implements IDAO<Bibliotec
             pstmt.setString(5, entity.getCorreoElectronico());
             pstmt.setString(6, entity.getUsuario());
             pstmt.setString(7, entity.getContrasenia());
-            pstmt.setString(10, dtf.format(now));
+            pstmt.setString(10, dtf.format(now).toString());
             pstmt.setInt(11, entity.getIdEstadoCivil());
             pstmt.setInt(12, entity.getIdSexo());
             pstmt.setInt(13, entity.getIdBibliotecario());

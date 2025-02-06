@@ -14,7 +14,7 @@ public class BiblioComboBox extends JComboBox<String>{
     }
 
     private void customizeComponent(){
-        setPreferredSize(new Dimension(250, 30));
+        setPreferredSize(new Dimension(100, 30));
         setBackground(Color.WHITE);
         setForeground(Color.BLACK);
         setBorder(BorderFactory.createLineBorder(Color.GRAY));

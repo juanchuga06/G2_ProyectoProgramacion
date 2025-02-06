@@ -14,13 +14,17 @@ public class PatTextBox extends JTextField {
         customizeComponent();
     }
 
+    public PatTextBox(Integer maxLength) {
+        super(maxLength);
+        customizeComponent();
+    }
+
     private void customizeComponent() {
         setBorderRect();
         setFont(BibliotecaStyle.FONT);  
         setForeground(BibliotecaStyle.COLOR_FONT_LIGHT);  
         setCaretColor(BibliotecaStyle.COLOR_CURSOR);    // Color del cursor
-        setMargin(new Insets(5, 5, 5, 5));      // Ajusta los márgenes
-        setPreferredSize(new Dimension(250, 30));
+        setPreferredSize(new Dimension(200, 30));
         setOpaque(true);
         setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Borde gris
         setBorder(BorderFactory.createLineBorder(Color.GRAY));                       // Fondo transparente

@@ -91,7 +91,7 @@ public class EditorialDAO extends SQLiteDataHelper implements IDAO<EditorialDTO>
     public boolean update(EditorialDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-DD  HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE Editorial SET NombreEditorial = ?, FechaModificaion = ? WHERE IdEditorial = ?";
+        String query = "UPDATE Editorial SET NombreEditorial = ?, FechaModificacion = ? WHERE IdEditorial = ?";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);

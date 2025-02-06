@@ -122,14 +122,16 @@ public class GestorBibliotecarios {
         }
     }
 
-    public void eliminarBibliotecario(Integer id) throws Exception{
+    public boolean eliminarBibliotecario(Integer id) throws Exception{
         if(id == null || id <= 0)
-            return;
+            return false;
         try{
             BibliotecarioBL.del(id);
+            return true;
         } catch (Exception e) {
             System.out.println("Error al eliminar al bibliotecario");
         }
+        return false;
     }
     
     public EstadoCivil getECByID(Integer id){

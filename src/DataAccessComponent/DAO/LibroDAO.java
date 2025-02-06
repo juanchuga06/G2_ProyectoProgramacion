@@ -116,7 +116,7 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
 
     @Override
     public boolean create(LibroDTO entity) throws Exception {
-        String query = " INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Precio, IdGeneroLibro,  IdEditorial,  IdAutor, CodigoBarras, CodigoISBN)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+        String query = " INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Precio, IdGeneroLibro,  IdEditorial,  IdAutor, CodigoBarras, CodigoISBN)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -134,6 +134,7 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
             return true;
         } 
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
     }
@@ -142,8 +143,9 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
     public boolean update(LibroDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-DD  HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE Libro SET titulo = ?, numeroEdicion = ?, numeroEjemplares = ?, fechaPublicacion = ?, Precio = ? fechaModificacion = ?, IdGeneroLibro = ?, IdEditorial = ?, IdAutor = ?,"
+        String query = "UPDATE Libro SET titulo = ?, numeroEdicion = ?, numeroEjemplares = ?, fechaPublicacion = ?, Precio = ?, fechaModificacion = ?, IdGeneroLibro = ?, IdEditorial = ?, IdAutor = ?,"
         +" codigoBarras = ?, codigoISBN = ? WHERE idLibro = ?";
+        
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -152,15 +154,17 @@ public class LibroDAO extends SQLiteDataHelper implements IDAO<LibroDTO>{
             pstmt.setInt(3, entity.getNumeroEjemplares());
             pstmt.setString(4, entity.getFechaPublicacion());
             pstmt.setBigDecimal(5, entity.getPrecio());
-            pstmt.setString(6, dtf.format(now));
+            pstmt.setString(6, dtf.format(now).toString());
             pstmt.setInt(7, entity.getIdGeneroLibro());
             pstmt.setInt(8, entity.getIdEditorial());
             pstmt.setInt(9, entity.getIdAutor());
             pstmt.setString(10, entity.getCodigoBarras());
             pstmt.setString(11, entity.getCodigoISBN());
+            pstmt.setInt(12, entity.getIdLibro());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
     }

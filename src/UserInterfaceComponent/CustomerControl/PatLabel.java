@@ -2,6 +2,7 @@ package UserInterfaceComponent.CustomerControl;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ public class PatLabel extends JLabel{
         setBackground(null);
         setForeground(color);
         setHorizontalAlignment(alignment);
+        setPreferredSize(new Dimension(20, 20));
         //setIcon(new ImageIcon(iconPath));
     }
 }

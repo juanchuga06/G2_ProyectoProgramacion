@@ -246,7 +246,6 @@ SELECT
     v.TotalPagar,
     v.Estado,
     v.FechaVenta,
-    v.FechaCreacion,
     v.FechaModificacion,
     l.IdLibro            as Libro,
     c.Nombre             as Nombre,

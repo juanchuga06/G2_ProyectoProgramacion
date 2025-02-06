@@ -27,12 +27,13 @@ public class Libro {
         setGeneroLibro(generoLibro);
         setEditorial(editorial);
         setAutor(autor);
+        setCodigoBarras(codigoBarras);
         setCodigoISBN(codigoISBN);
     }
 
 
     public Libro(String titulo, Integer numeroEdicion, Integer numeroEjemplares,
-            String fechaPublicacion, Double precio, GeneroLibro generoLibro, Editorial editorial, Autor autor, String codigoISBN) {
+            String fechaPublicacion, Double precio, GeneroLibro generoLibro, Editorial editorial, Autor autor, String codigoISBN, String codigoBarras) {
         setTitulo(titulo);
         setNumeroEdicion(numeroEdicion);
         setNumeroEjemplares(numeroEjemplares);
@@ -41,6 +42,7 @@ public class Libro {
         setGeneroLibro(generoLibro);
         setEditorial(editorial);
         setAutor(autor);
+        setCodigoBarras(codigoBarras);
         setCodigoISBN(codigoISBN);
     }
 
@@ -134,9 +136,9 @@ public class Libro {
         return CodigoBarras;
     }
     public void setCodigoBarras(String codigoBarras) {
-        if(codigoBarras == null || codigoBarras.isEmpty())
+        if(codigoBarras == null)
             return;
-        else
+        if (codigoBarras.matches("\\d+") || codigoBarras.isEmpty())
             this.CodigoBarras = codigoBarras;
     }
     public String getCodigoISBN() {
@@ -144,8 +146,9 @@ public class Libro {
     }
     public void setCodigoISBN(String codigoISBN) {
         if(codigoISBN == null || codigoISBN.isEmpty())
-            return;
-        else this.CodigoISBN = codigoISBN;
+            this.CodigoISBN = this.CodigoBarras;
+        else
+            this.CodigoISBN = codigoISBN;
     }
 
 
