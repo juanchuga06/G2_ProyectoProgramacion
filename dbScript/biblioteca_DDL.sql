@@ -116,7 +116,7 @@ CREATE TABLE Bibliotecario(
 CREATE TABLE Alquiler (
     IdAlquiler          INTEGER PRIMARY KEY AUTOINCREMENT,
     Estado              VARCHAR(1) DEFAULT 'A',
-    FechaAlquiler       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FechaAlquiler       DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaDevolucion     DATETIME,
     FechaModificacion   DATETIME,
     IdLibro             INTEGER NOT NULL REFERENCES Libro(IdLibro),
@@ -128,9 +128,9 @@ CREATE TABLE Alquiler (
 CREATE TABLE Direccion(
     IdDireccion         INTEGER PRIMARY KEY AUTOINCREMENT,
     CallePrincipal      VARCHAR(30) NOT NULL,
-    CalleSecundaria    VARCHAR(30) NOT NULL,
+    CalleSecundaria     VARCHAR(30) NOT NULL,
     Estado              VARCHAR(1)  DEFAULT 'A',
-    FechaCreacion       DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FechaCreacion       DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaModificacion   DATETIME,
     IdCliente           INTEGER REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER REFERENCES Bibliotecario(IdBibliotecario)
@@ -140,32 +140,29 @@ CREATE TABLE Venta (
     IdVenta             INTEGER PRIMARY KEY AUTOINCREMENT,
     CantidadLibros      INTEGER NOT NULL,
     TotalLibros         DECIMAL(10, 2) NOT NULL,
-    Descuento           VARCHAR(2) NOT NULL,
+    Descuento           BOOLEAN NOT NULL,
     TotalPagar          DECIMAL(10, 2) NOT NULL,
     Estado              VARCHAR(1) DEFAULT 'A',
-    FechaVenta          DATE NOT NULL,
-    FechaDevolucion     DATE NOT NULL,
-    FechaCreacion            DATETIME    NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaVenta          DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaModificacion   DATETIME,
     IdLibro             INTEGER NOT NULL REFERENCES Libro(IdLibro),
     IdCliente           INTEGER NOT NULL REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER NOT NULL REFERENCES Bibliotecario(IdBibliotecario)
 );
 
-
-
 CREATE TABLE Factura (
     IdFactura             INTEGER PRIMARY KEY AUTOINCREMENT,
     DireccionLocal        VARCHAR(50) NOT NULL,
     TelefonoLocal         VARCHAR(10) NOT NULL,
     CorreoElectronico     VARCHAR(30) NOT NULL,
-    FechaEmision          DATE NOT NULL,             -- Cambio de VARCHAR a DATE
+    FechaEmision          DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     NumeroFactura         VARCHAR(12) NOT NULL,
-    IdCliente             INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Cliente
     DetallesCompra        VARCHAR(150) NOT NULL,
-    IdVenta               INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Venta
+    IdCliente             INTEGER NOT NULL,
+    IdVenta               INTEGER NOT NULL,
     FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdVenta)    REFERENCES Venta(IdVenta)
+    CONSTRAINT Factura_Datos UNIQUE (DireccionLocal, TelefonoLocal, CorreoElectronico)
 );
 
 

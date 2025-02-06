@@ -134,17 +134,17 @@ INSERT INTO Alquiler(FechaAlquiler, FechaDevolucion, IdLibro, IdCliente, IdBibli
 ('05/01/2025', '30/01/2025',  3, 2, 5, 2),
 ('03/02/2024', '10/02/2024',  5, 3, 2, 2);
 
-INSERT INTO Venta (CantidadLibros, TotalLibros, Descuento, TotalPagar, FechaVenta, FechaDevolucion, IdLibro, IdCliente, IdBibliotecario) VALUES
-(2, 50.00, 'Si', 45.00, '2025-01-15', '2025-02-15', 1, 3, 2),
-(1, 30.00, 'No', 30.00, '2025-01-20', '2025-02-20', 2, 5, 1),
-(3, 75.00, 'Si', 65.00, '2025-01-25', '2025-02-25', 3, 7, 4),
-(5, 120.00, 'Si', 105.00, '2025-02-01', '2025-03-01', 4, 2, 3),
-(4, 90.00, 'No', 90.00, '2025-02-05', '2025-03-05', 5, 6, 5),
-(2, 40.00, 'No', 40.00, '2025-02-10', '2025-03-10', 6, 1, 2),
-(1, 20.00, 'Si', 18.00, '2025-02-15', '2025-03-15', 7, 8, 3),
-(6, 150.00, 'Si', 130.00, '2025-02-18', '2025-03-18', 8, 4, 1),
-(3, 70.00, 'No', 70.00, '2025-02-20', '2025-03-20', 9, 9, 4),
-(2, 45.00, 'Si', 40.00, '2025-02-25', '2025-03-25', 10, 10, 5);
+INSERT INTO Venta (CantidadLibros, TotalLibros, Descuento, TotalPagar, IdLibro, IdCliente, IdBibliotecario) VALUES
+(2, 50.00, 'Si', 45.00,   1, 3, 2),
+(1, 30.00, 'No', 30.00,   2, 5, 1),
+(3, 75.00, 'Si', 65.00,   3, 7, 4),
+(5, 120.00, 'Si', 105.00, 4, 2, 3),
+(4, 90.00, 'No', 90.00,   5, 6, 5),
+(2, 40.00, 'No', 40.00,   6, 1, 2),
+(1, 20.00, 'Si', 18.00,   7, 8, 3),
+(6, 150.00, 'Si', 130.00, 8, 4, 1),
+(3, 70.00, 'No', 70.00,   9, 9, 4),
+(2, 45.00, 'Si', 40.00,   10, 10, 5);
 
 
 INSERT INTO Factura(DireccionLocal, TelefonoLocal, CorreoElectronico, FechaEmision, NumeroFactura, IdCliente, DetallesCompra, IdVenta)VALUES
