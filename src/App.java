@@ -10,10 +10,10 @@ import UserInterface.Form.LoginFrame;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //SwingUtilities.invokeLater(LoginFrame :: new);
+      LoginFrame.main(new String[]{});
 
-         try {
-             AlquilerDAO oA = new AlquilerDAO();
+         //try {
+            // AlquilerDAO oA = new AlquilerDAO();
         //      AlquilerDTO oA1 = new AlquilerDTO();
         //      oA1.setFechaAlquiler("12/04/1542");
         //      oA1.setFechaDevolucion("20/04/1542");
@@ -26,14 +26,14 @@ public class App {
         //     //  oA.create(oA1);
         //     //  oA.delete(21);
         //     //  oA.delete(22);
-             for (AlquilerDTO a :  oA.readAll())
-                System.out.println(a.toString());
-             System.out.println("-------------");
-             System.out.println(oA.readBy(2));
-             System.out.println(oA.readBy(7));
-          } catch (Exception e) {
-             System.out.println(e.toString());
-          }
+        //     for (AlquilerDTO a :  oA.readAll())
+        //        System.out.println(a.toString());
+        //     System.out.println("-------------");
+        //     System.out.println(oA.readBy(2));
+        //     System.out.println(oA.readBy(7));
+        //  } catch (Exception e) {
+        //     System.out.println(e.toString());
+        //  }
 
 
         
