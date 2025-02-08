@@ -1,8 +1,10 @@
-package BusinessLogicComponent.entities.Gestores;
+package BusinessLogicComponent.entities.gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import BusinessLogicComponent.BLFactory;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
@@ -72,12 +74,14 @@ public class GestorAlquileres {
     }
 
     public void registrarAlquiler(Alquiler alquiler){
-        if(alquiler == null || alquiler.getLibro().getNumeroEjemplares() < 1)
+        if(alquiler == null || alquiler.getLibro().getNumeroEjemplares() < 1){
+            JOptionPane.showMessageDialog(null, "No existen copias suficientes del libro \n" + alquiler.getLibro().getTitulo(), "Error", JOptionPane.ERROR_MESSAGE);    
             return;
+        }
         try{
-            AlquilerBL.add(new AlquilerDTO(alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
+            AlquilerBL.add(new AlquilerDTO(null, null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
-            alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
+                                           alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
             gestorLibros.actualizarLibro(alquiler.getLibro());
         } catch (Exception e) {
             System.out.println("Error al registrar el alquiler");

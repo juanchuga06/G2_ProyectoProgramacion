@@ -44,6 +44,19 @@ public class VentaDTO {
         IdBibliotecario = idBibliotecario;
     }
 
+    public VentaDTO(Integer IdVenta, Integer cantidadLibros, BigDecimal totalLibros, Boolean descuento, String fechaVenta, BigDecimal totalPagar,
+    Integer idLibro, Integer idCliente, Integer idBibliotecario) {
+            setIdVenta(IdVenta);
+            setCantidadLibros(cantidadLibros);
+            setTotalLibros(totalLibros);
+            setDescuento(descuento);
+            setTotalPagar(totalPagar);
+            setFechaVenta(fechaVenta);
+            setIdLibro(idLibro);
+            setIdCliente(idCliente);
+            setIdBibliotecario(idBibliotecario);
+    }
+
     public Integer getIdVenta() {
         return IdVenta;
     }

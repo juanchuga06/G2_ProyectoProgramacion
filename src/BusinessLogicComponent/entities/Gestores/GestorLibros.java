@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.Gestores;
+package BusinessLogicComponent.entities.gestores;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

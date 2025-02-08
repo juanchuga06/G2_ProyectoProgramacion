@@ -83,6 +83,8 @@ public class Alquiler {
     public void setFechaDevolucion(LocalDate fechaDevolucion) {
         if(fechaDevolucion != null)
             this.FechaDevolucion = fechaDevolucion;
+        else 
+            this.FechaDevolucion = null;
     }
     public Libro getLibro() {
         return Libro;

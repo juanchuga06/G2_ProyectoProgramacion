@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import BusinessLogicComponent.entities.Gestores.GestorLibros;
+import BusinessLogicComponent.entities.gestores.GestorLibros;
 import BusinessLogicComponent.entities.Libros.Libro;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
 

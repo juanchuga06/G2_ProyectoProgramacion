@@ -12,13 +12,13 @@ public class Venta {
     private Double TotalLibros;
     private Boolean Descuento;
     private Double TotalAPagar;
-    private LocalDate FechaVenta;
+    private String FechaVenta;
     private Libro Libro;
     private Cliente Cliente;
     private Bibliotecario Bibliotecario;
 
     public Venta(Integer idVenta, Integer cantidadLibros, Double totalLibros, Boolean descuento, Double totalAPagar,
-            LocalDate fechaVenta, Libro libro, Cliente cliente, Bibliotecario bibliotecario) {
+            String fechaVenta, Libro libro, Cliente cliente, Bibliotecario bibliotecario) {
         setIdVenta(idVenta);
         setCantidadLibros(cantidadLibros);
         setTotalLibros(totalLibros);
@@ -30,7 +30,7 @@ public class Venta {
     }
 
     public Venta(Integer cantidadLibros, Double totalLibros, Boolean descuento, Double totalAPagar,
-            LocalDate fechaVenta, Libro libro, Cliente cliente, Bibliotecario bibliotecario) {
+            String fechaVenta, Libro libro, Cliente cliente, Bibliotecario bibliotecario) {
         setCantidadLibros(cantidadLibros);
         setTotalLibros(totalLibros);
         setDescuento(descuento);
@@ -86,14 +86,14 @@ public class Venta {
         else
             this.TotalAPagar = totalAPagar;
     }
-    public LocalDate getFechaVenta() {
+    public String getFechaVenta() {
         return FechaVenta;
     }
-    public void setFechaVenta(LocalDate fechaVenta) {
+    public void setFechaVenta(String fechaVenta) {
         if(fechaVenta == null)
-            fechaVenta = LocalDate.now();
+            fechaVenta = LocalDate.now().toString();
         else
-        this.FechaVenta = fechaVenta;
+            this.FechaVenta = fechaVenta;
     }
     public Libro getLibro() {
         return Libro;
