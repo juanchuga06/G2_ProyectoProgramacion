@@ -84,6 +84,15 @@ CREATE TABLE Libro(
     CodigoISBN               VARCHAR(20) NOT NULL UNIQUE
 );
 
+CREATE TABLE Portada(
+    IdPortada                INTEGER PRIMARY KEY AUTOINCREMENT,
+    Portada                  BLOB,
+    IdLibro                  INTEGER NOT NULL REFERENCES Libro(IdLibro),
+    Estado                   VARCHAR(1) DEFAULT 'A',
+    FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaModificacion        DATETIME
+);
+
 CREATE TABLE Cliente(
     IdCliente                INTEGER PRIMARY KEY AUTOINCREMENT,
     Nombre                   VARCHAR(30) NOT NULL,
@@ -150,8 +159,6 @@ CREATE TABLE Venta (
     IdCliente           INTEGER NOT NULL REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER NOT NULL REFERENCES Bibliotecario(IdBibliotecario)
 );
-
-
 
 CREATE TABLE Factura (
     IdFactura             INTEGER PRIMARY KEY AUTOINCREMENT,

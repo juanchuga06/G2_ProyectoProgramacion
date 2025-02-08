@@ -17,6 +17,8 @@ import DataAccessComponent.DTO.EstadoAlquilerDTO;
 public class GestorAlquileres {
     public List<Alquiler> AlquilerList;
     public List<EstadoAlquiler> EstadoAlquilerList;
+
+    private Integer idBibliotecario;
     // Tengo que encontrar una manera de determinar el bibliotecario que 
     // entra al sistema para asignarlo aquí.
 
@@ -94,6 +96,7 @@ public class GestorAlquileres {
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
+            gestorLibros.actualizarLibro(alquiler.getLibro());
         } catch (Exception e) {
             System.out.println("Error al actualizar el alquiler");
         }
