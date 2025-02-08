@@ -18,7 +18,7 @@ public class GestorAlquileres {
     public List<Alquiler> AlquilerList;
     public List<EstadoAlquiler> EstadoAlquilerList;
 
-    private Integer idBibliotecario;
+    // private Integer idBibliotecario;
     // Tengo que encontrar una manera de determinar el bibliotecario que 
     // entra al sistema para asignarlo aquí.
 

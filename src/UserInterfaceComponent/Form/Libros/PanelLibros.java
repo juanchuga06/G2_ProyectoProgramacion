@@ -7,18 +7,24 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorLibros;
@@ -27,7 +33,7 @@ import UserInterfaceComponent.CustomerControl.PatTextBox;
 
 public class PanelLibros extends JFrame{
     private JPanel                 librosPanel, topPanel;
-    private JButton                addLibroBtn, buscarCodigoBtn;
+    private JButton                addLibroBtn;
     private JTextField             searchField;
     private JScrollPane            scrollPane;
     private JLabel                 titleLabel;
@@ -130,14 +136,16 @@ public class PanelLibros extends JFrame{
         actualizarBoton(buscando);
         headerPanel.add(addLibroBtn);
 
-        buscarCodigoBtn = new JButton("Buscar Por Codigo");
-        buscarCodigoBtn.setPreferredSize(new Dimension(200, 40));
-        buscarCodigoBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        buscarCodigoBtn.setBackground(Color.BLACK);
-        buscarCodigoBtn.setForeground(Color.WHITE);
-        buscarCodigoBtn.setFocusPainted(false);
-        buscarCodigoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        headerPanel.add(buscarCodigoBtn);
+        // recargarBtn = new JButton("Recargar");
+        // recargarBtn.setPreferredSize(new Dimension(200, 40));
+        // recargarBtn.setFont(new Font("Arial", Font.BOLD, 14));
+        // recargarBtn.setBackground(Color.BLACK);
+        // recargarBtn.setForeground(Color.WHITE);
+        // recargarBtn.setFocusPainted(false);
+        // recargarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // recargarBtn.addActionListener(e -> recargarLibros());
+        // headerPanel.add(recargarBtn);
+
 
         topPanel.add(headerPanel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
@@ -185,6 +193,8 @@ public class PanelLibros extends JFrame{
         if (enBusqueda) {
             addLibroBtn.setText("Cancelar");
             addLibroBtn.addActionListener(e -> recargarLibros());
+            configurarTeclaEscape(enBusqueda);
+            
         } else {
             addLibroBtn.setText("Agregar Libro");
             addLibroBtn.addActionListener(e -> agregarNuevoLibro());
@@ -197,7 +207,23 @@ public class PanelLibros extends JFrame{
         addLibroBtn.setForeground(Color.WHITE);
         addLibroBtn.setFocusPainted(false);
         addLibroBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
     }
 
+    private void configurarTeclaEscape(Boolean enBusqueda) {
+        InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = rootPane.getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "accionEscape");
+        actionMap.put("accionEscape", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (enBusqueda) {
+                    recargarLibros(); // Llamar a la función que necesites
+                }
+            }
+        });
+    }
 
 }
+

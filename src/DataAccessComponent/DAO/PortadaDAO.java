@@ -21,6 +21,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
         PortadaDTO pt = new PortadaDTO();
         String query =" SELECT IdPortada                            "
                      +" ,Portada                                    "
+                     +" ,IdLibro                                    "
                      +" ,Estado                                     "
                      +" ,FechaCreacion                              "
                      +" ,FechaModificacion                          "
@@ -33,7 +34,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             ResultSet rs   = stmt.executeQuery(query);
             while (rs.next()) {
                 pt =  new PortadaDTO(rs.getInt(1)
-                                ,rs.getBlob(2)
+                                ,rs.getBytes(2)
                                 ,rs.getInt(3)
                                 ,rs.getString(4)
                                 ,rs.getString(5)
@@ -41,11 +42,43 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             }
         }
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
         return pt;
     }
     
+
+    public PortadaDTO readByLibro(Integer id) throws Exception {
+        PortadaDTO pt = null;
+        String query =" SELECT IdPortada                            "
+                     +" ,Portada                                    "
+                     +" ,IdLibro                                    "
+                     +" ,Estado                                     "
+                     +" ,FechaCreacion                              "
+                     +" ,FechaModificacion                          "
+                     +" FROM    Portada                             "
+                     +" WHERE   Portada.Estado ='A' AND IdLibro = " + id.toString();
+
+        try {
+            Connection conn = openConnection();
+            Statement  stmt = conn.createStatement();
+            ResultSet rs   = stmt.executeQuery(query);
+            while (rs.next()) {
+                pt =  new PortadaDTO(rs.getInt(1)
+                                ,rs.getBytes(2)
+                                ,rs.getInt(3)
+                                ,rs.getString(4)
+                                ,rs.getString(5)
+                                ,rs.getString(6));
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+        }
+        return pt;
+    }
 
     @Override
     public List<PortadaDTO> readAll() throws Exception {
@@ -64,7 +97,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             ResultSet rs   = stmt.executeQuery(query);
             while (rs.next()) {
                 PortadaDTO pt =  new PortadaDTO(rs.getInt(1)
-                                               ,rs.getBlob(2)
+                                               ,rs.getBytes(2)
                                                ,rs.getInt(3)
                                                ,rs.getString(4)
                                                ,rs.getString(5)
@@ -73,6 +106,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             }
         }
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
         return lst;
@@ -80,17 +114,17 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
 
     @Override
     public boolean create(PortadaDTO entity) throws Exception {
-        String query = " INSERT INTO Portada(IdPortada, Portada, IdLibro)VALUES (?, ?, ?); ";
+        String query = " INSERT INTO Portada(Portada, IdLibro)VALUES (?, ?); ";
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, entity.getIdPortada());
-            pstmt.setBlob(2, entity.getPortada());
-            pstmt.setInt(3, entity.getIdLibro());
+            pstmt.setBytes(1, entity.getPortada());
+            pstmt.setInt(2, entity.getIdLibro());
             pstmt.executeUpdate();
             return true;
         }
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
     }
@@ -103,7 +137,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
         try {
             Connection        conn  = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setBlob(1, entity.getPortada());
+            pstmt.setBytes(1, entity.getPortada());
             pstmt.setInt(2, entity.getIdLibro());
             pstmt.setString(3, dtf.format(now).toString());
             pstmt.setInt(4, entity.getIdPortada());
@@ -111,6 +145,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             return true;
         }
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
     }
@@ -127,6 +162,7 @@ public class PortadaDAO extends SQLiteDataHelper implements IDAO<PortadaDTO>{
             return true;
         } 
         catch (SQLException e) {
+            System.out.println(e);
             throw e;
         }
     }

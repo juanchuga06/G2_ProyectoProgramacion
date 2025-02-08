@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import BusinessLogicComponent.BLFactory;
 import BusinessLogicComponent.entities.Transacciones.Venta;
 import DataAccessComponent.DAO.VentaDAO;
-import DataAccessComponent.DTO.FacturaDTO;
+// import DataAccessComponent.DTO.FacturaDTO;
 import DataAccessComponent.DTO.VentaDTO;
 
 public class GestorVentas {
@@ -24,9 +24,9 @@ public class GestorVentas {
     // Agregar las constantes de contacto del negocio para insertarlas en la factura;
     public List<Venta> VentaList;
     
-    private Integer idBibliotecario;
+    // private Integer idBibliotecario;
     private BLFactory<VentaDTO> VentaBL;
-    private BLFactory<FacturaDTO> FacturaBL;
+    // private BLFactory<FacturaDTO> FacturaBL;
     private GestorBibliotecarios gestorBibliotecarios;
     private GestorClientes gestorClientes;
     private GestorLibros gestorLibros;

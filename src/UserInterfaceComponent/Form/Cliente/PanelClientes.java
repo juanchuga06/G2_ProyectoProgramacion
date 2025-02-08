@@ -2,6 +2,7 @@ package UserInterfaceComponent.Form.Cliente;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -178,6 +179,7 @@ public class PanelClientes extends JFrame {
         if (enBusqueda) {
             addClienteBtn.setText("Cancelar");
             addClienteBtn.addActionListener(e -> recargarClientes());
+            configurarTeclaEscape(enBusqueda);
         } else {
             addClienteBtn.setText("Agregar Cliente");
             addClienteBtn.addActionListener(e -> agregarNuevoCliente());
@@ -190,6 +192,21 @@ public class PanelClientes extends JFrame {
         addClienteBtn.setForeground(Color.WHITE);
         addClienteBtn.setFocusPainted(false);
         addClienteBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    private void configurarTeclaEscape(Boolean enBusqueda) {
+        InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = rootPane.getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "accionEscape");
+        actionMap.put("accionEscape", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (enBusqueda) {
+                    recargarClientes(); // Llamar a la función que necesites
+                }
+            }
+        });
     }
 
 }

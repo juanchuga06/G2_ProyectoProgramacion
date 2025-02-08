@@ -1,18 +1,16 @@
 package DataAccessComponent.DTO;
 
-import java.sql.Blob;
-
 public class PortadaDTO {
     private Integer IdPortada;
-    private Blob    Portada;
+    private byte[] Portada;
     private Integer IdLibro;
     private String  Estado;
     private String  FechaCreacion;
     private String  FechaModificacion;
     
     
-    public PortadaDTO(Integer idPortada, Blob portada, Integer idLibro, String estado, String fechaCreacion,
-                      String fechaModificacion) {
+    public PortadaDTO(Integer idPortada, byte[] portada, Integer idLibro, String estado, String fechaCreacion,
+    String fechaModificacion) {
         setIdPortada(idPortada);
         setPortada(portada);
         setIdLibro(idLibro);
@@ -21,13 +19,13 @@ public class PortadaDTO {
         setFechaModificacion(fechaModificacion);
     }
 
-    public PortadaDTO(Integer idPortada, Blob portada, Integer idLibro) {
+    public PortadaDTO(Integer idPortada, byte[] portada, Integer idLibro) {
         setIdPortada(idPortada);
         setPortada(portada);
         setIdLibro(idLibro);
     }
 
-    public PortadaDTO(Blob portada, Integer idLibro) {
+    public PortadaDTO(byte[] portada, Integer idLibro) {
         setPortada(portada);
         setIdLibro(idLibro);
     }
@@ -41,10 +39,10 @@ public class PortadaDTO {
     public void setIdPortada(Integer idPortada) {
         IdPortada = idPortada;
     }
-    public Blob getPortada() {
+    public byte[] getPortada() {
         return Portada;
     }
-    public void setPortada(Blob portada) {
+    public void setPortada(byte[] portada) {
         Portada = portada;
     }
     public Integer getIdLibro() {
@@ -56,7 +54,6 @@ public class PortadaDTO {
     public String getEstado() {
         return Estado;
     }
-
     public void setEstado(String estado) {
         Estado = estado;
     }
@@ -71,5 +68,10 @@ public class PortadaDTO {
     }
     public void setFechaModificacion(String fechaModificacion) {
         FechaModificacion = fechaModificacion;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + " " + IdPortada + " " + IdLibro + " " + Portada.toString();
     }
 }

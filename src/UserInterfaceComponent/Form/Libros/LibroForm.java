@@ -2,26 +2,32 @@ package UserInterfaceComponent.Form.Libros;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import BusinessLogicComponent.entities.Libros.Libro;
+import BusinessLogicComponent.entities.Libros.Portada;
+import BusinessLogicComponent.entities.Utilities.DoubleDocumentListener;
+import BusinessLogicComponent.entities.Utilities.NumericDocumentListener;
 import UserInterfaceComponent.CustomerControl.BiblioComboBox;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
-import UserInterfaceComponent.CustomerControl.PatLabel;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
 
 
@@ -32,9 +38,7 @@ public class LibroForm extends JPanel {
                                 fechaPubField, precioField, codigoBarrasField, codigoISBNField;
     private BiblioComboBox      autorBox, generoLibBox, editorialBox;
     private BiblioButton        guardarBtn, cancelarBtn, eliminarBtn, cambiarPortBtn;
-    private PatLabel            tituloLabel, numeroEdLabel, numeroEjempLabel, 
-                                fechaPubLabel, precioLabel, generoLibLabel, editorialLabel, 
-                                autorLabel, codigoBarrasLable, codigoISBNLbl;
+    private JLabel              PortadaLabel;
     private PanelLibros         parentFrame;
     private Image               backgroundImage;
     private Libro               libro = null;
@@ -81,6 +85,7 @@ public class LibroForm extends JPanel {
     }
 
     private void guardarBtnClick() {
+        System.out.println("Codigo de Barras: " + libro.getCodigoBarras() + " Codigo ISBN: " + libro.getCodigoISBN());
         if (tituloField.getText().isEmpty() || numeroEdField.getText().isEmpty() || numeroEjemField.getText().isEmpty() || 
             fechaPubField.getText().isEmpty() || precioField.getText().isEmpty() || codigoBarrasField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -138,6 +143,7 @@ public class LibroForm extends JPanel {
         mostrarLibro();
 
         this.parentFrame.recargarLibros();
+        System.out.println("Codigo de Barras: " + libro.getCodigoBarras() + " Codigo ISBN: " + libro.getCodigoISBN());
     }
     
     private void eliminarBtnClick(){
@@ -162,6 +168,7 @@ public class LibroForm extends JPanel {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(parentFrame, "Error al eliminar...!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }   
 
     private void cancelarBtnClick() {
@@ -174,7 +181,38 @@ public class LibroForm extends JPanel {
     }
 
     private void cambiarPortBtnClick(){
+        JFileChooser fileChooser = new JFileChooser();
         
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes PNG", "png");
+        fileChooser.setFileFilter(filtro);
+
+        int seleccion = fileChooser.showOpenDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+        
+            if (archivoSeleccionado.getName().toLowerCase().endsWith(".png")) {
+                ImageIcon imagen = new ImageIcon(archivoSeleccionado.getAbsolutePath());
+                
+                Image imagenEscalada = imagen.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+                int opcion = JOptionPane.showConfirmDialog(parentFrame, "¿Seguro que desea actualizar la portada del libro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+    
+                if (opcion == JOptionPane.YES_OPTION){
+                    if(this.parentFrame.gestorLibros.obtenerPortada(idLibro) == null){
+                        guardarBtnClick();
+                        parentFrame.gestorLibros.crearPortada(new Portada(new ImageIcon(imagenEscalada), libro.getIdLibro()));
+                        this.parentFrame.recargarLibros();
+                    }else { 
+                        guardarBtnClick();
+                        parentFrame.gestorLibros.actualizarPortada(new Portada(parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()).getIdPortada(), new ImageIcon(imagenEscalada), libro.getIdLibro()));
+                        this.parentFrame.recargarLibros();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo se permiten imágenes PNG.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+                
     }
 
 
@@ -205,6 +243,7 @@ public class LibroForm extends JPanel {
                 autorBox.setSelectedIndex(libro.getAutor().getIdAutor() - 1);
                 editorialBox.setSelectedIndex(libro.getEditorial().getIdEditorial() - 1);
                 generoLibBox.setSelectedIndex(libro.getGeneroLibro().getIdGeneroLibro() - 1);
+                
             }
             else{
                 limpiarCampos();
@@ -224,9 +263,7 @@ public class LibroForm extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Expandir horizontalmente
         gbc.weightx = 1.0;
-
 
         JLabel lblTitle;
         if(libro != null)
@@ -238,147 +275,189 @@ public class LibroForm extends JPanel {
         lblTitle.setHorizontalAlignment(SwingConstants.LEADING);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         centerPanel.add(lblTitle, gbc);
 
         gbc.gridwidth = 1;
+
+        // Portada (colocada en la primera columna con un tamaño fijo)
+        if(libro != null){
+            if(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()) != null ){
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.gridheight = 6; // Para que la imagen abarque varias filas sin afectar a otros elementos
+                gbc.anchor = GridBagConstraints.NORTH; // Mantener en la parte superior
+                PortadaLabel = new JLabel(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()).getPortada());
+                centerPanel.add(PortadaLabel, gbc);
+                gbc.gridheight = 1;
+            } // Restablecer valor predeterminado
+        }
+        // Primera columna de etiquetas
         gbc.gridx = 1;
         gbc.gridy = 1;
-        tituloLabel = new PatLabel("Titulo:");
-        centerPanel.add(tituloLabel, gbc);
+        gbc.anchor = GridBagConstraints.EAST;
+        centerPanel.add(new JLabel("Título:"), gbc);
 
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Número de Edición:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Número de Ejemplares:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Fecha de Publicación:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Precio:"), gbc);
+
+        // Segunda columna de campos de texto
         gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         tituloField = new PatTextBox();
         tituloField.setToolTipText("Ingresa el titulo del libro");
         centerPanel.add(tituloField, gbc);
-        
-        gbc.gridy = 2;
-        gbc.gridx = 1;
-        numeroEdLabel = new PatLabel("Numero de Edicion:");
-        centerPanel.add(numeroEdLabel, gbc);
+        centerPanel.add(tituloField, gbc);
 
-        gbc.gridx = 2;
+        gbc.gridy++;
         numeroEdField = new PatTextBox();
         numeroEdField.setToolTipText("Ingresa el numero de edicion");
+        numeroEdField.getDocument().addDocumentListener(new NumericDocumentListener(numeroEdField));
         centerPanel.add(numeroEdField, gbc);
 
-        gbc.gridy = 3;
-        gbc.gridx = 1;
-        numeroEjempLabel = new PatLabel("Numero de ejemplares:");
-        centerPanel.add(numeroEjempLabel, gbc);
-
-        gbc.gridx = 2;
+        gbc.gridy++;
         numeroEjemField = new PatTextBox();
         numeroEjemField.setToolTipText("Ingresa el numero de ejemplares");
+        numeroEjemField.getDocument().addDocumentListener(new NumericDocumentListener(numeroEjemField));
         centerPanel.add(numeroEjemField, gbc);
 
-        gbc.gridy = 4;
-        gbc.gridx = 1;
-        fechaPubLabel = new PatLabel("Fecha de publicacion:");
-        centerPanel.add(fechaPubLabel, gbc);
-
-        gbc.gridx = 2;
+        gbc.gridy++;
         fechaPubField = new PatTextBox();
+        fechaPubField.setColumns(4);
         fechaPubField.setToolTipText("Ingresa al año de publicacion");
+        fechaPubField.getDocument().addDocumentListener(new NumericDocumentListener(fechaPubField));
         centerPanel.add(fechaPubField, gbc);
 
-        gbc.gridy = 5;
-        gbc.gridx = 1;
-        precioLabel = new PatLabel("Precio por unidad:");
-        centerPanel.add(precioLabel, gbc);
-
-        gbc.gridx = 2;
+        // Revisar:
+        gbc.gridy++;
         precioField = new PatTextBox();
         precioField.setToolTipText("Ingresa el precio por unidad");
+        precioField.getDocument().addDocumentListener(new DoubleDocumentListener(precioField));
         centerPanel.add(precioField, gbc);
 
-        gbc.gridy = 1;
+        // Tercera columna de etiquetas
         gbc.gridx = 3;
-        codigoBarrasLable = new PatLabel("Codigo de barras:");
-        centerPanel.add(codigoBarrasLable, gbc);
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        centerPanel.add(new JLabel("Código de Barras:"), gbc);
 
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Código ISBN:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Autor:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Editorial:"), gbc);
+
+        gbc.gridy++;
+        centerPanel.add(new JLabel("Género de Libro:"), gbc);
+
+        // Cuarta columna de campos
         gbc.gridx = 4;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         codigoBarrasField = new PatTextBox();
         codigoBarrasField.setToolTipText("Ingresa el codigo de barras");
-        codigoBarrasField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) { // Cuando el escáner envía "Enter"
-                    String codigo = codigoBarrasField.getText().trim();
-                    System.out.println("Código escaneado: " + codigo);
-                }
-            }
-        });
+        codigoBarrasField.getDocument().addDocumentListener(new NumericDocumentListener(codigoBarrasField));
         centerPanel.add(codigoBarrasField, gbc);
 
-        gbc.gridy = 2;
-        gbc.gridx = 3;
-        codigoISBNLbl = new PatLabel("Codigo ISBN:");
-        centerPanel.add(codigoISBNLbl, gbc);
-
-        gbc.gridx = 4;
+        // Revisar
+        gbc.gridy++;
         codigoISBNField = new PatTextBox();
         codigoISBNField.setToolTipText("Ingresa el codigo ISBN");
+        codigoISBNField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filtrarTexto();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filtrarTexto();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filtrarTexto();
+            }
+
+            private void filtrarTexto() {
+                SwingUtilities.invokeLater(() -> {
+                    String texto = codigoISBNField.getText();
+                    if (!texto.matches("[\\d-]*")) { 
+                        codigoISBNField.setText(texto.replaceAll("[^\\d-]", ""));
+                    }
+                });
+            }
+        });
         centerPanel.add(codigoISBNField, gbc);
 
-
-        gbc.gridx = 3;
-        gbc.gridy = 3;
-        autorLabel = new PatLabel("Autor:");
-        centerPanel.add(autorLabel, gbc);
-
+        gbc.gridy++;
         String[] nombresAutor = new String[this.parentFrame.gestorLibros.AutorList.size()];
         for (int i = 0; i < nombresAutor.length; i++) {
             nombresAutor[i] = this.parentFrame.gestorLibros.AutorList.get(i).getNombre();
         }
         gbc.gridx = 4;
         autorBox = new BiblioComboBox(nombresAutor);
-        centerPanel.add(autorBox,gbc);
+        centerPanel.add(autorBox, gbc);
 
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        editorialLabel = new PatLabel("Editorial:");
-        centerPanel.add(editorialLabel, gbc);
-
+        gbc.gridy++;
         String[] nombresEditorial = new String[this.parentFrame.gestorLibros.EditorialList.size()];
         for (int i = 0; i < nombresEditorial.length; i++) {
             nombresEditorial[i] = this.parentFrame.gestorLibros.EditorialList.get(i).getNombre();
         }
         gbc.gridx = 4;
         editorialBox = new BiblioComboBox(nombresEditorial);
-        centerPanel.add(editorialBox,gbc);
+        centerPanel.add(editorialBox, gbc);
 
-        gbc.gridx = 3;
-        gbc.gridy = 5;
-        generoLibLabel = new PatLabel("Genero de Libro:");
-        centerPanel.add(generoLibLabel, gbc);
-
+        gbc.gridy++;
         String[] nombresGeneros = new String[this.parentFrame.gestorLibros.GeneroLibroList.size()];
         for (int i = 0; i < nombresGeneros.length; i++) {
             nombresGeneros[i] = this.parentFrame.gestorLibros.GeneroLibroList.get(i).getNombre();
         }
         gbc.gridx = 4;
         generoLibBox = new BiblioComboBox(nombresGeneros);
-        centerPanel.add(generoLibBox,gbc);
-        
-        gbc.gridy = 6;
+        centerPanel.add(generoLibBox, gbc);
+
+        // Botones en la parte inferior
+        if(libro != null)
+            gbc.gridy = 7;
+        else
+            gbc.gridy = 6;
         gbc.gridx = 0;
+        
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
         cambiarPortBtn = new BiblioButton("Cambiar portada", Color.BLACK, Color.WHITE);
         centerPanel.add(cambiarPortBtn, gbc);
 
+        gbc.gridy = 6;
         gbc.gridx = 1;
         guardarBtn = new BiblioButton("Guardar", Color.GREEN, Color.WHITE);
         centerPanel.add(guardarBtn, gbc);
 
         gbc.gridx = 2;
-        if(libro != null){
-            eliminarBtn = new BiblioButton("Eliminar", Color.BLACK, Color.WHITE);
-            eliminarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            centerPanel.add(eliminarBtn, gbc);
+        cancelarBtn = new BiblioButton("Cancelar", Color.RED, Color.WHITE);
+        centerPanel.add(cancelarBtn, gbc);
+
+        if (libro != null) {
             gbc.gridx = 3;
+            eliminarBtn = new BiblioButton("Eliminar", Color.BLACK, Color.WHITE);
+            centerPanel.add(eliminarBtn, gbc);
         }
-            cancelarBtn = new BiblioButton("Cancelar", Color.RED, Color.WHITE);
-            centerPanel.add(cancelarBtn, gbc);
 
         add(centerPanel, BorderLayout.CENTER);
     }

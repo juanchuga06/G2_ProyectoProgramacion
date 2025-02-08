@@ -1,5 +1,6 @@
 package BusinessLogicComponent.entities.Libros;
 
+
 public class Libro {
     private Integer IdLibro;
     private String Titulo;
@@ -136,9 +137,9 @@ public class Libro {
         return CodigoBarras;
     }
     public void setCodigoBarras(String codigoBarras) {
-        if(codigoBarras == null)
+        if(codigoBarras == null || codigoBarras.isEmpty())
             return;
-        if (codigoBarras.matches("\\d+") || codigoBarras.isEmpty())
+        else
             this.CodigoBarras = codigoBarras;
     }
     public String getCodigoISBN() {

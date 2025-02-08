@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import BusinessLogicComponent.entities.Personas.Cliente;
+import BusinessLogicComponent.entities.Utilities.NumericDocumentListener;
 import UserInterfaceComponent.CustomerControl.BiblioComboBox;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatLabel;
@@ -26,8 +27,7 @@ import UserInterfaceComponent.CustomerControl.PatTextBox;
 public class ClienteForm extends JPanel {
     private JTextField          nombreField, apellidoField, cedulaField, telefonoField, correoField;
     private BiblioComboBox      sexoBox, estadoCivilBox, direccionesBox;
-    private BiblioButton             guardarBtn, cancelarBtn, eliminarBtn;
-    private PatLabel            nombreLabel, apellidoLabel, cedulaLabel, telefonoLabel, correoLabel, sexoLabel, estadoCivilLabel, labelAux;
+    private BiblioButton        guardarBtn, cancelarBtn, eliminarBtn;
     private PanelClientes       parentFrame;
     private Image               backgroundImage;
     private Cliente             cliente = null;
@@ -237,7 +237,7 @@ public class ClienteForm extends JPanel {
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        nombreLabel = new PatLabel("Nombres:");
+        JLabel nombreLabel = new JLabel("Nombres:");
         centerPanel.add(nombreLabel, gbc);
 
         gbc.gridx = 1;
@@ -247,7 +247,7 @@ public class ClienteForm extends JPanel {
         
         gbc.gridy = 2;
         gbc.gridx = 0;
-        apellidoLabel = new PatLabel("Apellidos:");
+        JLabel apellidoLabel = new JLabel("Apellidos:");
         centerPanel.add(apellidoLabel, gbc);
 
         gbc.gridx = 1;
@@ -257,27 +257,29 @@ public class ClienteForm extends JPanel {
 
         gbc.gridy = 3;
         gbc.gridx = 0;
-        cedulaLabel = new PatLabel("Cedula:");
+        JLabel cedulaLabel = new JLabel("Cedula:");
         centerPanel.add(cedulaLabel, gbc);
 
         gbc.gridx = 1;
         cedulaField = new PatTextBox(10);
         cedulaField.setToolTipText("Ingresa la cedula");
+        cedulaField.getDocument().addDocumentListener(new NumericDocumentListener(cedulaField));
         centerPanel.add(cedulaField, gbc);
 
         gbc.gridy = 4;
         gbc.gridx = 0;
-        telefonoLabel = new PatLabel("Telefono:");
+        JLabel telefonoLabel = new JLabel("Telefono:");
         centerPanel.add(telefonoLabel, gbc);
 
         gbc.gridx = 1;
         telefonoField = new PatTextBox(10);
         telefonoField.setToolTipText("Ingresa el telefono");
+        telefonoField.getDocument().addDocumentListener(new NumericDocumentListener(telefonoField));
         centerPanel.add(telefonoField, gbc);
 
         gbc.gridy = 5;
         gbc.gridx = 0;
-        correoLabel = new PatLabel("Correo Electronico:");
+        JLabel correoLabel = new JLabel("Correo Electronico:");
         centerPanel.add(correoLabel, gbc);
 
         gbc.gridx = 1;
@@ -302,7 +304,7 @@ public class ClienteForm extends JPanel {
 
         gbc.gridx = 2;
         gbc.gridy = 1;
-        sexoLabel = new PatLabel("Sexo:");
+        JLabel sexoLabel = new JLabel("Sexo:");
         centerPanel.add(sexoLabel, gbc);
 
         String[] nombreSexos = new String[this.parentFrame.gestorClientes.SexoList.size()];
@@ -316,7 +318,7 @@ public class ClienteForm extends JPanel {
 
         gbc.gridx = 2;
         gbc.gridy = 2;
-        estadoCivilLabel = new PatLabel("Estado Civil:");
+        JLabel estadoCivilLabel = new JLabel("Estado Civil:");
         centerPanel.add(estadoCivilLabel, gbc);
         
         String[] nombreEC = new String[this.parentFrame.gestorClientes.EstadoCivilList.size()];
@@ -346,7 +348,7 @@ public class ClienteForm extends JPanel {
 
         gbc.gridy = 7;
         gbc.gridx = 1;
-        labelAux = new PatLabel("                             ");
+        JLabel labelAux = new JLabel("                             ");
         centerPanel.add(labelAux, gbc);
 
         add(centerPanel, BorderLayout.CENTER);

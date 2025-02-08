@@ -9,14 +9,18 @@ import BusinessLogicComponent.entities.Libros.Autor;
 import BusinessLogicComponent.entities.Libros.Editorial;
 import BusinessLogicComponent.entities.Libros.GeneroLibro;
 import BusinessLogicComponent.entities.Libros.Libro;
+import BusinessLogicComponent.entities.Libros.Portada;
+import BusinessLogicComponent.entities.Utilities.ImageUtilities;
 import DataAccessComponent.DAO.AutorDAO;
 import DataAccessComponent.DAO.EditorialDAO;
 import DataAccessComponent.DAO.GeneroLibroDAO;
 import DataAccessComponent.DAO.LibroDAO;
+import DataAccessComponent.DAO.PortadaDAO;
 import DataAccessComponent.DTO.AutorDTO;
 import DataAccessComponent.DTO.EditorialDTO;
 import DataAccessComponent.DTO.GeneroLibroDTO;
 import DataAccessComponent.DTO.LibroDTO;
+import DataAccessComponent.DTO.PortadaDTO;
 
 public class GestorLibros {
     public List<Editorial> EditorialList;
@@ -28,6 +32,7 @@ public class GestorLibros {
     private BLFactory<GeneroLibroDTO> GeneroLibroBL;
     private BLFactory<AutorDTO> AutorBL;
     private BLFactory<LibroDTO> LibroBL;
+
 
     public GestorLibros() {
         this.AutorList = new ArrayList<>();
@@ -99,7 +104,7 @@ public class GestorLibros {
         try{
             LibroBL.add(new LibroDTO(libro.getTitulo(), libro.getFechaPublicacion(), libro.getNumeroEdicion(), libro.getNumeroEjemplares(), (new BigDecimal(libro.getPrecio().toString())),
                                      libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
-                                     libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
+                                     libro.getAutor().getIdAutor(), libro.getCodigoBarras(), libro.getCodigoISBN()));
         } catch(Exception e){
             System.out.println("Error al registrar el libro");
         }   
@@ -109,7 +114,7 @@ public class GestorLibros {
         try{
             LibroBL.upd(new LibroDTO(libro.getIdLibro(),libro.getTitulo(), libro.getFechaPublicacion(), libro.getNumeroEdicion(), libro.getNumeroEjemplares(), (new BigDecimal(libro.getPrecio().toString())),
                                         libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
-                                        libro.getAutor().getIdAutor(), libro.getCodigoISBN(), libro.getCodigoBarras()));
+                                        libro.getAutor().getIdAutor(), libro.getCodigoBarras(), libro.getCodigoISBN()));
 
         } catch(Exception e){
             System.out.println("Error al actualizar el libro");
@@ -193,6 +198,56 @@ public class GestorLibros {
         }
         return libroaux;
     }
+
+    public Portada obtenerPortada(Integer idLibro){
+        PortadaDAO portadaDAO = new PortadaDAO();
+        PortadaDTO pt;
+        Portada portadaaux = null;
+        try {
+            pt = portadaDAO.readByLibro(idLibro);
+            if(pt != null){
+                portadaaux = new Portada(pt.getIdPortada(), ImageUtilities.bytesToImageIcon(pt.getPortada()), pt.getIdLibro());
+                return portadaaux;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return portadaaux;
+    }
+
+    public void crearPortada(Portada portada){
+        PortadaDAO portadaDAO = new PortadaDAO();
+        try {
+            portadaDAO.create(new PortadaDTO(ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void actualizarPortada(Portada portada){
+        PortadaDAO portadaDAO = new PortadaDAO();
+        try {
+            portadaDAO.update(new PortadaDTO(portada.getIdPortada(), ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarPortada(Portada portada){
+        PortadaDAO portadaDAO = new PortadaDAO();
+        try {
+            portadaDAO.update(new PortadaDTO(portada.getIdPortada(), ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+
+
     // El insertar el código de barras debe aniadirse un poco después de esto más 
     // arriba en la arquitectura del proyecto
     public void actualizarCodigoBarras(){}

@@ -14,6 +14,7 @@ import UserInterfaceComponent.BibliotecaStyle;
 import javax.swing.ImageIcon;
 
 public class BiblioButton  extends JButton implements MouseListener {
+    
     public BiblioButton(String text, Color colorBG, Color colorFG){
         customizeComponent(text, colorBG, colorFG);
     }
@@ -34,7 +35,7 @@ public class BiblioButton  extends JButton implements MouseListener {
     public void customizeComponent(String text, Color colorBG, Color colorFG) {
         setText(text);
         setPreferredSize(new Dimension(100, 40));
-        setFont(new Font("Arial", Font.BOLD, 14));
+        setFont(new Font("Arial", Font.BOLD, 8));
         setBackground(colorBG);
         setForeground(colorFG);
         setFocusPainted(false);
