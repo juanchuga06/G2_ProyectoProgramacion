@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorDevoluciones;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
-
+import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
 public class DevolucionPanel extends JFrame{
     private JPanel                 devolucionPanel, topPanel, headerPanel;
@@ -95,6 +95,10 @@ public class DevolucionPanel extends JFrame{
         topPanel.add(titleLabel, BorderLayout.NORTH);
 
         headerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
+        volverBtn.setAlignmentX(CENTER_ALIGNMENT);
+        headerPanel.add(volverBtn);
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);

@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorAlquileres;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
-
+import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
 public class AlquilerPanel extends JFrame{
     private JPanel                 alquilerPanel, topPanel;
@@ -101,11 +101,17 @@ public class AlquilerPanel extends JFrame{
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout()); 
 
+
         titleLabel = new JLabel("Gestionar Alquileres", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         topPanel.add(titleLabel, BorderLayout.NORTH);
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
+        volverBtn.setAlignmentX(CENTER_ALIGNMENT);
+        headerPanel.add(volverBtn);
+
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);

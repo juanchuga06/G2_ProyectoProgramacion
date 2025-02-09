@@ -29,6 +29,7 @@ import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorLibros;
 import BusinessLogicComponent.entities.Libros.Libro;
+import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
 
 public class PanelLibros extends JFrame{
@@ -108,6 +109,10 @@ public class PanelLibros extends JFrame{
 
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
+        JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
+        volverBtn.setAlignmentX(CENTER_ALIGNMENT);
+        headerPanel.add(volverBtn);
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(backgroundImage);

@@ -1,10 +1,12 @@
 
-import UserInterfaceComponent.Form.Libros.PanelLibros;
+import javax.swing.SwingUtilities;
+
+import UserInterfaceComponent.Form.LoginFrame;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-
+         SwingUtilities.invokeLater(LoginFrame::new);
         // GestorClientes gc = new GestorClientes();
         // for(Cliente c: gc.ClienteList){
         //     System.out.println(c.getNombre());
@@ -17,8 +19,8 @@ public class App {
         // }
 
 
-       @SuppressWarnings("unused")
-        PanelLibros pl = new PanelLibros();
+    //    @SuppressWarnings("unused")
+    //     PanelLibros pl = new PanelLibros();
         //  JFrame frame = new JFrame("Ejemplo de Selector");
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.setSize(300, 200);

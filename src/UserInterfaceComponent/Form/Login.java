@@ -29,7 +29,7 @@ public class Login extends JPanel {
         btnLogin.addActionListener(e -> btnLoginClick());
 
         // Cargar y redimensionar imagen correctamente
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterface/Resource/MRBOOKLG.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
     }
 
