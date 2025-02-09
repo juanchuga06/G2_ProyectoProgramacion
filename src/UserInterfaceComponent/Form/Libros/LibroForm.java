@@ -179,6 +179,10 @@ public class LibroForm extends JPanel {
     }
 
     private void cambiarPortBtnClick(){
+        if(libro == null){
+            JOptionPane.showMessageDialog(null, "Para ingresar una portada \n debe primero guardar el resto de \n datos del libro.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         JFileChooser fileChooser = new JFileChooser();
         
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes PNG", "png");
