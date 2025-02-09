@@ -7,10 +7,12 @@ import DataAccessComponent.DTO.AlquilerDTO;
 import DataAccessComponent.DTO.EstadoAlquilerDTO;
 import DataAccessComponent.DTO.GeneroLibroDTO;
 import UserInterface.Form.LoginFrame;
+import UserInterface.Form.MainForm;
 
 public class App {
     public static void main(String[] args) throws Exception {
         SwingUtilities.invokeLater(LoginFrame::new);
+        //SwingUtilities.invokeLater(MainForm:: new);
 
          //try {
             // AlquilerDAO oA = new AlquilerDAO();

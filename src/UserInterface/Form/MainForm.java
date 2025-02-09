@@ -31,24 +31,6 @@ public class MainForm extends JFrame {
         setVisible(true);
     }
 
-    // 📌 Método para mostrar la ventana de ventas
-    public void mostrarGVentasLPanel() {
-        System.out.println("📌 Mostrando GVentasLPanel...");
-        contentPanel.removeAll();
-        contentPanel.add( new GVentasLPanel());  // ✅ Pasamos 'this' correctamente
-        contentPanel.revalidate();
-        contentPanel.repaint();
-    }
-
-    // 📌 Método para mostrar la ventana de alquileres
-    public void mostrarGAlquileresLPanel() {
-        System.out.println("📌 Mostrando GAlquileresLPanel...");
-        contentPanel.removeAll();
-        contentPanel.add(new GAlquileresLPanel(this));  // ✅ Pasamos 'this' correctamente
-        contentPanel.revalidate();
-        contentPanel.repaint();
-    }
-
     // 📌 Método para volver al menú principal
     public void mostrarMenuPanel() {
         System.out.println("📌 Regresando al menú principal...");
