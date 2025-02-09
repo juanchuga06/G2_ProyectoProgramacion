@@ -27,7 +27,7 @@ public class PatLabel extends JLabel{
         setBackground(null);
         setForeground(color);
         setHorizontalAlignment(alignment);
-        setPreferredSize(new Dimension(20, 20));
+        setPreferredSize(new Dimension(200, 20));
         //setIcon(new ImageIcon(iconPath));
     }
 }

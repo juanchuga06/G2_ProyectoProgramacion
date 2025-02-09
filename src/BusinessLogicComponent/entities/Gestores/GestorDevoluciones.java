@@ -57,7 +57,7 @@ public class GestorDevoluciones {
 
         try {
             for(AlquilerDTO d: AlquilerBL.getAll()){
-                if(getEstAlquilerByID(d.getIdAlquiler()).getIdEstadoAlquiler() == 2){
+                if(d.getIdEstadoAlquiler() == 2){
                     devolucionaux = new Alquiler(d.getIdAlquiler(), d.getFechaAlquiler(), gestorLibros.getLibroByID(d.getIdLibro()),
                                                gestorClientes.getClienteByID(d.getIdCliente()), gestorBibliotecarios.getBibliotecarioByID(d.getIdBibliotecario()),
                                                getEstAlquilerByID(d.getIdAlquiler()));

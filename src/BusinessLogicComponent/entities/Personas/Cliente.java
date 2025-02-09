@@ -15,5 +15,9 @@ public class Cliente extends Persona{
             String correoElectronico, EstadoCivil estadoCivil,Sexo sexo, List<Direccion> direcciones) {
         super(nombre, apellido, cedula, telefono, correoElectronico, estadoCivil, sexo, direcciones);
     }
+    @Override
+    public String toString(){
+        return this.getNombre() + " " + this.getApellido();
+    }
 
 }

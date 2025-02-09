@@ -299,7 +299,7 @@ public class LibroForm extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
-        centerPanel.add(new JLabel("Título:"), gbc);
+        centerPanel.add(new JLabel("Título:" + libro.getTitulo()), gbc);
 
         gbc.gridy++;
         centerPanel.add(new JLabel("Número de Edición:"), gbc);

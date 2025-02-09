@@ -151,6 +151,9 @@ public class Libro {
         else
             this.CodigoISBN = codigoISBN;
     }
-
+    @Override
+    public String toString(){
+            return getTitulo();
+    }
 
 }

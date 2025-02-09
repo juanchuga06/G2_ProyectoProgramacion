@@ -25,9 +25,9 @@ public class GestorAlquileres {
     private BLFactory<AlquilerDTO> AlquilerBL;
     private BLFactory<EstadoAlquilerDTO> EstadoAlquilerBL;
 
-    private GestorBibliotecarios gestorBibliotecarios;
-    private GestorClientes gestorClientes;
-    private GestorLibros gestorLibros;
+    public GestorBibliotecarios gestorBibliotecarios;
+    public GestorClientes gestorClientes;
+    public GestorLibros gestorLibros;
 
     public GestorAlquileres(){
         this.AlquilerList = new ArrayList<>();
@@ -62,15 +62,16 @@ public class GestorAlquileres {
 
         try {
             for(AlquilerDTO a: AlquilerBL.getAll()){
-                if(getEstAlquilerByID(a.getIdAlquiler()).getIdEstadoAlquiler() == 1){
+                if(a.getIdEstadoAlquiler() == 1){
                     alquileraux = new Alquiler(a.getIdAlquiler(), a.getFechaAlquiler(), gestorLibros.getLibroByID(a.getIdLibro()),
                                                gestorClientes.getClienteByID(a.getIdCliente()), gestorBibliotecarios.getBibliotecarioByID(a.getIdBibliotecario()),
-                                               getEstAlquilerByID(a.getIdAlquiler()));
+                                               getEstAlquilerByID(1));
                     this.AlquilerList.add(alquileraux);
                 }
             }
             
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             System.out.println("Error al cargar los Alquileres");
         }
     }
@@ -83,7 +84,7 @@ public class GestorAlquileres {
         try{
             AlquilerBL.add(new AlquilerDTO(null, null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
-                                           alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
+            alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
             gestorLibros.actualizarLibro(alquiler.getLibro());
         } catch (Exception e) {
             System.out.println("Error al registrar el alquiler");
@@ -138,7 +139,7 @@ public class GestorAlquileres {
         }
     }
 
-    public EstadoAlquiler getEstAlquilerByID(int id){
+    public EstadoAlquiler getEstAlquilerByID(Integer id){
         EstadoAlquiler estaux = new EstadoAlquiler();
         for(EstadoAlquiler ea: this.EstadoAlquilerList){
             if(ea.getIdEstadoAlquiler().equals(id)){

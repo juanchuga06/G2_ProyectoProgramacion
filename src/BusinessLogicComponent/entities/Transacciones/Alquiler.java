@@ -15,7 +15,7 @@ public class Alquiler {
     private Bibliotecario Bibliotecario;
     private EstadoAlquiler EstadoAlquiler;
 
-    
+    public Alquiler(){}
     // Este constructor se utiliza para insertar un nuevo alquiler desde la base de datos, 
     // La creación de una devolucion se maneja a través de GestorAquiler
 
@@ -23,6 +23,7 @@ public class Alquiler {
             Cliente cliente, Bibliotecario bibliotecario, EstadoAlquiler estadoAlquiler) {
         setIdAlquiler(idAlquiler);
         setFechaAlquiler(fechaAlquiler);
+        setLibro(libro);
         setCliente(cliente);
         setBibliotecario(bibliotecario);
         setEstadoAlquiler(estadoAlquiler);
@@ -32,6 +33,7 @@ public class Alquiler {
     public Alquiler(String fechaAlquiler, Libro libro, Cliente cliente, 
                     Bibliotecario bibliotecario, EstadoAlquiler estadoAlquiler) {
         setFechaAlquiler(fechaAlquiler);
+        setLibro(libro);
         setCliente(cliente);
         setBibliotecario(bibliotecario);
         setEstadoAlquiler(estadoAlquiler);

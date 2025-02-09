@@ -42,4 +42,9 @@ public class Bibliotecario extends Persona{
             this.Contrasena = contrasena;
     }
 
+    @Override
+    public String toString() {
+        return getNombre() + " " + getApellido();
+    }
+
 }
