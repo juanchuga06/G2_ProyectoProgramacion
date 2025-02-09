@@ -92,8 +92,8 @@ public class Libro {
         return NumeroEjemplares;
     }
     public void setNumeroEjemplares(Integer numeroEjemplares) {
-        if(numeroEjemplares == null || numeroEjemplares <= 0)
-            this.NumeroEjemplares = 1;
+        if(numeroEjemplares == null || numeroEjemplares < 0)
+            this.NumeroEjemplares = 0;
         else
             this.NumeroEjemplares = numeroEjemplares;
     }

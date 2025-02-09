@@ -9,7 +9,7 @@ import BusinessLogicComponent.entities.Personas.Cliente;
 public class Alquiler {
     private Integer IdAlquiler;
     private String FechaAlquiler;
-    private LocalDate FechaDevolucion;
+    private String FechaDevolucion;
     private Libro Libro;
     private Cliente Cliente;
     private Bibliotecario Bibliotecario;
@@ -40,21 +40,23 @@ public class Alquiler {
     }
 
     //Este constructor es para sacar las devoluciones de la base de datos
-    public Alquiler(Integer idAlquiler, String fechaAlquiler, Libro libro, LocalDate fechaDevolucion,
+    public Alquiler(Integer idAlquiler, String fechaAlquiler, Libro libro, String fechaDevolucion,
             Cliente cliente, Bibliotecario bibliotecario, EstadoAlquiler estadoAlquiler) {
         setIdAlquiler(idAlquiler);
         setFechaAlquiler(fechaAlquiler);
         setFechaDevolucion(fechaDevolucion);
+        setLibro(libro);
         setCliente(cliente);
         setBibliotecario(bibliotecario);
         setEstadoAlquiler(estadoAlquiler);
     }
 
     // Este constructor sirve para actualizar una devolucion
-    public Alquiler(String fechaAlquiler, Libro libro, LocalDate fechaDevolucion,
+    public Alquiler(String fechaAlquiler, Libro libro, String fechaDevolucion,
             Cliente cliente, Bibliotecario bibliotecario, EstadoAlquiler estadoAlquiler) {
         setFechaAlquiler(fechaAlquiler);
         setFechaDevolucion(fechaDevolucion);
+        setLibro(libro);
         setCliente(cliente);
         setBibliotecario(bibliotecario);
         setEstadoAlquiler(estadoAlquiler);
@@ -79,10 +81,10 @@ public class Alquiler {
         else
             this.FechaAlquiler = fechaAlquiler;
     }
-    public LocalDate getFechaDevolucion() {
+    public String getFechaDevolucion() {
         return FechaDevolucion;
     }
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+    public void setFechaDevolucion(String fechaDevolucion) {
         if(fechaDevolucion != null)
             this.FechaDevolucion = fechaDevolucion;
         else 

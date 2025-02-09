@@ -113,7 +113,7 @@ public class AlquilerPanel extends JFrame{
         JLabel logoLabel = new JLabel(scaledIcon); 
         headerPanel.add(logoLabel);
 
-        searchLbl = new JLabel("Buscar alquiler por ISBN:");
+        searchLbl = new JLabel("Buscar alquiler por codigo de barras:");
         headerPanel.add(searchLbl);
 
         searchField = new PatTextBox();

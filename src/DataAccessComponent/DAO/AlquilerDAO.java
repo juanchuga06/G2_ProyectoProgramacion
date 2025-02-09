@@ -99,12 +99,14 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
 
     @Override
     public boolean create(AlquilerDTO entity) throws Exception {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         String query = "INSERT INTO Alquiler(FechaAlquiler, FechaDevolucion, IdLibro, IdCliente, IdBibliotecario, IdEstadoAlquiler) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, entity.getFechaAlquiler());
+            pstmt.setString(1, dtf.format(now).toString());
             pstmt.setString(2, entity.getFechaDevolucion());
             pstmt.setInt(3, entity.getIdLibro());
             pstmt.setInt(4, entity.getIdCliente());

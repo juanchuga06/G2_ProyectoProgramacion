@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,49 +97,42 @@ public class AlquilerForm extends JPanel{
         boolean alquilerNull = (alquiler == null);
         String confirmacion = alquilerNull ? "AGREGAR" : "ACTUALIZAR";
         
-        try {
             // Se verifica si el usuario quiere agregar o actualizar el alquiler
-            int opcion = JOptionPane.showConfirmDialog(
-                parentFrame, 
-                "¿Seguro que desea " + confirmacion + "?", 
-                "Confirmacion", 
-                JOptionPane.YES_NO_OPTION
-            );
-            
-            // Si se acepta el cambio, el sistema guarda o actualiza el cliente
-            // Se actualizan todos los campos menos la direccion ahem ahem Mayerli haz eso
-            // Se agrega o actualiza según el caso
-            if (opcion == JOptionPane.YES_OPTION) {
-                if (alquilerNull) {
-                    alquiler = new Alquiler(); 
-            // Si el cliente es nuevo, se debe crear un nuevo cliente para añadirle valores
-                    // alquiler.setCliente(null);
-                    // alquiler.setLibro(null);
-                    // alquiler.setBibliotecario(null);
-                    // alquiler.setFechaAlquiler(null);
-                    // alquiler.set
-                    // alquiler.setEstadoCivil(this.parentFrame.gestorClientes.EstadoCivilList.get(estadoCivilBox.getSelectedIndex()));
-                    // alquiler.setSexo(this.parentFrame.gestorClientes.SexoList.get(sexoBox.getSelectedIndex()));
-                    // this.parentFrame.gestorClientes.registrarCliente(cliente);
-                }
-                else {
-                    // cliente.setNombre(nombreField.getText());
-                    // cliente.setApellido(apellidoField.getText());
-                    // cliente.setCedula(cedulaField.getText());
-                    // cliente.setTelefono(telefonoField.getText());
-                    // cliente.setCorreoElectronico(correoField.getText());
-                    // cliente.setEstadoCivil(this.parentFrame.gestorClientes.EstadoCivilList.get(estadoCivilBox.getSelectedIndex()));
-                    // cliente.setSexo(this.parentFrame.gestorClientes.SexoList.get(sexoBox.getSelectedIndex()));
-                    // this.parentFrame.gestorClientes.actualizarCliente(cliente);
-                }
+        int opcion = JOptionPane.showConfirmDialog(
+            parentFrame, 
+            "¿Seguro que desea " + confirmacion + "?", 
+            "Confirmacion", 
+            JOptionPane.YES_NO_OPTION
+        );
         
-                // Al final se muestra un mensaje de exito, o un mensaje de error si algo salió mal
-                JOptionPane.showMessageDialog(parentFrame, "Cliente " + confirmacion + " con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        // Si se acepta el cambio, el sistema guarda o actualiza el cliente
+        // Se actualizan todos los campos menos la direccion ahem ahem Mayerli haz eso
+        // Se agrega o actualiza según el caso
+        if (opcion == JOptionPane.YES_OPTION) {
+            if (alquilerNull) {
+                alquiler = new Alquiler();
+                alquiler.setCliente((Cliente) clienteBox.getSelectedItem());
+                alquiler.setLibro((Libro) libroBox.getSelectedItem());
+                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(1));
+                alquiler.setEstadoAlquiler(this.parentFrame.gestorAlquileres.getEstAlquilerByID(1));
+                if(!this.parentFrame.gestorAlquileres.registrarAlquiler(alquiler)){
+                    return;
+                }
+
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(parentFrame, "Error al guardar...!", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
+            else {
+                alquiler.setCliente((Cliente) clienteBox.getSelectedItem());
+                alquiler.setLibro((Libro) libroBox.getSelectedItem());
+                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(1));
+                alquiler.setEstadoAlquiler(this.parentFrame.gestorAlquileres.getEstAlquilerByID(1));
+                if(!this.parentFrame.gestorAlquileres.actualizarAlquiler(alquiler)){
+                    return;
+                }
+                }
+            }
+    
+            // Al final se muestra un mensaje de exito, o un mensaje de error si algo salió mal
+            JOptionPane.showMessageDialog(parentFrame, "Alquiler " + confirmacion + " con exito el " + LocalDate.now().toString(), "Exito", JOptionPane.INFORMATION_MESSAGE);
         cargarAlquiler();
         mostrarAlquiler();
 
@@ -182,6 +176,31 @@ public class AlquilerForm extends JPanel{
             mostrarAlquiler();
             this.parentFrame.recargarAlquileres();
         } catch (Exception e) {}
+    }
+
+    private void marcarDevueltoBtnClick(){
+        try {
+            int opcion = JOptionPane.showConfirmDialog(
+                parentFrame, 
+                "¿Seguro que desea marcar como devuelto a este alquiler?", 
+                "Devolución", 
+                JOptionPane.YES_NO_OPTION
+            );
+            
+        // Si la opción es si, se elimina al cliente de forma lógico
+            if (opcion == JOptionPane.YES_OPTION) {
+                if (!this.parentFrame.gestorAlquileres.marcarDevuelto(alquiler)) {
+                    throw new Exception("Error al marcar como devuelto");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Alquiler " + idAlquiler + " marcado como devuelto el " + LocalDate.now().toString());
+                    this.parentFrame.recargarAlquileres();
+                }
+            }
+            // Se muestra un mensaje que muestra si la eliminación se hizo exitosa o no
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(parentFrame, "Error al marcar como devuelto...!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void cargarAlquiler(){
@@ -258,7 +277,6 @@ public class AlquilerForm extends JPanel{
 
             clienteBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Cliente clienteSeleccionado = (Cliente)clienteBox.getSelectedItem();
                     revalidate();
                     repaint();
                 }
@@ -280,9 +298,8 @@ public class AlquilerForm extends JPanel{
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         String textoBuscado = buscarLibroField.getText();
                         for (int i = 0; i < libroBox.getItemCount(); i++) {
-                            String item = ((Libro) libroBox.getSelectedItem()).getCodigoBarras();
+                            String item = ((Libro) libroBox.getItemAt(i)).getCodigoBarras();
                             if (item.contains(textoBuscado)) { 
-                                System.out.println(item.contains(textoBuscado));
                                 libroBox.setSelectedIndex(i);
                                 break;
                             }
@@ -383,6 +400,8 @@ public class AlquilerForm extends JPanel{
             gbc.gridx = 1;
             gbc.gridy = 4;
             marcarDevueltoBtn = new BiblioButton("Marcar Devuelto", Color.CYAN, Color.WHITE);
+            marcarDevueltoBtn.addActionListener(e -> marcarDevueltoBtnClick());
+
             centerPanel.add(marcarDevueltoBtn, gbc);
             gbc.gridx = 2;
         }
@@ -392,6 +411,7 @@ public class AlquilerForm extends JPanel{
 
         add(centerPanel, BorderLayout.CENTER);
     }    
+    
 
     private void limpiarCampos() {
         clienteBox.setSelectedItem(0);

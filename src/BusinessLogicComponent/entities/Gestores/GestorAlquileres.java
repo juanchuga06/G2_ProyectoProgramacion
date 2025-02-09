@@ -76,31 +76,36 @@ public class GestorAlquileres {
         }
     }
 
-    public void registrarAlquiler(Alquiler alquiler){
+    public boolean registrarAlquiler(Alquiler alquiler){
         if(alquiler == null || alquiler.getLibro().getNumeroEjemplares() < 1){
             JOptionPane.showMessageDialog(null, "No existen copias suficientes del libro \n" + alquiler.getLibro().getTitulo(), "Error", JOptionPane.ERROR_MESSAGE);    
-            return;
+            return false;
         }
         try{
             AlquilerBL.add(new AlquilerDTO(null, null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
             alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
             gestorLibros.actualizarLibro(alquiler.getLibro());
+            return true;
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Error al registrar el alquiler");
         }
+        return false;
     }
 
-    public void actualizarAlquiler(Alquiler alquiler){
+    public boolean actualizarAlquiler(Alquiler alquiler){
         if(alquiler == null)
-        return;
+            return false;
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
             gestorLibros.actualizarLibro(alquiler.getLibro());
+            return true;
         } catch (Exception e) {
             System.out.println("Error al actualizar el alquiler");
         }
+        return false;
     }
 
     public boolean eliminarAlquiler(Integer id) throws Exception{
@@ -115,17 +120,19 @@ public class GestorAlquileres {
         return false;
     }
     
-    public void marcarDevuelto(Alquiler alquiler){
+    public boolean marcarDevuelto(Alquiler alquiler){
         if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 1)
-        return;
+        return false;
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), LocalDate.now().toString(), alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 2));
             alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() + 1);
             gestorLibros.actualizarLibro(alquiler.getLibro());
+            return true;
         } catch (Exception e) {
             System.out.println("Error al marcar devuelto el alquiler");
         }
+            return false;
     }
 
     public void marcarInvalido(Alquiler alquiler){

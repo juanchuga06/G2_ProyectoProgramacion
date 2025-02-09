@@ -20,9 +20,9 @@ public class GestorDevoluciones {
     private BLFactory<AlquilerDTO> AlquilerBL;
     private BLFactory<EstadoAlquilerDTO> EstadoAlquilerBL;
 
-    private GestorBibliotecarios gestorBibliotecarios;
-    private GestorClientes gestorClientes;
-    private GestorLibros gestorLibros;
+    public GestorBibliotecarios gestorBibliotecarios;
+    public GestorClientes gestorClientes;
+    public GestorLibros gestorLibros;
 
     public GestorDevoluciones(){
         this.DevolucionList = new ArrayList<>();
@@ -58,9 +58,10 @@ public class GestorDevoluciones {
         try {
             for(AlquilerDTO d: AlquilerBL.getAll()){
                 if(d.getIdEstadoAlquiler() == 2){
-                    devolucionaux = new Alquiler(d.getIdAlquiler(), d.getFechaAlquiler(), gestorLibros.getLibroByID(d.getIdLibro()),
+                    devolucionaux = new Alquiler(d.getIdAlquiler(), d.getFechaAlquiler(), gestorLibros.getLibroByID(d.getIdLibro()), d.getFechaDevolucion(),
                                                gestorClientes.getClienteByID(d.getIdCliente()), gestorBibliotecarios.getBibliotecarioByID(d.getIdBibliotecario()),
-                                               getEstAlquilerByID(d.getIdAlquiler()));
+                                               getEstAlquilerByID(2));
+                    System.out.println(d.getIdLibro());
                     this.DevolucionList.add(devolucionaux);
                 }
             }
@@ -70,15 +71,17 @@ public class GestorDevoluciones {
         }
     }
 
-    public void actualizarDevolucion(Alquiler alquiler){
+    public boolean actualizarDevolucion(Alquiler alquiler){
         if(alquiler == null)
-        return;
+        return false;
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), alquiler.getFechaDevolucion().toString(), alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 2));
+            return true;
         } catch (Exception e) {
             System.out.println("Error al actualizar el alquiler");
         }
+        return false;
     }
 
     public boolean eliminarDevolucion(Integer id) throws Exception{
@@ -93,17 +96,19 @@ public class GestorDevoluciones {
         return false;
     }
     
-    public void marcarNoDevuelto(Alquiler alquiler){
+    public boolean marcarNoDevuelto(Alquiler alquiler){
         if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 2)
-        return;
+            return false;
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
             alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
             gestorLibros.actualizarLibro(alquiler.getLibro());
+            return true;
         } catch (Exception e) {
             System.out.println("Error al marcar devuelto el alquiler");
         }
+        return false;
     }
 
     public void marcarInvalido(Alquiler alquiler){
@@ -130,15 +135,6 @@ public class GestorDevoluciones {
         return estaux;
     }
 
-    public List<Alquiler> buscarDevolcionPorISBN(String codigoISBN){
-        List<Alquiler> alquileresLibro = new ArrayList<>();
-        for(Alquiler a: this.DevolucionList){
-            if(a.getLibro().getCodigoISBN().equals(codigoISBN)){
-                alquileresLibro.add(a);
-            }
-        }
-        return alquileresLibro;
-    }
 
     public List<Alquiler> buscarDevolcionPorCodigoBarras(String codigoBarras){
         List<Alquiler> alquileresLibro = new ArrayList<>();
