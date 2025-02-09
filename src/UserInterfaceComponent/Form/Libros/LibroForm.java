@@ -196,11 +196,12 @@ public class LibroForm extends JPanel {
                 int opcion = JOptionPane.showConfirmDialog(parentFrame, "¿Seguro que desea actualizar la portada del libro?", "Confirmacion", JOptionPane.YES_NO_OPTION);
     
                 if (opcion == JOptionPane.YES_OPTION){
-                    if(this.parentFrame.gestorLibros.obtenerPortada(idLibro) == null){
+                    if(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()) == null){
                         guardarBtnClick();
                         parentFrame.gestorLibros.crearPortada(new Portada(new ImageIcon(imagenEscalada), libro.getIdLibro()));
                         this.parentFrame.recargarLibros();
                     }else { 
+                        System.out.println(idLibro);
                         guardarBtnClick();
                         parentFrame.gestorLibros.actualizarPortada(new Portada(parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()).getIdPortada(), new ImageIcon(imagenEscalada), libro.getIdLibro()));
                         this.parentFrame.recargarLibros();
