@@ -24,7 +24,7 @@ public class MenuPanel extends JPanel {
 
     public MenuPanel(LoginFrame parentLoginFrame) {
         this.parentLoginFrame = parentLoginFrame;
-        setupUI();
+        setupUI();;
     }
 
     private void setupUI() {
@@ -32,9 +32,9 @@ public class MenuPanel extends JPanel {
         setPreferredSize(new Dimension(900, 600));
         setBackground(new Color(220, 230, 240));
 
-        // 🔹 Botón "Salir de modo librero" en la esquina superior izquierda
+        // Botón "Salir de modo librero"
         btnSalir.setBounds(10, 10, 200, 40);
-        btnSalir.setBackground(new Color(0, 51, 153)); // Azul oscuro
+        btnSalir.setBackground(new Color(0, 51, 153));
         btnSalir.setForeground(Color.WHITE);
         btnSalir.setFont(new Font("Arial", Font.BOLD, 14));
         btnSalir.setOpaque(true);
@@ -42,31 +42,21 @@ public class MenuPanel extends JPanel {
         add(btnSalir);
         btnSalir.addActionListener(e -> System.exit(0));
 
+        // Botón "Gestionar ventas de libros"
+        addButtonPanel(btnGestionarVenta, 10, 100, new Color(70, 130, 180));
+        btnGestionarVenta.addActionListener(e -> parentMainForm.mostrarGVentasLPanel());
 
+        // Botón "Gestionar alquileres de libros"
+        addButtonPanel(btnGestionarAl, 10, 160, new Color(70, 130, 180));
+        btnGestionarAl.addActionListener(e -> parentMainForm.mostrarGAlquileresLPanel());
 
-
-
-
-
-
-
-
-
-
-
-
-        
-
-        // 📌 Crear paneles individuales para cada botón de gestión (separados)
-        addButtonPanel(btnGestionarVenta, 10, 100, new Color(70, 130, 180)); // Azul acero
-        addButtonPanel(btnGestionVyD, 10, 160, new Color(70, 130, 180));
+        // Botón "Gestionar devolución de libros"
         addButtonPanel(btnGestionarDev, 10, 220, new Color(70, 130, 180));
-        addButtonPanel(btnGestionarAl, 10, 280, new Color(70, 130, 180));
 
-        // 🔴 "Gestionar clientes" en la parte inferior izquierda con fondo rojo
+        // Botón "Gestionar clientes"
         JPanel clientPanel = new JPanel();
         clientPanel.setBounds(10, 600, 250, 50);
-        clientPanel.setBackground(new Color(200, 0, 0)); // Rojo fuerte
+        clientPanel.setBackground(new Color(200, 0, 0));
         clientPanel.setLayout(null);
 
         btnGestionarClien.setBounds(5, 5, 240, 40);
@@ -77,7 +67,7 @@ public class MenuPanel extends JPanel {
         clientPanel.add(btnGestionarClien);
         add(clientPanel);
 
-        // 🔍 Zona de búsqueda
+        // Campo de búsqueda
         JTextField searchField = new JTextField("Inserte el código ISBN del libro...");
         searchField.setBounds(280, 20, 300, 30);
 
@@ -87,7 +77,7 @@ public class MenuPanel extends JPanel {
         add(searchField);
         add(searchButton);
 
-        // 📚 Información del libro
+        // Información del libro
         JLabel bookTitle = new JLabel("El diario de Ana Frank");
         bookTitle.setBounds(410, 80, 300, 20);
         bookTitle.setFont(new Font("Arial", Font.BOLD, 16));
@@ -110,12 +100,11 @@ public class MenuPanel extends JPanel {
         add(bookYear);
         add(bookStock);
 
-        // 🎯 Botones de acción (SEPARADOS Y CON COLORES DIFERENTES)
-        addButtonPanel(btnGestionarVentaL, 1030, 100, new Color(135, 206, 250)); // Celeste
-        addButtonPanel(btnGestionAlquiler, 1030, 160, new Color(138, 43, 226)); // Morado
+        // Botones de acción
+        addButtonPanel(btnGestionarVentaL, 1030, 100, new Color(135, 206, 250));
+        addButtonPanel(btnGestionAlquiler, 1030, 160, new Color(138, 43, 226));
     }
 
-    // 🔹 Método para agregar botones en paneles individuales
     private void addButtonPanel(PatButton button, int x, int y, Color color) {
         JPanel panel = new JPanel();
         panel.setBounds(x, y, 250, 50);

@@ -10,7 +10,7 @@ import UserInterface.Form.LoginFrame;
 
 public class App {
     public static void main(String[] args) throws Exception {
-      LoginFrame.main(new String[]{});
+        SwingUtilities.invokeLater(LoginFrame::new);
 
          //try {
             // AlquilerDAO oA = new AlquilerDAO();
