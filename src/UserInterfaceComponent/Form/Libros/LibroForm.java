@@ -85,7 +85,6 @@ public class LibroForm extends JPanel {
     }
 
     private void guardarBtnClick() {
-        System.out.println("Codigo de Barras: " + libro.getCodigoBarras() + " Codigo ISBN: " + libro.getCodigoISBN());
         if (tituloField.getText().isEmpty() || numeroEdField.getText().isEmpty() || numeroEjemField.getText().isEmpty() || 
             fechaPubField.getText().isEmpty() || precioField.getText().isEmpty() || codigoBarrasField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -143,7 +142,6 @@ public class LibroForm extends JPanel {
         mostrarLibro();
 
         this.parentFrame.recargarLibros();
-        System.out.println("Codigo de Barras: " + libro.getCodigoBarras() + " Codigo ISBN: " + libro.getCodigoISBN());
     }
     
     private void eliminarBtnClick(){
