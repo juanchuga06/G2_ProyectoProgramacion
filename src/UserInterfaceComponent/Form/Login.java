@@ -30,8 +30,12 @@ public class Login extends JPanel {
         btnLogin.addActionListener(e -> btnLoginClick());
 
         // Cargar y redimensionar imagen correctamente
+        try{
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al cargar el logo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override

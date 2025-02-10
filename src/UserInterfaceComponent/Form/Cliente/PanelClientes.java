@@ -107,11 +107,15 @@ public class PanelClientes extends JFrame {
         });
         
         // Agregar el logo en el encabezado del panel
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
-        Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(backgroundImage);
-        JLabel logoLabel = new JLabel(scaledIcon); 
-        headerPanel.add(logoLabel);
+        try{
+            ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
+            Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(backgroundImage);
+            JLabel logoLabel = new JLabel(scaledIcon); 
+            headerPanel.add(logoLabel);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al cargar el logo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         // Se agrega la etiqueta de busqueda
         searchLbl = new PatLabel("Buscar por cliente por nombre:");

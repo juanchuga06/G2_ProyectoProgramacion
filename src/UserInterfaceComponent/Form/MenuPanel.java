@@ -60,8 +60,12 @@ public class MenuPanel extends JPanel {
         add(btnSalir);
         btnSalir.addActionListener(e -> System.exit(0));
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
-        backgroundImage = icon.getImage().getScaledInstance(180, 160, Image.SCALE_SMOOTH);
+        try{
+            ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
+            backgroundImage = icon.getImage().getScaledInstance(180, 160, Image.SCALE_SMOOTH);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al cargar el logo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         JLabel imageLabel = new JLabel(new ImageIcon(backgroundImage));
         imageLabel.setBounds(25, 60, 200, 180);

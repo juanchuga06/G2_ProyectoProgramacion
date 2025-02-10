@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -125,11 +126,15 @@ public class PanelLibros extends JFrame{
             }
         });
         
-        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
-        Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(backgroundImage);
-        JLabel logoLabel = new JLabel(scaledIcon); 
-        headerPanel.add(logoLabel);
+        try{
+            ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
+            Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(backgroundImage);
+            JLabel logoLabel = new JLabel(scaledIcon); 
+            headerPanel.add(logoLabel);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al cargar el logo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         searchLbl = new JLabel("Buscar por libro por ISBN:");
         headerPanel.add(searchLbl);
