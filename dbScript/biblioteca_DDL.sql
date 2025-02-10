@@ -4,8 +4,6 @@ copyRight EPN 2025
 Maye_Ana
 DDL : Definicion de las tablas de la base de datos
 */
-DROP TABLE IF EXISTS Factura;
-DROP TABLE IF EXISTS Venta;
 DROP TABLE IF EXISTS Direccion;
 DROP TABLE IF EXISTS Alquiler;
 DROP TABLE IF EXISTS Bibliotecario;
@@ -17,6 +15,7 @@ DROP TABLE IF EXISTS Sexo;
 DROP TABLE IF EXISTS Autor;
 DROP TABLE IF EXISTS Editorial;
 DROP TABLE IF EXISTS GeneroLibro;
+DROP TABLE IF EXISTS Portada;
 
 
 CREATE TABLE GeneroLibro(
@@ -73,6 +72,7 @@ CREATE TABLE Libro(
     NumeroEdicion            INTEGER NOT NULL,
     NumeroEjemplares         INTEGER NOT NULL,
     FechaPublicacion         VARCHAR(4) NOT NULL,
+    Precio                   DECIMAL(10,2) NOT NULL,
     Estado                   VARCHAR(1) DEFAULT 'A',
     FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaModificacion        DATETIME,
@@ -81,6 +81,15 @@ CREATE TABLE Libro(
     IdAutor                  INTEGER NOT NULL REFERENCES  Autor(IdAutor),
     CodigoBarras             VARCHAR(20) NOT NULL UNIQUE,
     CodigoISBN               VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE Portada(
+    IdPortada                INTEGER PRIMARY KEY AUTOINCREMENT,
+    Portada                  BLOB,
+    IdLibro                  INTEGER NOT NULL REFERENCES Libro(IdLibro),
+    Estado                   VARCHAR(1) DEFAULT 'A',
+    FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaModificacion        DATETIME
 );
 
 CREATE TABLE Cliente(
@@ -135,37 +144,3 @@ CREATE TABLE Direccion(
     IdCliente           INTEGER REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER REFERENCES Bibliotecario(IdBibliotecario)
 );
-
-CREATE TABLE Venta (
-    IdVenta             INTEGER PRIMARY KEY AUTOINCREMENT,
-    CantidadLibros      INTEGER NOT NULL,
-    TotalLibros         DECIMAL(10, 2) NOT NULL,
-    Descuento           VARCHAR(2) NOT NULL,
-    TotalPagar          DECIMAL(10, 2) NOT NULL,
-    Estado              VARCHAR(1) DEFAULT 'A',
-    FechaVenta          DATE NOT NULL,
-    FechaDevolucion     DATE NOT NULL,
-    FechaCreacion            DATETIME    NOT NULL DEFAULT (datetime('now','localtime')),
-    FechaModificacion   DATETIME,
-    IdLibro             INTEGER NOT NULL REFERENCES Libro(IdLibro),
-    IdCliente           INTEGER NOT NULL REFERENCES Cliente(IdCliente),
-    IdBibliotecario     INTEGER NOT NULL REFERENCES Bibliotecario(IdBibliotecario)
-);
-
-
-
-CREATE TABLE Factura (
-    IdFactura             INTEGER PRIMARY KEY AUTOINCREMENT,
-    DireccionLocal        VARCHAR(50) NOT NULL,
-    TelefonoLocal         VARCHAR(10) NOT NULL,
-    CorreoElectronico     VARCHAR(30) NOT NULL,
-    FechaEmision          DATE NOT NULL,             -- Cambio de VARCHAR a DATE
-    NumeroFactura         VARCHAR(12) NOT NULL,
-    IdCliente             INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Cliente
-    DetallesCompra        VARCHAR(150) NOT NULL,
-    IdVenta               INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Venta
-    FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente),
-    FOREIGN KEY (IdVenta)    REFERENCES Venta(IdVenta)
-);
-
-

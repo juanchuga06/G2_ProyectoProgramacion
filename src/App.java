@@ -1,5 +1,8 @@
+import javax.swing.SwingUtilities;
+
+import UserInterfaceComponent.Form.LoginFrame;
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        SwingUtilities.invokeLater(LoginFrame::new);
     }
 }

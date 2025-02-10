@@ -1,4 +1,4 @@
-package BusinessLogic;
+package BusinessLogicComponent;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -32,6 +32,10 @@ public class BLFactory<T>  {
     public boolean del(Integer id) throws Exception {
         return oDAO.delete(id);
 
+    }
+
+    public Integer getMax() throws Exception{
+        return oDAO.getMaxRow();
     }
 
 }
