@@ -156,9 +156,6 @@ public class MenuPanel extends JPanel {
             });
         add(searchField);
 
-        JButton searchButton = new JButton(new ImageIcon("search-icon.png")); // Ícono de lupa
-        searchButton.setBounds(590, 20, 40, 30);
-        add(searchButton);
 
         // ── Contenedor para los libros ──
         // Se utiliza un JPanel con BoxLayout en el eje Y para apilar las "tarjetas" de cada libro
@@ -198,7 +195,74 @@ public class MenuPanel extends JPanel {
     }
 
 
-    private void buscarLibro(String criterio) {}
+    private void buscarLibro(String codigoBarras) {
+        booksContainer.removeAll(); // Limpiar panel antes de mostrar resultados
+    
+        Libro libroEncontrado = gestorLibros.BuscarLibroPorCodigoBarras(codigoBarras);
+        
+        if (libroEncontrado != null) {
+            ImageIcon portada;
+            if (gestorLibros.obtenerPortada(libroEncontrado.getIdLibro()) == null) {
+                portada = new ImageIcon(getClass().getResource("../Resource/placeholder-vertical.png"));
+            } else {
+                portada = gestorLibros.obtenerPortada(libroEncontrado.getIdLibro()).getPortada();
+            }
+    
+            booksContainer.add(createBookPanel(
+                portada,
+                libroEncontrado.getTitulo(),
+                libroEncontrado.getAutor().getNombre(),
+                libroEncontrado.getFechaPublicacion() + " | " + libroEncontrado.getNumeroEdicion() + "a Edición",
+                libroEncontrado.getNumeroEjemplares() + " copias en stock",
+                "US$" + libroEncontrado.getPrecio(),
+                libroEncontrado.getEditorial().getNombre(),
+                libroEncontrado.getCodigoISBN(),
+                libroEncontrado.getCodigoBarras(),
+                libroEncontrado.getGeneroLibro().getNombre()
+            ));
+    
+            // Botón "Cancelar" para restaurar la vista original
+            JButton btnCancelar = new JButton("Cancelar");
+            btnCancelar.setBounds(640, 20, 100, 30);
+            btnCancelar.addActionListener(e -> restaurarVistaOriginal());
+            add(btnCancelar);
+            revalidate();
+            repaint();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un libro con ese código de barras.", "Libro no encontrado", JOptionPane.WARNING_MESSAGE);
+            restaurarVistaOriginal();
+        }
+    }
+
+    private void restaurarVistaOriginal() {
+        booksContainer.removeAll();
+        
+        // Restaurar todos los libros
+        for (Libro l : gestorLibros.LibroList) {
+            ImageIcon portada;
+            if (gestorLibros.obtenerPortada(l.getIdLibro()) == null) {
+                portada = new ImageIcon(getClass().getResource("../Resource/placeholder-vertical.png"));
+            } else {
+                portada = gestorLibros.obtenerPortada(l.getIdLibro()).getPortada();
+            }
+            
+            booksContainer.add(createBookPanel(
+                portada,
+                l.getTitulo(),
+                l.getAutor().getNombre(),
+                l.getFechaPublicacion() + " | " + l.getNumeroEdicion() + "a Edición",
+                l.getNumeroEjemplares() + " copias en stock",
+                "US$" + l.getPrecio(),
+                l.getEditorial().getNombre(),
+                l.getCodigoISBN(),
+                l.getCodigoBarras(),
+                l.getGeneroLibro().getNombre()
+            ));
+        }
+    
+        revalidate();
+        repaint();
+    }
     
     // Método que crea una "tarjeta" de libro con la imagen y sus características
     private JPanel createBookPanel(ImageIcon portada, String title, String author, String yearEdition, String stock, String price, String editorial, String ISBN, String CB, String generoLibro) {
