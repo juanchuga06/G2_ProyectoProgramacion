@@ -14,85 +14,92 @@ import DataAccessComponent.DTO.AutorDTO;
 import DataAccessComponent.DTO.EditorialDTO;
 import DataAccessComponent.DTO.GeneroLibroDTO;
 
+import javax.swing.table.DefaultTableModel;
+
 public class GestorCatalogoLibro {
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
     public List<Editorial> EditorialList;
     public List<GeneroLibro> GeneroLibroList;
     public List<Autor> AutorList;
+    
 
     private BLFactory<EditorialDTO> EditorialBL;
     private BLFactory<GeneroLibroDTO> GeneroLibroBL;
     private BLFactory<AutorDTO> AutorBL;
 
     public GestorCatalogoLibro(Integer modo) {
+        System.out.println("GestorCatalogoLibro creado con modo: " + modo);
         this.AutorList = new ArrayList<>();
         this.EditorialList = new ArrayList<>();
         this.GeneroLibroList = new ArrayList<>();
+      
 
         this.AutorBL = new BLFactory<>(AutorDAO::new);
         this.EditorialBL = new BLFactory<>(EditorialDAO::new);
         this.GeneroLibroBL = new BLFactory<>(GeneroLibroDAO::new);
-
-
     
     }
+
+   
 
     // Modo 1: Autores
     // Modo 2: Editoriales
     // Modo 3: Generos de Libro
 
-    public void cargarCatalogoLibro(Integer modo){
-        this.AutorList.clear();
-        this.EditorialList.clear();
-        this.GeneroLibroList.clear();
+    public void cargarCatalogoLibro(Integer modo) throws Exception{
+         this.AutorList = new ArrayList<>();
+         for (AutorDTO autorDTO : AutorBL.getAll()) {
+             this.AutorList.add(new Autor(autorDTO.getIdAutor(), autorDTO.getNombreAutor()));
+         }
+        this.EditorialList = new ArrayList<>();
+        for (EditorialDTO editorialDTO : EditorialBL.getAll()) {
+            this.EditorialList.add(new Editorial(editorialDTO.getIdEditorial(), editorialDTO.getNombreEditorial()));
+        }
+        this.GeneroLibroList = new ArrayList<>();
+        for (GeneroLibroDTO generoLibroDTO : GeneroLibroBL.getAll()) {
+            this.GeneroLibroList.add(new GeneroLibro(generoLibroDTO.getIdGeneroLibro(), generoLibroDTO.getNombreGeneroLibro()));
+        }
 
-        Autor autoraux;
-        Editorial editorialaux;
-        GeneroLibro generoaux;
 
+        modeloTabla.setRowCount(0);
+        modeloTabla.setColumnCount(0);
+        
+        
+    
         switch (modo) {
-            case 1:
-                try {
-                    for(AutorDTO a: AutorBL.getAll()){
-                        autoraux = new Autor(a.getIdAutor(),a.getNombreAutor());
-                        this.AutorList.add(autoraux);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error al cargar los autores");
+            case 1: // Autores
+                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                for (Autor autor : this.AutorList) {
+                    System.out.println("Autor: " + autor.getIdAutor() + " - " + autor.getNombre());
+                    modeloTabla.addRow(new Object[]{autor.getIdAutor(), autor.getNombre()});
                 }
                 break;
-            case 2:
-            try {
-                for(EditorialDTO e: EditorialBL.getAll()){
-                    editorialaux = new Editorial(e.getIdEditorial(),e.getNombreEditorial());
-                    this.EditorialList.add(editorialaux);
+            case 2: // Editoriales
+                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                for (Editorial editorial : this.EditorialList) {
+                    System.out.println("Editorial: " + editorial.getIdEditorial() + " - " + editorial.getNombre());
+                    modeloTabla.addRow(new Object[]{editorial.getIdEditorial(), editorial.getNombre()});
                 }
-            } catch (Exception e) {
-                System.out.println("Error al cargar las editoriales");
-            }
-            break;
-            case 3:
-            try{
-                for(GeneroLibroDTO g: GeneroLibroBL.getAll()){
-                    generoaux = new GeneroLibro(g.getIdGeneroLibro(),g.getNombreGeneroLibro());
-                    this.GeneroLibroList.add(generoaux);
+                break;
+            case 3: // Géneros
+                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                for (GeneroLibro genero : this.GeneroLibroList) {
+                    System.out.println("Género: " + genero.getIdGeneroLibro() + " - " + genero.getNombre());
+                    modeloTabla.addRow(new Object[]{genero.getIdGeneroLibro(), genero.getNombre()});
                 }
-            } catch (Exception e) {
-                System.out.println("Error al cargar los generos de libros");
-            }
-            break;
-            default:
                 break;
         }
+        
+        modeloTabla.fireTableDataChanged(); // Asegurar que la tabla se actualiza
     }
 
 
-    public void registrarAutor(Autor autor){
-        if(autor == null)
-            return;
+    public void registrarAutor(Autor autor) {
+        if (autor == null) return;
         try {
             AutorBL.add(new AutorDTO(autor.getNombre()));
         } catch (Exception e) {
-            System.out.println("Error al registrar el autor");
+            System.out.println("Error al registrar el autor: " + e.getMessage());
         }
     }
 
