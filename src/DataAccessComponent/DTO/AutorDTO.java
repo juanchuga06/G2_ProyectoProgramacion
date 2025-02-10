@@ -22,6 +22,11 @@ public class AutorDTO {
         setFechaModificacion(fechaModificacion);
     }
 
+    public AutorDTO(Integer idAutor, String nombreAutor) {
+        setIdAutor(idAutor);
+        setNombreAutor(nombreAutor);
+    }
+
     public Integer getIdAutor() {
         return IdAutor;
     }

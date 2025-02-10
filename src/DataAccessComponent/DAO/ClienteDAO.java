@@ -137,6 +137,7 @@ public class ClienteDAO extends SQLiteDataHelper implements IDAO<ClienteDTO> {
             pstmt.setInt(6, entity.getIdEstadoCivil());
             pstmt.setInt(7, entity.getIdSexo());
             pstmt.setString(8,dtf.format(now).toString());
+            pstmt.setInt(9, entity.getIdCliente());
             pstmt.executeUpdate();
             return true;
         }

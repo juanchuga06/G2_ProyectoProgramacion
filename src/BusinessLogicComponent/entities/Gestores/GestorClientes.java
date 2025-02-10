@@ -1,10 +1,13 @@
-package BusinessLogic.entities.Gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import BusinessLogic.BLFactory;
-import BusinessLogic.entities.Personas.*;
+import BusinessLogicComponent.BLFactory;
+import BusinessLogicComponent.entities.Personas.Cliente;
+import BusinessLogicComponent.entities.Personas.Direccion;
+import BusinessLogicComponent.entities.Personas.EstadoCivil;
+import BusinessLogicComponent.entities.Personas.Sexo;
 import DataAccessComponent.DAO.ClienteDAO;
 import DataAccessComponent.DAO.DireccionDAO;
 import DataAccessComponent.DAO.EstadoCivilDAO;
@@ -13,6 +16,8 @@ import DataAccessComponent.DTO.ClienteDTO;
 import DataAccessComponent.DTO.DireccionDTO;
 import DataAccessComponent.DTO.EstadoCivilDTO;
 import DataAccessComponent.DTO.SexoDTO;
+
+
 
 public class GestorClientes {
     public List<Cliente> ClienteList;

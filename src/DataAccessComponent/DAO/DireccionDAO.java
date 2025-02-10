@@ -111,7 +111,7 @@ public class DireccionDAO extends SQLiteDataHelper implements IDAO<DireccionDTO>
     public boolean update(DireccionDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = " UPDATE Direccion SET CallePrincipal = ?, CalleSecundaria = ?, FechaModifica = ? WHERE IdDireccion = ?";
+        String query = " UPDATE Direccion SET CallePrincipal = ?, CalleSecundaria = ?, FechaModificacion = ? WHERE IdDireccion = ?";
         try {
             Connection          conn = openConnection();
             PreparedStatement pstmt  = conn.prepareStatement(query);

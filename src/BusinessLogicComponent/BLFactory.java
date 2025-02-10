@@ -1,16 +1,15 @@
-package BusinessLogic;
-
-import java.util.List;
-import java.util.function.Supplier;
+package BusinessLogicComponent;
 
 import DataAccessComponent.IDAO;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class BLFactory<T>  {
     private final IDAO<T> oDAO;
 
     // Constructor que usa un Supplier para crear la instancia de T
     public BLFactory(Supplier<IDAO<T>> supplier) {
-        this.oDAO = supplier.get(); 
+        this.oDAO = supplier.get();
     }
  
     public List<T> getAll() throws Exception {
@@ -32,6 +31,10 @@ public class BLFactory<T>  {
     public boolean del(Integer id) throws Exception {
         return oDAO.delete(id);
 
+    }
+
+    public Integer getMax() throws Exception{
+        return oDAO.getMaxRow();
     }
 
 }
