@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS Sexo;
 DROP TABLE IF EXISTS Autor;
 DROP TABLE IF EXISTS Editorial;
 DROP TABLE IF EXISTS GeneroLibro;
+DROP TABLE IF EXISTS Portada;
 
 
 CREATE TABLE GeneroLibro(
@@ -82,6 +83,15 @@ CREATE TABLE Libro(
     IdAutor                  INTEGER NOT NULL REFERENCES  Autor(IdAutor),
     CodigoBarras             VARCHAR(20) NOT NULL UNIQUE,
     CodigoISBN               VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE Portada(
+    IdPortada                INTEGER PRIMARY KEY AUTOINCREMENT,
+    Portada                  BLOB,
+    IdLibro                  INTEGER NOT NULL REFERENCES Libro(IdLibro),
+    Estado                   VARCHAR(1) DEFAULT 'A',
+    FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaModificacion        DATETIME
 );
 
 CREATE TABLE Cliente(
@@ -150,8 +160,6 @@ CREATE TABLE Venta (
     IdCliente           INTEGER NOT NULL REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER NOT NULL REFERENCES Bibliotecario(IdBibliotecario)
 );
-
-
 
 CREATE TABLE Factura (
     IdFactura             INTEGER PRIMARY KEY AUTOINCREMENT,

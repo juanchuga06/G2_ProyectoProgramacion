@@ -1,7 +1,6 @@
 package DataAccessComponent.DTO;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 public class LibroDTO {
     private Integer IdLibro;             
@@ -18,8 +17,6 @@ public class LibroDTO {
     private Integer IdAutor;            
     private String CodigoBarras;        
     private String CodigoISBN;
-
-    
 
     public LibroDTO(){
 
@@ -45,9 +42,25 @@ public class LibroDTO {
         setCodigoISBN(codigoISBN);
     }
 
-    public LibroDTO(String titulo, String fechaPublicacion, BigDecimal precio, Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN){
+    public LibroDTO(String titulo, String fechaPublicacion, Integer numeroEdicion, Integer numeroEjemplares, BigDecimal precio, Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN){
         Titulo = titulo;
         FechaPublicacion = fechaPublicacion;
+        Precio = precio;
+        NumeroEdicion = numeroEdicion;
+        NumeroEjemplares = numeroEjemplares;
+        IdGeneroLibro = idGeneroLibro;
+        IdEditorial = idEditorial;
+        IdAutor = idAutor;
+        CodigoBarras = codigoBarras;
+        CodigoISBN = codigoISBN;
+    }
+
+    public LibroDTO(Integer idLibro, String titulo, String fechaPublicacion, Integer numeroEdicion, Integer numeroEjemplares, BigDecimal precio, Integer idGeneroLibro, Integer idEditorial, Integer idAutor, String codigoBarras, String codigoISBN){
+        IdLibro = idLibro;
+        Titulo = titulo;
+        FechaPublicacion = fechaPublicacion;
+        NumeroEdicion = numeroEdicion;
+        NumeroEjemplares = numeroEjemplares;
         Precio = precio;
         IdGeneroLibro = idGeneroLibro;
         IdEditorial = idEditorial;

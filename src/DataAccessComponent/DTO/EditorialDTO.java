@@ -12,7 +12,7 @@ public class EditorialDTO{
 
     public EditorialDTO(String nombreEditorial){
         NombreEditorial = nombreEditorial;
-    };
+    }
     
     public EditorialDTO(Integer idEditorial, String nombreEditorial, String estado, String fechaCreacion, String fechaModificacion) {
        setIdEditorial(idEditorial);
@@ -21,6 +21,11 @@ public class EditorialDTO{
        setFechaCreacion(fechaCreacion);
        setFechaModificacion(fechaModificacion);
     }
+
+    public EditorialDTO(Integer idEditorial, String nombreEditorial) {
+        setIdEditorial(idEditorial);
+        setNombreEditorial(nombreEditorial);
+     }
     
     public Integer getIdEditorial() {
         return IdEditorial;

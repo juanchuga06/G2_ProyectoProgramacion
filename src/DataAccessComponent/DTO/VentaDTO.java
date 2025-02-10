@@ -1,7 +1,6 @@
 package DataAccessComponent.DTO;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 public class VentaDTO {
     private Integer IdVenta;
@@ -43,6 +42,19 @@ public class VentaDTO {
         IdLibro = idLibro;
         IdCliente = idCliente;
         IdBibliotecario = idBibliotecario;
+    }
+
+    public VentaDTO(Integer IdVenta, Integer cantidadLibros, BigDecimal totalLibros, Boolean descuento, String fechaVenta, BigDecimal totalPagar,
+    Integer idLibro, Integer idCliente, Integer idBibliotecario) {
+            setIdVenta(IdVenta);
+            setCantidadLibros(cantidadLibros);
+            setTotalLibros(totalLibros);
+            setDescuento(descuento);
+            setTotalPagar(totalPagar);
+            setFechaVenta(fechaVenta);
+            setIdLibro(idLibro);
+            setIdCliente(idCliente);
+            setIdBibliotecario(idBibliotecario);
     }
 
     public Integer getIdVenta() {

@@ -19,7 +19,12 @@ public class EstadoCivilDTO {
                 setEstado(estado);
                 setFechaCreacion(fechaCreacion);
                 setFechaModificacion(fechaModificacion);
-        }
+    }
+
+    public EstadoCivilDTO(Integer idEstadoCivil, String nombre) {
+        setIdEstadoCivil(idEstadoCivil);
+        setNombre(nombre); 
+    }
             
     public Integer getIdEstadoCivil() {
         return IdEstadoCivil;

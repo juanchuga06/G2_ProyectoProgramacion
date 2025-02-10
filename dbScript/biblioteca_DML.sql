@@ -5,20 +5,6 @@ Maye_Ana
 DML : Llenar datos en la tablas correspondientes
 */
 
-DROP TABLE IF EXISTS Factura;
-DROP TABLE IF EXISTS Venta;
-DROP TABLE IF EXISTS Direccion;
-DROP TABLE IF EXISTS Alquiler;
-DROP TABLE IF EXISTS Bibliotecario;
-DROP TABLE IF EXISTS Cliente;
-DROP TABLE IF EXISTS Libro;
-DROP TABLE IF EXISTS EstadoAlquiler;
-DROP TABLE IF EXISTS EstadoCivil;
-DROP TABLE IF EXISTS Sexo;
-DROP TABLE IF EXISTS Autor;
-DROP TABLE IF EXISTS Editorial;
-DROP TABLE IF EXISTS GeneroLibro;
-
 INSERT INTO GeneroLibro(NombreGeneroLibro)VALUES
 ('Accion'),
 ('Terror'),
@@ -73,7 +59,7 @@ INSERT INTO EstadoAlquiler(Nombre)VALUES
 ('Invalido');
 
 INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Precio, IdGeneroLibro, IdEditorial, IdAutor, CodigoBarras, CodigoISBN)VALUES
-('El diario de Ana Frank',   '1',  '4', '1947','35.00', 3, 5, 10, '9789584277954', '978-95842-7795-4'),
+('El diario de Ana Frank',   '1',  '4', '1947','35.00', 3, 5, 10, '9789978182383', '978-95842-7795-4'),
 ('Matar a un ruiseñor',      '3',  '5', '1960','42.00', 5, 4,  3, '9788418271809', '978-84182-7180-9'),
 ('Orgullo y prejuicio',      '7',  '8', '1567','51.00', 8, 7,  5, '9786562390476', '978-65623-9047-6'),
 ('Don Quijote de la Mancha', '5',  '7', '1605','21.00', 3, 2,  4, '9785392561292', '978-53925-6129-2'),
@@ -260,8 +246,6 @@ SELECT
     v.TotalPagar,
     v.Estado,
     v.FechaVenta,
-    v.FechaDevolucion,
-    v.FechaCreacion,
     v.FechaModificacion,
     l.IdLibro            as Libro,
     c.Nombre             as Nombre,

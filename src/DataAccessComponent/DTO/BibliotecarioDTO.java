@@ -30,6 +30,20 @@ public class BibliotecarioDTO {
         IdSexo = idSexo;
     }
 
+    public BibliotecarioDTO(Integer idB, String nombre, String apellido, String cedula, String telefono,
+    String correoElectronico, String usuario, String contrasenia, Integer idEstadoCivil, Integer idSexo ){
+        idBibliotecario = idB;
+        Nombre = nombre;
+        Apellido = apellido;
+        Cedula = cedula;
+        Telefono = telefono;
+        CorreoElectronico = correoElectronico;
+        Usuario = usuario;
+        Contrasenia = contrasenia;
+        IdEstadoCivil = idEstadoCivil;
+        IdSexo = idSexo;
+    }
+
 
 
     
