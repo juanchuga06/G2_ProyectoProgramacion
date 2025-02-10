@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import BusinessLogicComponent.entities.gestores.GestorDevoluciones;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
+import UserInterfaceComponent.Form.MainForm;
 public class DevolucionPanel extends JFrame{
     private JPanel                 devolucionPanel, topPanel, headerPanel;
     private JButton                addAlquilerBtn;
@@ -99,6 +101,15 @@ public class DevolucionPanel extends JFrame{
         JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
         volverBtn.setAlignmentX(CENTER_ALIGNMENT);
         headerPanel.add(volverBtn);
+
+         volverBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainForm mf = new MainForm();
+                mf.setVisible(true);
+                dispose();
+            }
+        });
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);

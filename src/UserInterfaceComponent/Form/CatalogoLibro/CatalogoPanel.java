@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorCatalogoLibro;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
+import UserInterfaceComponent.Form.Libros.PanelLibros;
 
 
 public class CatalogoPanel extends JFrame {
@@ -70,6 +73,14 @@ public class CatalogoPanel extends JFrame {
         JButton editorialBtn = crearBoton("Editorial", 2);
         JButton generoBtn = crearBoton("Género de libro", 3);
         BiblioButton volverBtn = new BiblioButton("Volver", Color.RED, Color.WHITE);
+        volverBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PanelLibros pl = new PanelLibros();
+                pl.setVisible(true);
+                dispose();
+            }
+        });
 
         botonesPanel.add(autorBtn);
         botonesPanel.add(editorialBtn);

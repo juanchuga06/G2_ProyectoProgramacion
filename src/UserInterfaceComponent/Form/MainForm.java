@@ -10,7 +10,7 @@ public class MainForm extends JFrame {
     public MainForm() {
         setTitle("Menú Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1320, 720);
+        setSize(900, 720);
         setLocationRelativeTo(null);
         setResizable(false);
 

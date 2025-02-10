@@ -1,11 +1,20 @@
 package UserInterfaceComponent.Form;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.*;
 
 import BusinessLogicComponent.entities.Libros.Libro;
 import BusinessLogicComponent.entities.gestores.GestorLibros;
 import UserInterfaceComponent.CustomerControl.PatButton;
+import UserInterfaceComponent.Form.Alquiler.AlquilerPanel;
+import UserInterfaceComponent.Form.Cliente.PanelClientes;
+import UserInterfaceComponent.Form.Devolucion.DevolucionPanel;
+import UserInterfaceComponent.Form.Libros.PanelLibros;
 
 public class MenuPanel extends JPanel {
     @SuppressWarnings("unused")
@@ -14,6 +23,7 @@ public class MenuPanel extends JPanel {
     private LoginFrame parentLoginFrame;
     private GestorLibros gestorLibros;
     private Image backgroundImage;
+    private JPanel booksContainer;
 
     public PatButton btnGestionarVenta = new PatButton("Gestionar ventas\n de libros"),
                      btnGestionVyD = new PatButton("Gestionar \n libros"),
@@ -75,6 +85,34 @@ public class MenuPanel extends JPanel {
         addButtonPanel(btnGestionarDev, 10, 340, new Color(70, 130, 180));
         addButtonPanel(btnGestionarAl, 10, 400, new Color(70, 130, 180));
 
+
+         btnGestionVyD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PanelLibros panelLibros = new PanelLibros();
+                panelLibros.setVisible(true);
+                SwingUtilities.getWindowAncestor(MenuPanel.this).setVisible(false);
+            }
+        });
+
+        btnGestionarDev.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DevolucionPanel panelDevolucion = new DevolucionPanel();
+                panelDevolucion.setVisible(true);
+                SwingUtilities.getWindowAncestor(MenuPanel.this).setVisible(false);
+            }
+        });
+
+        btnGestionarAl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AlquilerPanel panelAlquiler = new AlquilerPanel();
+                panelAlquiler.setVisible(true);
+                SwingUtilities.getWindowAncestor(MenuPanel.this).setVisible(false);
+            }
+        });
+
         // ── Panel de Clientes ──
         JPanel clientPanel = new JPanel(null);
         clientPanel.setBounds(10, 600, 250, 50);
@@ -83,12 +121,35 @@ public class MenuPanel extends JPanel {
         btnGestionarClien.setBackground(Color.WHITE);
         btnGestionarClien.setForeground(Color.BLACK);
         btnGestionarClien.setFont(new Font("Arial", Font.BOLD, 14));
+
+        btnGestionarClien.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PanelClientes pl = new PanelClientes();
+                pl.setVisible(true);
+                SwingUtilities.getWindowAncestor(MenuPanel.this).setVisible(false);
+            }
+        }); 
+
         clientPanel.add(btnGestionarClien);
         add(clientPanel);
 
+
         // ── Zona de búsqueda (fija) ──
-        JTextField searchField = new JTextField("Inserte el código ISBN del libro...");
+        JTextField searchField = new JTextField();
         searchField.setBounds(280, 20, 300, 30);
+        searchField.setToolTipText("Buscar libro...");
+        searchField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        buscarLibro(searchField.getText());
+                    } else if(searchField.getText().isBlank()|| e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        return;
+                    }
+                    
+                }
+            });
         add(searchField);
 
         JButton searchButton = new JButton(new ImageIcon("search-icon.png")); // Ícono de lupa
@@ -97,7 +158,7 @@ public class MenuPanel extends JPanel {
 
         // ── Contenedor para los libros ──
         // Se utiliza un JPanel con BoxLayout en el eje Y para apilar las "tarjetas" de cada libro
-        JPanel booksContainer = new JPanel();
+        booksContainer = new JPanel();
         booksContainer.setLayout(new BoxLayout(booksContainer, BoxLayout.Y_AXIS));
         booksContainer.setBackground(new Color(220, 230, 240));
 
@@ -116,7 +177,10 @@ public class MenuPanel extends JPanel {
                 l.getFechaPublicacion() + " | " + l.getNumeroEdicion() + "a Edición",
                 l.getNumeroEjemplares() + " copias en stock",
                 "US$" + l.getPrecio(),
-                l.getEditorial().getNombre()
+                l.getEditorial().getNombre(),
+                l.getCodigoISBN(),
+                l.getCodigoBarras(),
+                l.getGeneroLibro().getNombre()
             ));
         }
 
@@ -129,8 +193,11 @@ public class MenuPanel extends JPanel {
         add(bookScrollPane);
     }
 
+
+    private void buscarLibro(String criterio) {}
+    
     // Método que crea una "tarjeta" de libro con la imagen y sus características
-    private JPanel createBookPanel(ImageIcon portada, String title, String author, String yearEdition, String stock, String price, String editorial) {
+    private JPanel createBookPanel(ImageIcon portada, String title, String author, String yearEdition, String stock, String price, String editorial, String ISBN, String CB, String generoLibro) {
         JPanel bookPanel = new JPanel();
         bookPanel.setLayout(null);
         bookPanel.setPreferredSize(new Dimension(2000, 350));
@@ -176,9 +243,21 @@ public class MenuPanel extends JPanel {
         bookEditorial.setBounds(220, 145, 400, 20);
         bookPanel.add(bookEditorial);
 
+        JLabel bookISBNCode = new JLabel("ISBN: " + ISBN);
+        bookISBNCode.setBounds(220, 170, 400, 20);
+        bookPanel.add(bookISBNCode);
+
+        JLabel bookBarCode = new JLabel("Código de barras: " + CB);
+        bookBarCode.setBounds(220, 195, 400, 20);
+        bookPanel.add(bookBarCode);
+
+        JLabel bookGenre = new JLabel(generoLibro);
+        bookGenre.setBounds(220, 220, 400, 20);
+        bookPanel.add(bookGenre);
+
         // Separador inferior (opcional)
         JSeparator separator = new JSeparator();
-        separator.setBounds(0, 335, 2000, 1);
+        separator.setBounds(0, 335, 200, 1);
         bookPanel.add(separator);
 
         return bookPanel;

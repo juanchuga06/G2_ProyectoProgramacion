@@ -28,7 +28,6 @@ public class GestorCatalogoLibro {
     private BLFactory<AutorDTO> AutorBL;
 
     public GestorCatalogoLibro(Integer modo) {
-        System.out.println("GestorCatalogoLibro creado con modo: " + modo);
         this.AutorList = new ArrayList<>();
         this.EditorialList = new ArrayList<>();
         this.GeneroLibroList = new ArrayList<>();
@@ -67,21 +66,18 @@ public class GestorCatalogoLibro {
             case 1: // Autores
                 modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
                 for (Autor autor : this.AutorList) {
-                    System.out.println("Autor: " + autor.getIdAutor() + " - " + autor.getNombre());
                     modeloTabla.addRow(new Object[]{autor.getIdAutor(), autor.getNombre()});
                 }
                 break;
             case 2: // Editoriales
                 modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
                 for (Editorial editorial : this.EditorialList) {
-                    System.out.println("Editorial: " + editorial.getIdEditorial() + " - " + editorial.getNombre());
                     modeloTabla.addRow(new Object[]{editorial.getIdEditorial(), editorial.getNombre()});
                 }
                 break;
             case 3: // Géneros
                 modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
                 for (GeneroLibro genero : this.GeneroLibroList) {
-                    System.out.println("Género: " + genero.getIdGeneroLibro() + " - " + genero.getNombre());
                     modeloTabla.addRow(new Object[]{genero.getIdGeneroLibro(), genero.getNombre()});
                 }
                 break;

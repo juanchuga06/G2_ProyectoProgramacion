@@ -6,7 +6,6 @@ import java.awt.*;
 public class LoginFrame extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    Integer idBibliotecarioSistema;
 
     public LoginFrame() {
         setTitle("Acceso al Sistema");

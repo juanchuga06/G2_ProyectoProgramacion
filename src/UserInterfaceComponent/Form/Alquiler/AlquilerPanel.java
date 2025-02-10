@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import BusinessLogicComponent.entities.gestores.GestorAlquileres;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
+import UserInterfaceComponent.Form.MainForm;
 public class AlquilerPanel extends JFrame{
     private JPanel                 alquilerPanel, topPanel;
     private JButton                addAlquilerBtn;
@@ -101,7 +103,6 @@ public class AlquilerPanel extends JFrame{
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout()); 
 
-
         titleLabel = new JLabel("Gestionar Alquileres", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         topPanel.add(titleLabel, BorderLayout.NORTH);
@@ -112,6 +113,14 @@ public class AlquilerPanel extends JFrame{
         volverBtn.setAlignmentX(CENTER_ALIGNMENT);
         headerPanel.add(volverBtn);
 
+        volverBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainForm mf = new MainForm();
+                mf.setVisible(true);
+                dispose();
+            }
+        });
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
@@ -140,17 +149,6 @@ public class AlquilerPanel extends JFrame{
         addAlquilerBtn = new JButton();
         actualizarBoton(buscando);
         headerPanel.add(addAlquilerBtn);
-
-        // recargarBtn = new JButton("Recargar");
-        // recargarBtn.setPreferredSize(new Dimension(200, 40));
-        // recargarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        // recargarBtn.setBackground(Color.BLACK);
-        // recargarBtn.setForeground(Color.WHITE);
-        // recargarBtn.setFocusPainted(false);
-        // recargarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // recargarBtn.addActionListener(e -> recargarLibros());
-        // headerPanel.add(recargarBtn);
-
 
         topPanel.add(headerPanel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);

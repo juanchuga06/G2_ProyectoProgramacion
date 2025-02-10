@@ -120,31 +120,6 @@ INSERT INTO Alquiler(FechaAlquiler, FechaDevolucion, IdLibro, IdCliente, IdBibli
 ('05/01/2025', '30/01/2025',  3, 2, 5, 2),
 ('03/02/2024', '10/02/2024',  5, 3, 2, 2);
 
-INSERT INTO Venta (CantidadLibros, TotalLibros, Descuento, TotalPagar, FechaVenta, IdLibro, IdCliente, IdBibliotecario) VALUES
-(2, 50.00, 'Si', 45.00, '2025-01-15', 1, 3, 2),
-(1, 30.00, 'No', 30.00, '2025-01-20', 2, 5, 1),
-(3, 75.00, 'Si', 65.00, '2025-01-25', 3, 7, 4),
-(5, 120.00, 'Si', 105.00, '2025-02-01', 4, 2, 3),
-(4, 90.00, 'No', 90.00, '2025-02-05', 5, 6, 5),
-(2, 40.00, 'No', 40.00, '2025-02-10', 6, 1, 2),
-(1, 20.00, 'Si', 18.00, '2025-02-15', 7, 8, 3),
-(6, 150.00, 'Si', 130.00, '2025-02-18', 8, 4, 1),
-(3, 70.00, 'No', 70.00, '2025-02-20', 9, 9, 4),
-(2, 45.00, 'Si', 40.00, '2025-02-25', 10, 10, 5);
-
-
-INSERT INTO Factura(DireccionLocal, TelefonoLocal, CorreoElectronico, NumeroFactura, IdCliente, DetallesCompra, IdVenta)VALUES
-('Av. Amazonas 123',        '0998745632', 'contacto@libreriaquito.com',      'FAC-2025-001', 3, '2 libros de literatura',  1),
-('Calle 10 de Agosto 456',  '0987456123', 'info@bibliotecacentral.com',      'FAC-2025-002', 5, '1 libro de historia',     2),
-('Av. Naciones Unidas 789', '0974123658', 'ventas@librosguayaquil.com',      'FAC-2025-003', 7, '3 libros de ciencia',     3),
-('Calle Sucre 321',         '0965234789', 'facturacion@bibliotecacuenca.com','FAC-2025-004', 2, '5 libros de matematicas', 4),
-('Av. Simon Bolivar 852',   '0958741236', 'contacto@libreriacuenca.com',     'FAC-2025-005', 6, '4 libros de arte',        5),
-('Calle Rocafuerte 741',    '0945214783', 'info@bibliotecaesmeraldas.com',   'FAC-2025-006', 1, '2 libros de filosofia',   6),
-('Av. Pichincha 369',       '0936587412', 'ventas@librosloja.com',           'FAC-2025-007', 8, '1 libro de economia',     7),
-('Calle Olmedo 258',        '0923658741', 'facturas@bibliotecamanabi.com',   'FAC-2025-008', 4, '6 libros de tecnologia',  8),
-('Av. 6 de Diciembre 147',  '0914785236', 'info@libreriatunja.com',          'FAC-2025-009', 9, '3 libros de ingenieria',  9),
-('Calle Bolivar 963',       '0902365874', 'contacto@bibliotecapasto.com',    'FAC-2025-010', 10, '2 libros de medicina',  10);
-
 
 SELECT
     l.IdLibro               as  Codigo,
@@ -238,44 +213,6 @@ INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler
 WHERE a.Estado = 'A';
 
 
-SELECT
-    v.IdVenta           as codigo,
-    v.CantidadLibros,
-    v.TotalLibros,
-    v.Descuento,
-    v.TotalPagar,
-    v.Estado,
-    v.FechaVenta,
-    v.FechaModificacion,
-    l.IdLibro            as Libro,
-    c.Nombre             as Nombre,
-    c.Apellido           as Apellido,
-    c.Cedula             as Cedula,
-    c.Telefono           as Telefono,
-    c.CorreoElectronico  as CorreoElectronico,
-    b.Nombre             as Bibliotecario
-FROM Venta as v
-INNER JOIN Libro as l on v.IdLibro = l.IdLibro
-INNER JOIN Cliente as c on v.IdCliente = c.IdCliente
-INNER JOIN Bibliotecario as b on v.IdBibliotecario = b.IdBibliotecario
-WHERE v.Estado = 'A';
-
-
-
-SELECT
-    f.IdFactura                   ,
-    f.DireccionLocal              ,
-    f.TelefonoLocal               ,
-    f.CorreoElectronico           ,
-    f.FechaEmision                ,
-    f.NumeroFactura               ,
-    f.DetallesCompra              ,
-    c.IdCliente                   ,
-    v.IdVenta                     
-FROM Factura as f
-INNER JOIN Venta as v on f.IdVenta = v.IdVenta
-INNER JOIN Cliente as c on v.IdCliente = c.IdCliente
-WHERE  f.Estado = 'A';
 
 
 

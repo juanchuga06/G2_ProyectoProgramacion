@@ -3,6 +3,7 @@ package UserInterfaceComponent.Form.Cliente;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import BusinessLogicComponent.entities.Personas.Cliente;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatLabel;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
+import UserInterfaceComponent.Form.MainForm;
 
 // Los comentarios agregados son momentaneos, hay que eliminarlos después
 // los comentarios son solo para que el código sea más entendible
@@ -94,6 +96,15 @@ public class PanelClientes extends JFrame {
         JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
         volverBtn.setAlignmentX(CENTER_ALIGNMENT);
         headerPanel.add(volverBtn);
+
+         volverBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainForm mf = new MainForm();
+                mf.setVisible(true);
+                dispose();
+            }
+        });
         
         // Agregar el logo en el encabezado del panel
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));

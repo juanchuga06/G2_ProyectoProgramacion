@@ -19,9 +19,10 @@ public class Login extends JPanel {
     private PatTextBox txtUsername;
     private JPasswordField txtPassword;
     private JButton btnLogin;
-    private JLabel lblForgot;
     private Image backgroundImage;
     private LoginFrame parentFrame;
+
+    public static Integer idBibliotecarioSistema;
 
     public Login(LoginFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -56,7 +57,7 @@ public class Login extends JPanel {
         for (Bibliotecario b : gestorBibliotecarios.BibliotecarioList) {
             if (b.getUsuario().equals(username) && Arrays.equals(b.getContrasena().toCharArray(), password)) {
                 JOptionPane.showMessageDialog(this, "¡Login Exitoso!", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-                parentFrame.idBibliotecarioSistema = b.getIdPersona();
+                idBibliotecarioSistema = b.getIdPersona();
                 parentFrame.showMainMenu();
                 loginSuccess = true; 
                 break; 
@@ -120,16 +121,7 @@ public class Login extends JPanel {
         txtPassword.setToolTipText("Ingresa tu contraseña");
         centerPanel.add(txtPassword, gbc);
 
-        // Fila 3: Olvidó su contraseña
-        gbc.gridy = 3;
-        gbc.gridx = 1; // Solo en la columna de los inputs
-        lblForgot = new JLabel("¿Olvidó su contraseña?");
-        lblForgot.setForeground(Color.BLUE);
-        lblForgot.setFont(new Font("Arial", Font.ITALIC, 12));
-        lblForgot.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        centerPanel.add(lblForgot, gbc);
-
-        // Fila 4: Botón Ingresar
+        // Fila 3: Botón Ingresar
         gbc.gridy = 4;
         gbc.gridx = 0;
         gbc.gridwidth = 2; // Centrar el botón en ambas columnas

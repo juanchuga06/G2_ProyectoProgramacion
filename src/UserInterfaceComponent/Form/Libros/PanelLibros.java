@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ import BusinessLogicComponent.entities.gestores.GestorLibros;
 import BusinessLogicComponent.entities.Libros.Libro;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
+import UserInterfaceComponent.Form.MainForm;
+import UserInterfaceComponent.Form.CatalogoLibro.CatalogoPanel;
 
 public class PanelLibros extends JFrame{
     private JPanel                 librosPanel, topPanel;
-    private JButton                addLibroBtn;
+    private JButton                addLibroBtn, editarCatBtn;
     private JTextField             searchField;
     private JScrollPane            scrollPane;
     private JLabel                 titleLabel;
@@ -112,6 +115,15 @@ public class PanelLibros extends JFrame{
         JButton volverBtn = new BiblioButton("Volver", Color.DARK_GRAY, Color.WHITE);
         volverBtn.setAlignmentX(CENTER_ALIGNMENT);
         headerPanel.add(volverBtn);
+
+         volverBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainForm mf = new MainForm();
+                mf.setVisible(true);
+                dispose();
+            }
+        });
         
         ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
         Image backgroundImage = icon.getImage().getScaledInstance(200, 180, Image.SCALE_SMOOTH);
@@ -141,16 +153,23 @@ public class PanelLibros extends JFrame{
         actualizarBoton(buscando);
         headerPanel.add(addLibroBtn);
 
-        // recargarBtn = new JButton("Recargar");
-        // recargarBtn.setPreferredSize(new Dimension(200, 40));
-        // recargarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        // recargarBtn.setBackground(Color.BLACK);
-        // recargarBtn.setForeground(Color.WHITE);
-        // recargarBtn.setFocusPainted(false);
-        // recargarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // recargarBtn.addActionListener(e -> recargarLibros());
-        // headerPanel.add(recargarBtn);
-
+        editarCatBtn = new JButton("Editar Catalogo");
+        editarCatBtn.setPreferredSize(new Dimension(200, 40));
+        editarCatBtn.setFont(new Font("Arial", Font.BOLD, 14));
+        editarCatBtn.setBackground(Color.DARK_GRAY);
+        editarCatBtn.setForeground(Color.WHITE);
+        editarCatBtn.setFocusPainted(false);
+        editarCatBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        editarCatBtn.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CatalogoPanel cp = new CatalogoPanel();
+                cp.setVisible(true);
+                dispose();
+            }
+        });
+        
+        headerPanel.add(editarCatBtn);
 
         topPanel.add(headerPanel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
