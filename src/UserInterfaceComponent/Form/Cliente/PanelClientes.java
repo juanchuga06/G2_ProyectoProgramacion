@@ -118,7 +118,7 @@ public class PanelClientes extends JFrame {
         }
 
         // Se agrega la etiqueta de busqueda
-        searchLbl = new PatLabel("Buscar por cliente por nombre:");
+        searchLbl = new PatLabel("Buscar por nombres:");
         headerPanel.add(searchLbl);
 
         // Se agrega la barra de busqueda, también se agrega un detector de evento que permite 
