@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,19 +109,6 @@ public class GestorDevoluciones {
             System.out.println("Error al marcar devuelto el alquiler");
         }
         return false;
-    }
-
-    public void marcarInvalido(Alquiler alquiler){
-        if(alquiler == null)
-        return;
-        try{
-            AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
-                                           alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 3));
-            alquiler.getLibro().setNumeroEjemplares(alquiler.getLibro().getNumeroEjemplares() - 1);
-            gestorLibros.actualizarLibro(alquiler.getLibro());
-        } catch (Exception e) {
-            System.out.println("Error al marcar devuelto el alquiler");
-        }
     }
 
     public EstadoAlquiler getEstAlquilerByID(int id){

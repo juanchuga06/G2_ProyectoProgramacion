@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.util.ArrayList;
 import java.util.List;

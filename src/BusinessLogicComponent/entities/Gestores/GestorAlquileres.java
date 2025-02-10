@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -135,17 +135,6 @@ public class GestorAlquileres {
             return false;
     }
 
-    public void marcarInvalido(Alquiler alquiler){
-        if(alquiler == null)
-        return;
-        try{
-            AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
-                                           alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 3));
-        } catch (Exception e) {
-            System.out.println("Error al marcar devuelto el alquiler");
-        }
-    }
-
     public EstadoAlquiler getEstAlquilerByID(Integer id){
         EstadoAlquiler estaux = new EstadoAlquiler();
         for(EstadoAlquiler ea: this.EstadoAlquilerList){
@@ -157,15 +146,6 @@ public class GestorAlquileres {
         return estaux;
     }
 
-    public List<Alquiler> buscarAlquileresPorISBN(String codigoISBN){
-        List<Alquiler> alquileresLibro = new ArrayList<>();
-        for(Alquiler a: this.AlquilerList){
-            if(a.getLibro().getCodigoISBN().equals(codigoISBN)){
-                alquileresLibro.add(a);
-            }
-        }
-        return alquileresLibro;
-    }
 
     public List<Alquiler> buscarAlquileresPorCodigoBarras(String codigoBarras){
         List<Alquiler> alquileresLibro = new ArrayList<>();

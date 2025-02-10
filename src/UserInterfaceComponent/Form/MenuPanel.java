@@ -8,8 +8,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 
+import BusinessLogicComponent.entities.Gestores.GestorLibros;
 import BusinessLogicComponent.entities.Libros.Libro;
-import BusinessLogicComponent.entities.gestores.GestorLibros;
 import UserInterfaceComponent.CustomerControl.PatButton;
 import UserInterfaceComponent.Form.Alquiler.AlquilerPanel;
 import UserInterfaceComponent.Form.Cliente.PanelClientes;
@@ -200,7 +200,7 @@ public class MenuPanel extends JPanel {
     
         Libro libroEncontrado = gestorLibros.BuscarLibroPorCodigoBarras(codigoBarras);
         
-        if (libroEncontrado != null) {
+        if (libroEncontrado != null && libroEncontrado.getTitulo() != null) {
             ImageIcon portada;
             if (gestorLibros.obtenerPortada(libroEncontrado.getIdLibro()) == null) {
                 portada = new ImageIcon(getClass().getResource("../Resource/placeholder-vertical.png"));

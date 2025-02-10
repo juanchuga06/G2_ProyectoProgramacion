@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -236,19 +236,4 @@ public class GestorLibros {
         }
     }
 
-    public void eliminarPortada(Portada portada){
-        PortadaDAO portadaDAO = new PortadaDAO();
-        try {
-            portadaDAO.update(new PortadaDTO(portada.getIdPortada(), ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
-        }
-    }
-
-
-
-    // El insertar el código de barras debe aniadirse un poco después de esto más 
-    // arriba en la arquitectura del proyecto
-    public void actualizarCodigoBarras(){}
 }

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
-import BusinessLogicComponent.entities.gestores.GestorBibliotecarios;
+import BusinessLogicComponent.entities.Gestores.GestorBibliotecarios;
 import BusinessLogicComponent.entities.Personas.Bibliotecario;
 import UserInterfaceComponent.CustomerControl.PatLabel;
 import UserInterfaceComponent.CustomerControl.PatTextBox;

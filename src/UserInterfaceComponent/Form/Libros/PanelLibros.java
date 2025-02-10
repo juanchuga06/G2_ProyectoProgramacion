@@ -29,7 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-import BusinessLogicComponent.entities.gestores.GestorLibros;
+import BusinessLogicComponent.entities.Gestores.GestorLibros;
 import BusinessLogicComponent.entities.Libros.Libro;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;

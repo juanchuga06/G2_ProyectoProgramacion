@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import BusinessLogicComponent.entities.gestores.GestorClientes;
+
+import BusinessLogicComponent.entities.Gestores.GestorClientes;
 import BusinessLogicComponent.entities.Personas.Cliente;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatLabel;

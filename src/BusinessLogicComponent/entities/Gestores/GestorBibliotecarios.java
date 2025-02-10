@@ -1,4 +1,4 @@
-package BusinessLogicComponent.entities.gestores;
+package BusinessLogicComponent.entities.Gestores;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +109,7 @@ public class GestorBibliotecarios {
         }
     }
 
-    public void actualizarCliente(Bibliotecario bibliotecario){
+    public void actualizarBibliotecario(Bibliotecario bibliotecario){
         if(bibliotecario == null)
             return;
         try {

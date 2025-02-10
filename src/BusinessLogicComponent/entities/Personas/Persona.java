@@ -115,9 +115,6 @@ public abstract class Persona {
         return Direcciones;
     }
 
-    //Para hacer esta parte debo tomar los registros de direcciones DAO que
-    // tengan la id del Cliente, transformarlas a la claseDireccion
-    //  y añadirla en la lista propia del cliente
     
     
 }

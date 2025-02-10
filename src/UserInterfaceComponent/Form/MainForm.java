@@ -25,15 +25,10 @@ public class MainForm extends JFrame {
         add(menuPanel, BorderLayout.WEST);
         add(contentPanel, BorderLayout.CENTER);
 
-       
-        System.out.println("✅ MainForm inicializado correctamente: " + this);
-
         setVisible(true);
     }
 
-    // 📌 Método para volver al menú principal
     public void mostrarMenuPanel() {
-        System.out.println("📌 Regresando al menú principal...");
         contentPanel.removeAll();
         contentPanel.add(menuPanel);
         contentPanel.revalidate();

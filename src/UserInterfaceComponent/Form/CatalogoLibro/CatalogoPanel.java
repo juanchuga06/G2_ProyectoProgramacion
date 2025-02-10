@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import BusinessLogicComponent.entities.gestores.GestorCatalogoLibro;
+import BusinessLogicComponent.entities.Gestores.GestorCatalogoLibro;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.Form.Libros.PanelLibros;
 

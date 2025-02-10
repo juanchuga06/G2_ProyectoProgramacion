@@ -10,9 +10,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import BusinessLogicComponent.entities.gestores.GestorCatalogoLibro;
 import UserInterfaceComponent.BibliotecaStyle;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
+import BusinessLogicComponent.entities.Gestores.GestorCatalogoLibro;
 import BusinessLogicComponent.entities.Libros.Autor;
 import BusinessLogicComponent.entities.Libros.Editorial;
 import BusinessLogicComponent.entities.Libros.GeneroLibro;
@@ -164,15 +164,12 @@ public class CatalogoForm extends JPanel {
             switch (modo) {
                 case 1:
                     gestorCatalogo.registrarAutor(new Autor(nombre));
-                    System.out.println("Autor registrado: " + nombre);
                     break;
                 case 2:
                     gestorCatalogo.registrarEditorial(new Editorial(nombre));
-                    System.out.println("Editorial registrada: " + nombre);
                     break;
                 case 3:
                     gestorCatalogo.registrarGeneroLibro(new GeneroLibro(nombre));
-                    System.out.println("Género registrado: " + nombre);
                     break;
             }
             cargarDatos(modo); // Asegúrate de que esto actualice la tabla

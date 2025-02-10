@@ -46,11 +46,6 @@ public class Libro {
         setCodigoBarras(codigoBarras);
         setCodigoISBN(codigoISBN);
     }
-
-    public void AsocialCodigoBarras(String codigoBarras) {
-        setCodigoBarras(codigoBarras);
-    }
-
     public Double getPrecio() {
         return Precio;
     }

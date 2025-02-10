@@ -282,7 +282,7 @@ public class LibroForm extends JPanel {
         centerPanel.add(lblTitle, gbc);
 
         gbc.gridwidth = 1;
-
+        
         // Portada (colocada en la primera columna con un tamaño fijo)
         if(libro != null){
             if(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()) != null ){
@@ -299,8 +299,10 @@ public class LibroForm extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
-        centerPanel.add(new JLabel("Título:" + libro.getTitulo()), gbc);
-
+        if(libro != null)
+            centerPanel.add(new JLabel("Título:" + libro.getTitulo()), gbc);
+        else
+            centerPanel.add(new JLabel("Título: "), gbc);
         gbc.gridy++;
         centerPanel.add(new JLabel("Número de Edición:"), gbc);
 

@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-import BusinessLogicComponent.entities.gestores.GestorAlquileres;
+import BusinessLogicComponent.entities.Gestores.GestorAlquileres;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
