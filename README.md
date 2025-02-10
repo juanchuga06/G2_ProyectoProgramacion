@@ -1,18 +1,33 @@
-## Getting Started
+# Proyecto Final de Programación II 
+## Gestor de Libros Mr.Book
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este es el proyecto final de programación 2 del grupo 2. Paralelo GR2SW, Semestre 2024B.  Este proyecto fue un gestor de librería que manejas alquileres, devoluciones, libros y clientes. Todo esto usando una arquitectura de capas. Además, este proyecto implementó un lector de barras que agiliza la búsqueda de libros dentro del sistema.
 
-## Folder Structure
+Versión 1.1
 
-The workspace contains two folders by default, where:
+### Integrantes
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- Anthony Gamboa
+- Chugá Juan
+- Mayerli Chavez
+- Fuentes Carlos
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Estructura de carpetas
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Este proyecto se maneja completamente por medio de las siguientes carpetas
 
-## Dependency Management
+- `src`: donde se guarda el código fuente del proyecto
+- `design`: aquí se guardan los diagramas del proyecto: caso de uso, diagrama de clases, diagrama MER y diagrama de arquitectura N-Tier
+- `database`: aquí se encuentra la base de datos del gestor de biblioteca
+- `dbScript`: aquí se encuentran los scripts usados para la creación de las tablas de la base de datos junto a una cantidad predeterminada de ejemplos
+- `manuales`: donde se guardan los manuales del usuario y técnico, además de la presentación del proyecto
+- `lib`: aquí se mantienen las dependencias del proyecto, como el jdbc usado para conectar el proyecto con la base de datos
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+## Enlaces
+
+El github respectivo del proyecto se encuentra aquí:
+https://github.com/juanchuga06/G2_ProyectoProgramacion
+
+La presentación original de canva puede encontrarse tanto en la carpeta manuales como en el siguiente enlace:
+https://www.canva.com/design/DAGW3Y1brgc/gOKfhdJJYDuzUesckRzWrg/edit?utm_content=DAGW3Y1brgc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
