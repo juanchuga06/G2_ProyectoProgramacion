@@ -96,16 +96,15 @@ public class EstadoAlquilerDAO extends SQLiteDataHelper implements IDAO<EstadoAl
     public boolean update(EstadoAlquilerDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE EstadoAlquiler SET Nombre = ?, Estado = ?,, FechaModificacion = ? WHERE IdEstadoAlquiler = ?";
+        String query = "UPDATE EstadoAlquiler SET Nombre = ?, FechaModificacion = ? WHERE IdEstadoAlquiler = ?";
 
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, entity.getNombre());
-            pstmt.setString(2, entity.getEstado());
-            pstmt.setString(3, dtf.format(now).toString());
-            pstmt.setInt(4, entity.getIdEstadoAlquiler());
+            pstmt.setString(2, dtf.format(now).toString());
+            pstmt.setInt(2, entity.getIdEstadoAlquiler());
             pstmt.executeUpdate();
             return true;
 

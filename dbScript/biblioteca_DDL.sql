@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS Sexo;
 DROP TABLE IF EXISTS Autor;
 DROP TABLE IF EXISTS Editorial;
 DROP TABLE IF EXISTS GeneroLibro;
-
+DROP TABLE IF EXISTS Portada;
 
 
 CREATE TABLE GeneroLibro(
@@ -74,6 +74,7 @@ CREATE TABLE Libro(
     NumeroEdicion            INTEGER NOT NULL,
     NumeroEjemplares         INTEGER NOT NULL,
     FechaPublicacion         VARCHAR(4) NOT NULL,
+    Precio                   DECIMAL(10,2) NOT NULL,
     Estado                   VARCHAR(1) DEFAULT 'A',
     FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaModificacion        DATETIME,
@@ -82,6 +83,15 @@ CREATE TABLE Libro(
     IdAutor                  INTEGER NOT NULL REFERENCES  Autor(IdAutor),
     CodigoBarras             VARCHAR(20) NOT NULL UNIQUE,
     CodigoISBN               VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE Portada(
+    IdPortada                INTEGER PRIMARY KEY AUTOINCREMENT,
+    Portada                  BLOB,
+    IdLibro                  INTEGER NOT NULL REFERENCES Libro(IdLibro),
+    Estado                   VARCHAR(1) DEFAULT 'A',
+    FechaCreacion            DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaModificacion        DATETIME
 );
 
 CREATE TABLE Cliente(
@@ -141,31 +151,31 @@ CREATE TABLE Venta (
     IdVenta             INTEGER PRIMARY KEY AUTOINCREMENT,
     CantidadLibros      INTEGER NOT NULL,
     TotalLibros         DECIMAL(10, 2) NOT NULL,
-    Descuento           VARCHAR(2) NOT NULL,
+    Descuento           BOOLEAN NOT NULL,
     TotalPagar          DECIMAL(10, 2) NOT NULL,
     Estado              VARCHAR(1) DEFAULT 'A',
-    FechaVenta          DATE NOT NULL,
-    FechaDevolucion     DATE NOT NULL,
-    FechaCreacion            DATETIME    NOT NULL DEFAULT (datetime('now','localtime')),
+    FechaVenta          DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     FechaModificacion   DATETIME,
     IdLibro             INTEGER NOT NULL REFERENCES Libro(IdLibro),
     IdCliente           INTEGER NOT NULL REFERENCES Cliente(IdCliente),
     IdBibliotecario     INTEGER NOT NULL REFERENCES Bibliotecario(IdBibliotecario)
 );
 
-
-
 CREATE TABLE Factura (
     IdFactura             INTEGER PRIMARY KEY AUTOINCREMENT,
     DireccionLocal        VARCHAR(50) NOT NULL,
     TelefonoLocal         VARCHAR(10) NOT NULL,
     CorreoElectronico     VARCHAR(30) NOT NULL,
-    FechaEmision          DATE NOT NULL,             -- Cambio de VARCHAR a DATE
+    FechaEmision          DATETIME NOT NULL DEFAULT (datetime('now','localtime')),
     NumeroFactura         VARCHAR(12) NOT NULL,
-    IdCliente             INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Cliente
+    Estado                VARCHAR(1) DEFAULT 'A',
+    FechaModificacion     DATETIME, 
     DetallesCompra        VARCHAR(150) NOT NULL,
-    IdVenta               INTEGER NOT NULL,          -- Clave foránea que hace referencia a la tabla Venta
+    IdCliente             INTEGER NOT NULL,
+    IdVenta               INTEGER NOT NULL,
     FOREIGN KEY (IdCliente)  REFERENCES Cliente(IdCliente),
     FOREIGN KEY (IdVenta)    REFERENCES Venta(IdVenta)
+    CONSTRAINT Factura_Datos UNIQUE (DireccionLocal, TelefonoLocal, CorreoElectronico)
 );
+
 

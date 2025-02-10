@@ -93,16 +93,15 @@ public class GeneroLibroDAO extends SQLiteDataHelper implements IDAO<GeneroLibro
     public boolean update(GeneroLibroDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        String query = "UPDATE GeneroLibro SET NombreGeneroLibro = ?, Estado = ?, FechaCreacion = ?, FechaModificacion = ? WHERE IdGeneroLibro = ? ";
+        String query = "UPDATE GeneroLibro SET NombreGeneroLibro = ?, FechaModificacion = ? WHERE IdGeneroLibro = ? ";
         
         try {
             Connection conn = openConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, entity.getNombreGeneroLibro());
-            pstmt.setString(2, entity.getEstado());
-            pstmt.setString(3, entity.getFechaCreacion());
-            pstmt.setString(4, dtf.format(now).toString());
+            pstmt.setString(2, dtf.format(now).toString());
+            pstmt.setInt(3, entity.getIdGeneroLibro());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
