@@ -71,16 +71,16 @@ INSERT INTO Libro(Titulo, NumeroEdicion, NumeroEjemplares, FechaPublicacion, Pre
 ('El código Da Vinci',       '7',  '1', '1777','35.00', 3, 1,  1, '9785958639663', '978-59586-3966-3');
 
 INSERT INTO Bibliotecario(Nombre, Apellido, Cedula, Telefono, CorreoElectronico, Usuario, Contrasenia, IdEstadoCivil, IdSexo)VALUES
-('Juan Andres',     'Lopez Arrelano', '1745896238',  '0962748173', 'andres.IO@gmail.com',        'Andres_Lopez', '123456Guapo',    1, 1),
-('Maria Lourdes',   'Noboa Correa',   '1892733784',  '0927563833', 'maria_Luis@gmail.com',       'Noboa_Maria',  '199999Flor',     3, 2),
-('Fernanda Ana',    'Quijote Mancha', '1783939394',  '0973647467', 'quijote.ana@gmail.com',      'Quijote_Ana',  'Lamasbella2025', 2, 2),
-('Brayan Luis',     'Java Black',     '1997384848',  '0982838383', 'java_Liss@gmail.com',        'Java_Brayan',  'Programar67',    4, 1),
-('Rodrigo Arnulfo', 'Perez Pallares', '1256304987',  '0995726485', 'Rodrigo.Perez@gmail.com',    'RodriP3',      '12356089',       1, 1),
-('Maria Fernanda',  'Lopez Garcia',   '1758945632',  '0987451236', 'Maria.Lopez@gmail.com',      'MariaL89',     'maria1234',      2, 2),
-('Carlos Andres',   'Mendoza Torres', '1102458974',  '0968745210', 'Carlos.Mendoza@gmail.com',   'CarlosM10',    'mendozA12',      1, 1),
-('Sofia Alejandra', 'Vargas Salinas', '1803698745',  '0974521368', 'Sofia.Vargas@gmail.com',     'SofiV99',      'sofiaPass',      3, 2),
-('Juan Sebastian',  'Ortega Mejia',   '1205789634',  '0958745236', 'Juan.Ortega@gmail.com',      'JuanSeba20',   'juanPass12',     1, 1),
-('Camila Valentina','Fernandez Rios', '1702398547',  '0936587412', 'Camila.Fernandez@gmail.com', 'CamiFer23',    'camila321',      2, 2);
+('Carlos Daniel',   'Fuentes Proano', '1745896238',  '0962748173', 'andres.IO@gmail.com',        'Carlos_Fuentes',  '123456789CF',     1, 1),
+('Juan Camilo',     'Chuga Rosero',   '1892733784',  '0927563833', 'maria_Luis@gmail.com',       'Juan_Chuga',      '123456789JC',     3, 2),
+('Mayerli Anahi',    'Chavez Toapanta', '1783939394',  '0973647467', 'quijote.ana@gmail.com',    'Mayerli_Chavez',  '123456789MC',     2, 2),
+('Anthony Andres','Gamboa Albia',     '1997384848',  '0982838383', 'java_Liss@gmail.com',        'Anthony_Gamboa',  '123456789AG',     4, 1),
+('Rodrigo Arnulfo', 'Perez Pallares', '1256304987',  '0995726485', 'Rodrigo.Perez@gmail.com',    'RodriP3',         '12356089',        1, 1),
+('Maria Fernanda',  'Lopez Garcia',   '1758945632',  '0987451236', 'Maria.Lopez@gmail.com',      'MariaL89',        'maria1234',       2, 2),
+('Carlos Andres',   'Mendoza Torres', '1102458974',  '0968745210', 'Carlos.Mendoza@gmail.com',   'CarlosM10',       'mendozA12',       1, 1),
+('Sofia Alejandra', 'Vargas Salinas', '1803698745',  '0974521368', 'Sofia.Vargas@gmail.com',     'SofiV99',         'sofiaPass',       3, 2),
+('Juan Sebastian',  'Ortega Mejia',   '1205789634',  '0958745236', 'Juan.Ortega@gmail.com',      'JuanSeba20',      'juanPass12',      1, 1),
+('Camila Valentina','Fernandez Rios', '1702398547',  '0936587412', 'Camila.Fernandez@gmail.com', 'CamiFer23',       'camila321',       2, 2);
 
 
 
