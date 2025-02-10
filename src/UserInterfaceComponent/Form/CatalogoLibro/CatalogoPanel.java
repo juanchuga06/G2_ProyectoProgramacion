@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,24 +15,21 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import BusinessLogicComponent.entities.gestores.GestorCatalogoLibro;
+import UserInterfaceComponent.CustomerControl.BiblioButton;
 
 
 public class CatalogoPanel extends JFrame {
     private JPanel             catalogoPanel, topPanel;
     private JLabel             titleLabel;
-    private JScrollPane        scrollPane;
-    private ArrayList<CatalogoForm> catalogoForms;
-    private GestorCatalogoLibro gestorCatalogoLibro;
+    public GestorCatalogoLibro gestorCatalogoLibro;
+    private CatalogoForm catalogoForm;
 
     public CatalogoPanel() { 
         gestorCatalogoLibro = new GestorCatalogoLibro(1);  // Modo inicial
-        CatalogoForm catalogoForm = new CatalogoForm(gestorCatalogoLibro);
-        catalogoForms = new ArrayList<>();
-        catalogoForms.add(catalogoForm); 
+        this.catalogoForm = new CatalogoForm(this);
 
         setTitle("Gestion de catalogo");
         setSize(1300, 720);
@@ -54,7 +50,7 @@ public class CatalogoPanel extends JFrame {
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
     
-        titleLabel = new JLabel("Gestionar Catalogo", SwingConstants.CENTER);
+        titleLabel = new JLabel("Gestionar catalogo de libros", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         topPanel.add(titleLabel, BorderLayout.NORTH);
     
@@ -67,21 +63,19 @@ public class CatalogoPanel extends JFrame {
         JLabel logoLabel = new JLabel(scaledIcon);
         headerPanel.add(logoLabel);
     
-       
         JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         botonesPanel.setOpaque(false); 
-    
         
         JButton autorBtn = crearBoton("Autor", 1);
         JButton editorialBtn = crearBoton("Editorial", 2);
-        JButton generoBtn = crearBoton("Género", 3);
+        JButton generoBtn = crearBoton("Género de libro", 3);
+        BiblioButton volverBtn = new BiblioButton("Volver", Color.RED, Color.WHITE);
 
-        
         botonesPanel.add(autorBtn);
         botonesPanel.add(editorialBtn);
         botonesPanel.add(generoBtn);
+        botonesPanel.add(volverBtn);
     
-        
         headerPanel.add(botonesPanel);
     
         topPanel.add(headerPanel, BorderLayout.CENTER);
@@ -94,10 +88,8 @@ public class CatalogoPanel extends JFrame {
 
     private void inicializarCatalogoPanel() {
         catalogoPanel = new JPanel(new BorderLayout());
-        CatalogoForm catalogoForm = new CatalogoForm(gestorCatalogoLibro);
-        scrollPane = new JScrollPane(catalogoForm);
-        catalogoPanel.add(scrollPane, BorderLayout.CENTER);
-        add(catalogoPanel, BorderLayout.CENTER);
+        CatalogoForm catalogoForm = new CatalogoForm(this);
+        catalogoPanel.add(catalogoForm, BorderLayout.CENTER);
     }
     
    
@@ -110,19 +102,17 @@ public class CatalogoPanel extends JFrame {
         boton.setFocusPainted(false);
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
     
-        boton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        boton.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         boton.addActionListener(e -> {
-            System.out.println("Botón presionado: " + texto);
-            if (!catalogoForms.isEmpty()) {
                 try {
-                    catalogoForms.get(0).cargarDatos(modo);
+                    this.catalogoForm.cargarDatos(modo);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-            }
         });
     
         return boton;
     }
-
-}   
+    
+}
+  

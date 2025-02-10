@@ -1,14 +1,18 @@
 package UserInterfaceComponent.Form.CatalogoLibro;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 import BusinessLogicComponent.entities.gestores.GestorCatalogoLibro;
+import UserInterfaceComponent.BibliotecaStyle;
+import UserInterfaceComponent.CustomerControl.BiblioButton;
 import BusinessLogicComponent.entities.Libros.Autor;
 import BusinessLogicComponent.entities.Libros.Editorial;
 import BusinessLogicComponent.entities.Libros.GeneroLibro;
@@ -18,85 +22,93 @@ import java.awt.*;
 
 public class CatalogoForm extends JPanel {
     private JButton nuevoBtn, guardarBtn, eliminarBtn, cancelarBtn;
+    private JLabel lblTitle;
     private JTable tablaDatos;
     private DefaultTableModel modeloTabla;
     private int modo; // 1 = Autores, 2 = Editoriales, 3 = Géneros
     private GestorCatalogoLibro gestorCatalogo;
-    private JPanel formPanel;
+    private CatalogoPanel parentFrame;
 
-    public CatalogoForm(GestorCatalogoLibro gestorCatalogo) {
-        this.gestorCatalogo = gestorCatalogo;
+    public CatalogoForm(CatalogoPanel parentFrame) {
+        this.parentFrame = parentFrame;
+        this.lblTitle = new JLabel();
+        this.gestorCatalogo = this.parentFrame.gestorCatalogoLibro;
+        initializeComponents();
+    }
+
+    private void initializeComponents(){
         setLayout(new BorderLayout());
-        formPanel = new JPanel();
-        formPanel.setLayout(new BorderLayout());
+        setBackground(new Color(220, 230, 240));
         
-        // Panel de botones a la izquierda
-        JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new GridLayout(4, 1, 5, 5));
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
         
-        nuevoBtn = new JButton("(+) Nuevo");
-        guardarBtn = new JButton("Guardar");
-        eliminarBtn = new JButton("Eliminar");
-        cancelarBtn = new JButton("Cancelar");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 20, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        nuevoBtn.setPreferredSize(new Dimension(200, 5));
-        nuevoBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        nuevoBtn.setBackground(Color.CYAN);
-        nuevoBtn.setForeground(Color.BLACK);
-        nuevoBtn.setFocusPainted(false);
-        nuevoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        guardarBtn.setPreferredSize(new Dimension(200, 5));
-        guardarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        guardarBtn.setBackground(Color.GREEN);
-        guardarBtn.setForeground(Color.WHITE);
-        guardarBtn.setFocusPainted(false);
-        guardarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        eliminarBtn.setPreferredSize(new Dimension(200, 5));
-        eliminarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        eliminarBtn.setBackground(Color.BLACK);
-        eliminarBtn.setForeground(Color.WHITE);
-        eliminarBtn.setFocusPainted(false);
-        eliminarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        cancelarBtn.setPreferredSize(new Dimension(200, 5));
+        nuevoBtn = new BiblioButton("Nuevo", Color.CYAN, Color.BLACK);
+        nuevoBtn.setSize(new Dimension(200, 30));
+        guardarBtn = new BiblioButton("Guardar", Color.GREEN, Color.WHITE);
+        guardarBtn.setSize(new Dimension(200, 30));
+        eliminarBtn = new BiblioButton("Eliminar", Color.BLACK, Color.WHITE);
+        eliminarBtn.setSize(new Dimension(200, 30));
+        cancelarBtn = new BiblioButton("Cancelar", Color.RED, Color.WHITE);
         cancelarBtn.setFont(new Font("Arial", Font.BOLD, 14));
-        cancelarBtn.setBackground(Color.RED);
-        cancelarBtn.setForeground(Color.WHITE);
-        cancelarBtn.setFocusPainted(false);
-        cancelarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cancelarBtn.setSize(new Dimension(200, 30));
 
-        nuevoBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        guardarBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        eliminarBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        cancelarBtn.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
-        panelBotones.add(nuevoBtn);
-        panelBotones.add(guardarBtn);
-        panelBotones.add(eliminarBtn);
-        panelBotones.add(cancelarBtn);
-        
-        add(panelBotones, BorderLayout.WEST);
-        
-        // Tabla de datos a la derecha
-           // Configurar panel principal
-        formPanel = new JPanel();
-        formPanel.setLayout(new BorderLayout());
-        add(formPanel);
-   
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        centerPanel.add(nuevoBtn, gbc);
+
+        gbc.gridy++;
+        centerPanel.add(guardarBtn, gbc);
+
+        gbc.gridy++;
+        centerPanel.add(eliminarBtn, gbc);
+
+        gbc.gridy++;
+        centerPanel.add(cancelarBtn, gbc);
+
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 5;
            // Crear tabla y scroll
         modeloTabla = new DefaultTableModel();
+        cargarDatos(1);
         tablaDatos = new JTable(modeloTabla);
+
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(SwingConstants.CENTER); // Centrar el texto
+        renderer.setBackground(new Color(230, 240, 250)); // Color de fondo
+        renderer.setForeground(new Color(50, 50, 50)); // Color del texto
+        tablaDatos.setDefaultRenderer(Object.class, renderer);
+
+        JTableHeader header = tablaDatos.getTableHeader();
+        header.setFont(new Font("Arial", Font.BOLD, 14)); // Cambiar la fuente
+        header.setBackground(new Color(100, 150, 200)); // Color de fondo
+        header.setForeground(Color.WHITE); // Color del texto
+
+        tablaDatos.setCursor(BibliotecaStyle.CURSOR_HAND);
         tablaDatos.setFillsViewportHeight(true);
    
         JScrollPane scrollPane = new JScrollPane(tablaDatos);
         scrollPane.setPreferredSize(new Dimension(400, 200));
-   
+        
            // Agregar tabla al panel
-        formPanel.add(scrollPane, BorderLayout.CENTER);
+        centerPanel.add(scrollPane, gbc);
         scrollPane.revalidate();
         scrollPane.repaint();
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        centerPanel.add(lblTitle, gbc);
    
         setVisible(true);
         
@@ -105,6 +117,8 @@ public class CatalogoForm extends JPanel {
         guardarBtn.addActionListener(e -> guardarElemento());
         eliminarBtn.addActionListener(e -> eliminarElemento());
         cancelarBtn.addActionListener(e -> cancelarAccion());
+
+        add(centerPanel, BorderLayout.CENTER);
     }
     
     public void cargarDatos(int modo) {
@@ -121,21 +135,24 @@ public class CatalogoForm extends JPanel {
         
         switch (modo) {
             case 1: // Autores
-                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                modeloTabla.setColumnIdentifiers(new String[]{"Nombre del autor"});
                 for (Autor autor : gestorCatalogo.AutorList) {
-                    modeloTabla.addRow(new Object[]{autor.getIdAutor(), autor.getNombre()});
+                    modeloTabla.addRow(new Object[]{autor.getNombre()});
+                    lblTitle.setText("Se ha seleccionado el modo Autores");
                 }
                 break;
             case 2: // Editoriales
-                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                modeloTabla.setColumnIdentifiers(new String[]{"Nombre del editorial"});
                 for (Editorial editorial : gestorCatalogo.EditorialList) {
-                    modeloTabla.addRow(new Object[]{editorial.getIdEditorial(), editorial.getNombre()});
+                    modeloTabla.addRow(new Object[]{editorial.getNombre()});
+                    lblTitle.setText("Se ha seleccionado el modo Editoriales");
                 }
                 break;
             case 3: // Géneros
-                modeloTabla.setColumnIdentifiers(new String[]{"ID", "Nombre"});
+                modeloTabla.setColumnIdentifiers(new String[]{"Nombre del genero de Libro"});
                 for (GeneroLibro genero : gestorCatalogo.GeneroLibroList) {
-                    modeloTabla.addRow(new Object[]{genero.getIdGeneroLibro(), genero.getNombre()});
+                    modeloTabla.addRow(new Object[]{genero.getNombre()});
+                    lblTitle.setText("Se ha seleccionado el modo Genero de libro");
                 }
                 break;
         }
@@ -161,6 +178,7 @@ public class CatalogoForm extends JPanel {
             cargarDatos(modo); // Asegúrate de que esto actualice la tabla
         }
     }
+
     
     private void guardarElemento() {
         int filaSeleccionada = tablaDatos.getSelectedRow();

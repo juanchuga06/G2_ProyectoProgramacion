@@ -13,6 +13,7 @@ public class MenuPanel extends JPanel {
     @SuppressWarnings("unused")
     private LoginFrame parentLoginFrame;
     private GestorLibros gestorLibros;
+    private Image backgroundImage;
 
     public PatButton btnGestionarVenta = new PatButton("Gestionar ventas\n de libros"),
                      btnGestionVyD = new PatButton("Gestionar \n libros"),
@@ -49,11 +50,30 @@ public class MenuPanel extends JPanel {
         add(btnSalir);
         btnSalir.addActionListener(e -> System.exit(0));
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/UserInterfaceComponent/Resource/MRBOOKLG.png"));
+        backgroundImage = icon.getImage().getScaledInstance(180, 160, Image.SCALE_SMOOTH);
+
+        JLabel imageLabel = new JLabel(new ImageIcon(backgroundImage));
+        imageLabel.setBounds(25, 60, 200, 180);
+        add(imageLabel);
+
+        JLabel textLabel = new JLabel("Sistema de Gestion Bibliotecario", SwingConstants.CENTER);
+        textLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        textLabel.setForeground(Color.BLACK);
+        textLabel.setBounds(10, 230, 250, 20);
+        add(textLabel);
+
+        JLabel footerLabel = new JLabel("GRUPO 2 - 2024 Programacion II", SwingConstants.LEFT);
+        footerLabel.setFont(new Font("Arial", Font.BOLD, 12));
+        footerLabel.setForeground(Color.BLACK);
+        footerLabel.setBounds(10, 570 + 90,300, 20);
+        add(footerLabel);
+
+
         // ── Botones del Menú en Paneles ──
-        addButtonPanel(btnGestionarVenta, 10, 100, new Color(70, 130, 180));
-        addButtonPanel(btnGestionVyD, 10, 160, new Color(70, 130, 180));
-        addButtonPanel(btnGestionarDev, 10, 220, new Color(70, 130, 180));
-        addButtonPanel(btnGestionarAl, 10, 280, new Color(70, 130, 180));
+        addButtonPanel(btnGestionVyD, 10, 280, new Color(70, 130, 180));
+        addButtonPanel(btnGestionarDev, 10, 340, new Color(70, 130, 180));
+        addButtonPanel(btnGestionarAl, 10, 400, new Color(70, 130, 180));
 
         // ── Panel de Clientes ──
         JPanel clientPanel = new JPanel(null);

@@ -35,7 +35,7 @@ public class BiblioButton  extends JButton implements MouseListener {
     public void customizeComponent(String text, Color colorBG, Color colorFG) {
         setText(text);
         setPreferredSize(new Dimension(100, 40));
-        setFont(new Font("Arial", Font.BOLD, 8));
+        setFont(new Font("Arial", Font.BOLD, 7));
         setBackground(colorBG);
         setForeground(colorFG);
         setFocusPainted(false);

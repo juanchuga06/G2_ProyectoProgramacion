@@ -37,10 +37,7 @@ public class GestorCatalogoLibro {
         this.AutorBL = new BLFactory<>(AutorDAO::new);
         this.EditorialBL = new BLFactory<>(EditorialDAO::new);
         this.GeneroLibroBL = new BLFactory<>(GeneroLibroDAO::new);
-    
     }
-
-   
 
     // Modo 1: Autores
     // Modo 2: Editoriales
