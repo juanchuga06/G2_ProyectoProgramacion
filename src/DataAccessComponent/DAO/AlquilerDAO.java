@@ -16,24 +16,26 @@ import DataAccessComponent.DTO.AlquilerDTO;
 
 public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
 
+    private static final String SELECT_ALQUILERES = " SELECT  a.IdAlquiler                                                                        "
+                                                   +" ,a.Estado                                                                                 "
+                                                   +" ,a.FechaAlquiler                                                                          "
+                                                   +" ,a.FechaDevolucion                                                                        "
+                                                   +" ,a.FechaModificacion                                                                      "
+                                                   +" ,l.IdLibro                                                                                "
+                                                   +" ,c.IdCliente                                                                              "
+                                                   +" ,b.IdBibliotecario                                                                        "
+                                                   +" ,ea.IdEstadoAlquiler                                                                      "
+                                                   +" FROM Alquiler as a                                                                        "
+                                                   +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                            "
+                                                   +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                      "
+                                                   +" INNER JOIN Bibliotecario as b ON a.IdBibliotecario = b.IdBibliotecario                    "
+                                                   +" INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler               "
+                                                   +" WHERE a.Estado = 'A'";
+
     @Override
     public AlquilerDTO readBy(Integer id) throws Exception {
         AlquilerDTO oA = new AlquilerDTO();
-        String query = " SELECT  a.IdAlquiler                                                                        "
-                        +" ,a.Estado                                                                                 "
-                        +" ,a.FechaAlquiler                                                                          "
-                        +" ,a.FechaDevolucion                                                                        "
-                        +" ,a.FechaModificacion                                                                      "
-                        +" ,l.IdLibro                                                                                "
-                        +" ,c.IdCliente                                                                              "
-                        +" ,b.IdBibliotecario                                                                        "
-                        +" ,ea.IdEstadoAlquiler                                                                      "
-                        +" FROM Alquiler as a                                                                        "
-                        +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                            "
-                        +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                      "
-                        +" INNER JOIN Bibliotecario as b ON a.IdBibliotecario = b.IdBibliotecario                    "
-                        +" INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler               "
-                        +" WHERE a.Estado = 'A' AND IdAlquiler =                                                     "  +  id.toString();
+        String query =  SELECT_ALQUILERES + "AND IdAlquiler =" + id.toString();
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
@@ -59,21 +61,7 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
     @Override
     public List<AlquilerDTO> readAll() throws Exception {
         List<AlquilerDTO> lst = new ArrayList<>();
-        String query = "SELECT  a.IdAlquiler                                                                        "
-                        +" ,a.Estado                                                                                "
-                        +" ,a.FechaAlquiler                                                                         "
-                        +" ,a.FechaDevolucion                                                                       "
-                        +" ,a.FechaModificacion                                                                     "
-                        +" ,l.IdLibro                                                                               "
-                        +" ,c.IdCliente                                                                             "
-                        +" ,b.IdBibliotecario                                                                       "
-                        +" ,ea.IdEstadoAlquiler                                                                     "
-                        +" FROM Alquiler as a                                                                       "
-                        +" INNER JOIN Libro as l ON a.IdLibro = l.IdLibro                                           "
-                        +" INNER JOIN Cliente as c ON a.IdCliente = c.IdCliente                                     "
-                        +" INNER JOIN Bibliotecario as b ON a.IdBibliotecario = b.IdBibliotecario                   "
-                        +" INNER JOIN EstadoAlquiler as ea ON a.IdEstadoAlquiler = ea.IdEstadoAlquiler              "
-                        +" WHERE a.Estado = 'A'                                                                     ";
+        String query = SELECT_ALQUILERES;
         try {
             Connection conn = openConnection();
             Statement stmt = conn.createStatement();
