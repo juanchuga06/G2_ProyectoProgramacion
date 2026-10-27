@@ -34,7 +34,7 @@ public class DireccionDTO {
     }
 
 
-    public DireccionDTO(String callePrincipal, String calleSecundaria, Integer idCliente, Integer idBiblotecario){
+    public DireccionDTO(String callePrincipal, String calleSecundaria, Integer idCliente){
         CallePrincipal = callePrincipal;
         CalleSecundaria = calleSecundaria;
         IdCliente = idCliente;
