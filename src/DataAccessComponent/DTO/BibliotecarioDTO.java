@@ -1,50 +1,36 @@
 package DataAccessComponent.DTO;
 
-public class BibliotecarioDTO {
+public class BibliotecarioDTO extends PersonaDTO {
     private Integer idBibliotecario;    
-    private String  Nombre;             
-    private String  Apellido;           
-    private String  Cedula;             
-    private String  Telefono;           
-    private String  CorreoElectronico;  
     private String  Usuario;            
     private String  Contrasenia ;       
-    private String  Estado;             
-    private String  FechaCreacion;      
-    private String  FechaModificacion;  
-    private Integer IdEstadoCivil;
-    private Integer IdSexo;
-
-
 
     public BibliotecarioDTO(String nombre, String apellido, String cedula, String telefono,
     String correoElectronico, String usuario, String contrasenia, Integer idEstadoCivil, Integer idSexo ){
-        Nombre = nombre;
-        Apellido = apellido;
-        Cedula = cedula;
-        Telefono = telefono;
-        CorreoElectronico = correoElectronico;
+        setNombre(nombre);
+        setApellido(apellido);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreoElectronico(correoElectronico);
         Usuario = usuario;
         Contrasenia = contrasenia;
-        IdEstadoCivil = idEstadoCivil;
-        IdSexo = idSexo;
+        setIdEstadoCivil(idEstadoCivil);
+        setIdSexo(idSexo);
     }
 
     public BibliotecarioDTO(Integer idB, String nombre, String apellido, String cedula, String telefono,
     String correoElectronico, String usuario, String contrasenia, Integer idEstadoCivil, Integer idSexo ){
         idBibliotecario = idB;
-        Nombre = nombre;
-        Apellido = apellido;
-        Cedula = cedula;
-        Telefono = telefono;
-        CorreoElectronico = correoElectronico;
+        setNombre(nombre);
+        setApellido(apellido);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreoElectronico(correoElectronico);
         Usuario = usuario;
         Contrasenia = contrasenia;
-        IdEstadoCivil = idEstadoCivil;
-        IdSexo = idSexo;
+        setIdEstadoCivil(idEstadoCivil);
+        setIdSexo(idSexo);
     }
-
-
 
     
     public BibliotecarioDTO(Integer idBibliotecario, String nombre, String apellido, String cedula, String telefono,
@@ -68,25 +54,6 @@ public class BibliotecarioDTO {
     }
 
     
-    public Integer getIdEstadoCivil() {
-        return IdEstadoCivil;
-    }
-
-
-    public void setIdEstadoCivil(Integer idEstadoCivil) {
-        IdEstadoCivil = idEstadoCivil;
-    }
-
-
-    public Integer getIdSexo() {
-        return IdSexo;
-    }
-
-
-    public void setIdSexo(Integer idSexo) {
-        IdSexo = idSexo;
-    }
-
 
     public BibliotecarioDTO(){
 
@@ -97,110 +64,26 @@ public class BibliotecarioDTO {
         return idBibliotecario;
     }
 
-
     public void setIdBibliotecario(Integer idBibliotecario) {
         this.idBibliotecario = idBibliotecario;
     }
-
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-
-    public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-
-
-    public String getApellido() {
-        return Apellido;
-    }
-
-
-    public void setApellido(String apellido) {
-        Apellido = apellido;
-    }
-
-
-    public String getCedula() {
-        return Cedula;
-    }
-
-
-    public void setCedula(String cedula) {
-        Cedula = cedula;
-    }
-
-
-    public String getTelefono() {
-        return Telefono;
-    }
-
-
-    public void setTelefono(String telefono) {
-        Telefono = telefono;
-    }
-
-
-    public String getCorreoElectronico() {
-        return CorreoElectronico;
-    }
-
-
-    public void setCorreoElectronico(String correoElectronico) {
-        CorreoElectronico = correoElectronico;
-    }
-
 
     public String getUsuario() {
         return Usuario;
     }
 
-
     public void setUsuario(String usuario) {
         Usuario = usuario;
     }
-
 
     public String getContrasenia() {
         return Contrasenia;
     }
 
-
     public void setContrasenia(String contrasenia) {
         Contrasenia = contrasenia;
     }
 
-
-    public String getEstado() {
-        return Estado;
-    }
-
-
-    public void setEstado(String estado) {
-        Estado = estado;
-    }
-
-
-    public String getFechaCreacion() {
-        return FechaCreacion;
-    }
-
-
-    public void setFechaCreacion(String fechaCreacion) {
-        FechaCreacion = fechaCreacion;
-    }
-
-
-    public String getFechaModificacion() {
-        return FechaModificacion;
-    }
-
-
-    public void setFechaModificacion(String fechaModificacion) {
-        FechaModificacion = fechaModificacion;
-    }
     
     public String toString(){
         return getClass().getName() 

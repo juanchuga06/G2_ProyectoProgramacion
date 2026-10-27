@@ -1,17 +1,7 @@
 package DataAccessComponent.DTO;
 
-public class ClienteDTO {
+public class ClienteDTO extends PersonaDTO {
     private Integer IdCliente;
-    private String  Nombre;
-    private String  Apellido;
-    private String  Cedula;
-    private String  Telefono;
-    private String  CorreoElectronico;
-    private String  Estado;
-    private String  FechaCreacion;
-    private String  FechaModificacion;
-    private Integer IdEstadoCivil;
-    private Integer IdSexo;
 
     public ClienteDTO(){ }
 
@@ -45,13 +35,13 @@ public class ClienteDTO {
 }
 
     public ClienteDTO(String nombre, String apellido, String cedula, String telefono, String correoElectronico, Integer idEstadoCivil, Integer idSexo){
-        Nombre = nombre;
-        Apellido = apellido;
-        Cedula = cedula;
-        Telefono = telefono;
-        CorreoElectronico = correoElectronico;
-        IdEstadoCivil = idEstadoCivil;
-        IdSexo = idSexo;
+        setNombre(nombre);
+        setApellido(apellido);
+        setCedula(cedula);
+        setTelefono(telefono);
+        setCorreoElectronico(correoElectronico);
+        setIdEstadoCivil(idEstadoCivil);
+        setIdSexo(idSexo);
     }
 
     public Integer getIdCliente() {
@@ -60,86 +50,6 @@ public class ClienteDTO {
 
     public void setIdCliente(Integer IdCliente) {
         this.IdCliente = IdCliente;
-    }
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
-
-    public String getApellido() {
-        return Apellido;
-    }
-
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
-    }
-
-    public String getCedula() {
-        return Cedula;
-    }
-
-    public void setCedula(String Cedula) {
-        this.Cedula = Cedula;
-    }
-
-    public String getTelefono() {
-        return Telefono;
-    }
-
-    public void setTelefono(String Telefono) {
-        this.Telefono = Telefono;
-    }
-
-    public String getCorreoElectronico() {
-        return CorreoElectronico;
-    }
-
-    public void setCorreoElectronico(String CorreoElectronico) {
-        this.CorreoElectronico = CorreoElectronico;
-    }
-
-    public String getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
-    }
-
-    public String getFechaCreacion() {
-        return FechaCreacion;
-    }
-
-    public void setFechaCreacion(String FechaCreacion) {
-        this.FechaCreacion = FechaCreacion;
-    }
-
-    public String getFechaModificacion() {
-        return FechaModificacion;
-    }
-
-    public void setFechaModificacion(String FechaModificacion) {
-        this.FechaModificacion = FechaModificacion;
-    }
-
-    public Integer getIdEstadoCivil() {
-        return IdEstadoCivil;
-    }
-
-    public void setIdEstadoCivil(Integer IdEstadoCivil) {
-        this.IdEstadoCivil = IdEstadoCivil;
-    }
-
-    public Integer getIdSexo() {
-        return IdSexo;
-    }
-
-    public void setIdSexo(Integer IdSexo) {
-        this.IdSexo = IdSexo;
     }
 
     @Override
