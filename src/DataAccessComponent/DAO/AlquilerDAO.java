@@ -35,11 +35,12 @@ public class AlquilerDAO extends SQLiteDataHelper implements IDAO<AlquilerDTO> {
     @Override
     public AlquilerDTO readBy(Integer id) throws Exception {
         AlquilerDTO oA = new AlquilerDTO();
-        String query =  SELECT_ALQUILERES + "AND IdAlquiler =" + id.toString();
+        String query =  SELECT_ALQUILERES + "AND IdAlquiler = ?";
         try {
             Connection conn = openConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,id);
+            ResultSet rs = pstmt.executeQuery(query);
             while (rs.next()) {
                 oA = new AlquilerDTO(
                     rs.getInt(1),
