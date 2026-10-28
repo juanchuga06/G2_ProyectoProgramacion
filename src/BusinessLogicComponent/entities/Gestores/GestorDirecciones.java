@@ -39,7 +39,7 @@ public class GestorDirecciones {
         if(direccion == null)
             return;
         try{
-            DireccionBL.add(new DireccionDTO(direccion.getCallePrimaria(),direccion.getCalleSecundaria(),direccion.getCliente().getIdPersona(), null));
+            DireccionBL.add(new DireccionDTO(direccion.getCallePrimaria(),direccion.getCalleSecundaria(),direccion.getCliente().getIdPersona()));
         } catch(Exception e){
             System.out.println("Error al registrar la direccion");
         }
