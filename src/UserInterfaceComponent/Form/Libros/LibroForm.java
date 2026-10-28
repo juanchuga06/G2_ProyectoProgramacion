@@ -256,6 +256,11 @@ public class LibroForm extends JPanel {
         }
     }
 
+    private boolean tienePortada(Libro libro){
+    return libro != null
+            && parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()) != null;
+    }
+
     private void initializeComponents(){
         setLayout(new BorderLayout());
         setBackground(new Color(220, 230, 240));
@@ -283,18 +288,16 @@ public class LibroForm extends JPanel {
 
         gbc.gridwidth = 1;
         
-        // Portada (colocada en la primera columna con un tamaño fijo)
-        if(libro != null){
-            if(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()) != null ){
-                gbc.gridx = 0;
-                gbc.gridy = 1;
-                gbc.gridheight = 6; // Para que la imagen abarque varias filas sin afectar a otros elementos
-                gbc.anchor = GridBagConstraints.NORTH; // Mantener en la parte superior
-                PortadaLabel = new JLabel(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()).getPortada());
-                centerPanel.add(PortadaLabel, gbc);
-                gbc.gridheight = 1;
-            } // Restablecer valor predeterminado
+        if(tienePortada(libro)){
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.gridheight = 6; // Para que la imagen abarque varias filas sin afectar a otros elementos
+            gbc.anchor = GridBagConstraints.NORTH; // Mantener en la parte superior
+            PortadaLabel = new JLabel(this.parentFrame.gestorLibros.obtenerPortada(libro.getIdLibro()).getPortada());
+            centerPanel.add(PortadaLabel, gbc);
+            gbc.gridheight = 1;
         }
+
         // Primera columna de etiquetas
         gbc.gridx = 1;
         gbc.gridy = 1;
