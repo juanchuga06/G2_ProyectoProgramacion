@@ -32,7 +32,7 @@ public class CatalogoPanel extends JFrame {
     private CatalogoForm catalogoForm;
 
     public CatalogoPanel() { 
-        gestorCatalogoLibro = new GestorCatalogoLibro(1);  // Modo inicial
+        gestorCatalogoLibro = new GestorCatalogoLibro();  // Modo inicial
         this.catalogoForm = new CatalogoForm(this);
 
         setTitle("Gestion de catalogo");
