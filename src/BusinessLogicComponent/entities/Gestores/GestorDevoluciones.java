@@ -2,6 +2,7 @@ package BusinessLogicComponent.entities.Gestores;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors; // Importación necesaria para Streams
 
 import BusinessLogicComponent.BLFactory;
 import BusinessLogicComponent.entities.Transacciones.Alquiler;
@@ -72,8 +73,9 @@ public class GestorDevoluciones {
     }
 
     public boolean actualizarDevolucion(Alquiler alquiler){
-        if(alquiler == null)
-        return false;
+        if(alquiler == null) {
+            return false; // Corrección adicional de indentación
+        }
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), alquiler.getFechaDevolucion().toString(), alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 2));
@@ -85,8 +87,9 @@ public class GestorDevoluciones {
     }
 
     public boolean eliminarDevolucion(Integer id) throws Exception{
-        if(id == null || id <= 0)
-            return false;
+        if(id == null || id <= 0) {
+            return false; // Corrección adicional de indentación
+        }
         try{
             AlquilerBL.del(id);
             return true;
@@ -97,8 +100,9 @@ public class GestorDevoluciones {
     }
     
     public boolean marcarNoDevuelto(Alquiler alquiler){
-        if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 2)
-            return false;
+        if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 2) {
+            return false; // Corrección adicional de indentación
+        }
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
@@ -112,26 +116,18 @@ public class GestorDevoluciones {
     }
 
     public EstadoAlquiler getEstAlquilerByID(int id){
-        EstadoAlquiler estaux = new EstadoAlquiler();
-        for(EstadoAlquiler ea: this.EstadoAlquilerList){
-            if(ea.getIdEstadoAlquiler().equals(id)){
-                estaux = ea;
-                break;
-            }
-        }
-        return estaux;
+        // Replace Loop with Pipeline aplicado aquí también para mayor consistencia
+        return this.EstadoAlquilerList.stream()
+            .filter(ea -> ea.getIdEstadoAlquiler().equals(id))
+            .findFirst()
+            .orElse(new EstadoAlquiler()); 
     }
 
-
     public List<Alquiler> buscarDevolcionPorCodigoBarras(String codigoBarras){
-        List<Alquiler> alquileresLibro = new ArrayList<>();
-        for(Alquiler a: this.DevolucionList){
-            if(a.getLibro().getCodigoBarras().equals(codigoBarras)){
-                alquileresLibro.add(a);
-            }
-        }
-        return alquileresLibro;
+        // Refactorización: Replace Loop with Pipeline utilizando Stream API
+        return this.DevolucionList.stream()
+            .filter(a -> a.getLibro().getCodigoBarras().equals(codigoBarras))
+            .collect(Collectors.toList());
     }
 
 }
-
