@@ -164,16 +164,12 @@ public class PanelClientes extends JFrame {
         // Se quita de pantalla todos los clientes que se estaban mostrando
         clientesPanel.removeAll();
 
-        for(Cliente c: gestorClientes.ClienteList){
-            if(c.getNombre().toLowerCase().contains(criterio.toLowerCase())){
-                clientesPanel.add(new ClienteForm(this, c, gestorClientes.ClienteList.indexOf(c)));
-                break;
-            }
-            else if(c.getApellido().toLowerCase().contains(criterio.toLowerCase())){
-                clientesPanel.add(new ClienteForm(this, c, gestorClientes.ClienteList.indexOf(c)));
-                break;
-            }
-        }
+        String criterioMin = criterio.toLowerCase();
+
+        gestorClientes.ClienteList.stream()
+        .filter(c -> c.getNombre().toLowerCase().contains(criterioMin) || c.getApellido().toLowerCase().contains(criterioMin))
+        .findFirst()
+        .ifPresent(c -> clientesPanel.add(new ClienteForm(this, c, gestorClientes.ClienteList.indexOf(c))));
         
         // Aunque el metodo encuentre o no al cliente, debe cambiar el boton de agregar 
         // cliente por uno de cancelar que permita salir de ese estado, luego se reinicia el panel de clientes

@@ -32,7 +32,7 @@ import UserInterfaceComponent.BibliotecaStyle;
 import UserInterfaceComponent.CustomerControl.BiblioButton;
 import UserInterfaceComponent.CustomerControl.PatLabel;
 import UserInterfaceComponent.CustomerControl.PatTextBox;
-import UserInterfaceComponent.Form.Login;
+import UserInterfaceComponent.Form.SesionSistema;
 
 public class AlquilerForm extends JPanel{
     private JLabel              clienteLbl, libroLbl, biblioLbl, numCopiasLbl, buscarLbl, fechaAlqLbl,  codBarrasLbl, codISBNLbl;
@@ -114,7 +114,7 @@ public class AlquilerForm extends JPanel{
                 alquiler = new Alquiler();
                 alquiler.setCliente((Cliente) clienteBox.getSelectedItem());
                 alquiler.setLibro((Libro) libroBox.getSelectedItem());
-                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(Login.idBibliotecarioSistema));
+                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(SesionSistema.getIdBibliotecario()));
                 alquiler.setEstadoAlquiler(this.parentFrame.gestorAlquileres.getEstAlquilerByID(1));
                 if(!this.parentFrame.gestorAlquileres.registrarAlquiler(alquiler)){
                     return;
@@ -124,7 +124,7 @@ public class AlquilerForm extends JPanel{
             else {
                 alquiler.setCliente((Cliente) clienteBox.getSelectedItem());
                 alquiler.setLibro((Libro) libroBox.getSelectedItem());
-                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(Login.idBibliotecarioSistema));
+                alquiler.setBibliotecario(this.parentFrame.gestorAlquileres.gestorBibliotecarios.getBibliotecarioByID(SesionSistema.getIdBibliotecario()));
                 alquiler.setEstadoAlquiler(this.parentFrame.gestorAlquileres.getEstAlquilerByID(1));
                 if(!this.parentFrame.gestorAlquileres.actualizarAlquiler(alquiler)){
                     return;

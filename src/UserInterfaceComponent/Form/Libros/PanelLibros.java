@@ -38,11 +38,9 @@ import UserInterfaceComponent.Form.CatalogoLibro.CatalogoPanel;
 
 public class PanelLibros extends JFrame{
     private JPanel                 librosPanel, topPanel;
-    private JButton                addLibroBtn, editarCatBtn;
+    private JButton                addLibroBtn;
     private JTextField             searchField;
     private JScrollPane            scrollPane;
-    private JLabel                 titleLabel;
-    private JLabel           searchLbl;
     private ArrayList<LibroForm>   libroForms;
     public GestorLibros            gestorLibros;
     private boolean buscando = false;
@@ -107,7 +105,7 @@ public class PanelLibros extends JFrame{
         topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout()); 
 
-        titleLabel = new JLabel("Gestionar Libros", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Gestionar Libros", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         topPanel.add(titleLabel, BorderLayout.NORTH);
 
@@ -136,7 +134,7 @@ public class PanelLibros extends JFrame{
             JOptionPane.showMessageDialog(this, "Error al cargar el logo", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        searchLbl = new JLabel("Buscar por libro por ISBN:");
+        JLabel searchLbl = new JLabel("Buscar por libro por ISBN:");
         headerPanel.add(searchLbl);
 
         searchField = new PatTextBox();
@@ -158,7 +156,7 @@ public class PanelLibros extends JFrame{
         actualizarBoton(buscando);
         headerPanel.add(addLibroBtn);
 
-        editarCatBtn = new JButton("Editar Catalogo");
+        JButton editarCatBtn = new JButton("Editar Catalogo");
         editarCatBtn.setPreferredSize(new Dimension(200, 40));
         editarCatBtn.setFont(new Font("Arial", Font.BOLD, 14));
         editarCatBtn.setBackground(Color.DARK_GRAY);
