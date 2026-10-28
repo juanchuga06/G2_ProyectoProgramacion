@@ -9,6 +9,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageUtilities {
+
+    private ImageUtilities() {
+    }
+    
     // El parametro format debe ser "png", "jpg"
     public static byte[] imageIconToBytes(ImageIcon icon, String format) {
         try {

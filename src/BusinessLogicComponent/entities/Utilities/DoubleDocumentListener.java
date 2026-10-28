@@ -30,7 +30,7 @@ public class DoubleDocumentListener implements DocumentListener {
         SwingUtilities.invokeLater(() -> {
             String texto = textField.getText();
             
-            if (!texto.matches("\\d*\\.?\\d*")) {
+            if (!texto.matches("\\d*+\\.?\\d*+")) {
                 textField.setText(texto.replaceAll("[^\\d.]", "")); 
                 
                 int firstDotIndex = textField.getText().indexOf(".");

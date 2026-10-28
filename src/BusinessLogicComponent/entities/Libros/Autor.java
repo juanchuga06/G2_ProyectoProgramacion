@@ -1,8 +1,8 @@
 package BusinessLogicComponent.entities.Libros;
 
 public class Autor {
-    private Integer IdAutor;
-    private String Nombre;
+    private Integer idAutor;
+    private String nombre;
     
     public Autor() {
     }
@@ -17,21 +17,21 @@ public class Autor {
     }
 
     public Integer getIdAutor() {
-        return IdAutor;
+        return idAutor;
     }
     public void setIdAutor(Integer idAutor) {
         if(idAutor == null || idAutor <= 0)
             return;
         else
-            this.IdAutor = idAutor;
+            this.idAutor = idAutor;
     }
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
     public void setNombre(String nombre) {
         if(nombre == null || nombre.isEmpty())
-            this.Nombre = "NombreComun";
+            this.nombre = "NombreComun";
         else
-            this.Nombre = nombre;
+            this.nombre = nombre;
     }
 }
