@@ -7,13 +7,14 @@ import java.net.URL;
 import javax.swing.SwingConstants;
 
 public abstract class BibliotecaStyle {
+    private static final String FONT_NAME = "JetBrains Mono";
    public static final Color COLOR_FONT = new Color(200, 200, 200); //(218, 8, 40)
     public static final Color COLOR_FONT_LIGHT = new Color(100, 100, 100);
     public static final Color COLOR_CURSOR = Color.black;
     public static final Color COLOR_BORDER = Color.lightGray;
-    public static final Font  FONT         = new Font("JetBrains Mono", Font.PLAIN, 14);
-    public static final Font  FONT_BOLD    = new Font("JetBrains Mono", Font.BOLD | Font.PLAIN, 14);
-    public static final Font  FONT_SMALL   = new Font("JetBrains Mono", Font.PLAIN| Font.PLAIN, 10);
+    public static final Font  FONT         = new Font(FONT_NAME, Font.PLAIN, 14);
+    public static final Font  FONT_BOLD    = new Font(FONT_NAME, Font.BOLD | Font.PLAIN, 14);
+    public static final Font  FONT_SMALL   = new Font(FONT_NAME, Font.PLAIN| Font.PLAIN, 10);
 
     public static final int ALIGNMENT_LEFT  = SwingConstants.LEFT;
     public static final int ALIGNMENT_RIGHT = SwingConstants.RIGHT;
