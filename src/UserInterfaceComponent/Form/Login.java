@@ -22,8 +22,6 @@ public class Login extends JPanel {
     private Image backgroundImage;
     private LoginFrame parentFrame;
 
-    public static Integer idBibliotecarioSistema;
-
     public Login(LoginFrame parentFrame) {
         this.parentFrame = parentFrame;
         initializeComponents();
@@ -61,7 +59,7 @@ public class Login extends JPanel {
         for (Bibliotecario b : gestorBibliotecarios.BibliotecarioList) {
             if (b.getUsuario().equals(username) && Arrays.equals(b.getContrasena().toCharArray(), password)) {
                 JOptionPane.showMessageDialog(this, "¡Login Exitoso!", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-                idBibliotecarioSistema = b.getIdPersona();
+                SesionSistema.iniciarSesion(b.getIdPersona());
                 parentFrame.showMainMenu();
                 loginSuccess = true; 
                 break; 
