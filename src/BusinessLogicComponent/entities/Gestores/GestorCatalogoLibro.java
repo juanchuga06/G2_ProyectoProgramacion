@@ -27,7 +27,10 @@ public class GestorCatalogoLibro {
     private BLFactory<GeneroLibroDTO> GeneroLibroBL;
     private BLFactory<AutorDTO> AutorBL;
 
-    public GestorCatalogoLibro(Integer modo) {
+    // Refactorización aplicada: Se elimina el parámetro 'Integer modo' no utilizado 
+    // (Remove Dead Code / Change Function Declaration)
+    
+    public GestorCatalogoLibro() {
         this.AutorList = new ArrayList<>();
         this.EditorialList = new ArrayList<>();
         this.GeneroLibroList = new ArrayList<>();

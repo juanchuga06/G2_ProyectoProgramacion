@@ -3,6 +3,8 @@ package BusinessLogicComponent.entities.Gestores;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import BusinessLogicComponent.BLFactory;
 import BusinessLogicComponent.entities.Libros.Autor;
@@ -23,6 +25,7 @@ import DataAccessComponent.DTO.LibroDTO;
 import DataAccessComponent.DTO.PortadaDTO;
 
 public class GestorLibros {
+    private static final Logger LOGGER = Logger.getLogger(GestorLibros.class.getName());
     public List<Editorial> EditorialList;
     public List<GeneroLibro> GeneroLibroList;
     public List<Autor> AutorList;
@@ -64,7 +67,7 @@ public class GestorLibros {
                 this.AutorList.add(autoraux);
             }
         } catch (Exception e) {
-            System.out.println("Error al cargar los autores");
+            LOGGER.log(Level.SEVERE, "Error al cargar los autores", e);
         }
 
         try {
@@ -73,7 +76,7 @@ public class GestorLibros {
                 this.EditorialList.add(editorialaux);
             }
         } catch (Exception e) {
-            System.out.println("Error al cargar las editoriales");
+            LOGGER.log(Level.SEVERE, "Error al cargar las editoriales", e);
         }
         
         try{
@@ -82,7 +85,7 @@ public class GestorLibros {
                 this.GeneroLibroList.add(generoaux);
             }
         } catch (Exception e) {
-            System.out.println("Error al cargar los generos de libros");
+            LOGGER.log(Level.SEVERE, "Error al cargar los generos de libros", e);
         }
 
         try{
@@ -94,7 +97,7 @@ public class GestorLibros {
                 this.LibroList.add(libroaux);
                 }
         } catch (Exception e) {
-            System.out.println("Error al cargar los libros");
+            LOGGER.log(Level.SEVERE, "Error al cargar los libros", e);
         }
     }
     
@@ -106,7 +109,7 @@ public class GestorLibros {
                                      libro.getGeneroLibro().getIdGeneroLibro(), libro.getEditorial().getIdEditorial(),
                                      libro.getAutor().getIdAutor(), libro.getCodigoBarras(), libro.getCodigoISBN()));
         } catch(Exception e){
-            System.out.println("Error al registrar el libro");
+            LOGGER.log(Level.SEVERE, "Error al registrar el libro", e);
         }   
     }
 
@@ -117,7 +120,7 @@ public class GestorLibros {
                                         libro.getAutor().getIdAutor(), libro.getCodigoBarras(), libro.getCodigoISBN()));
 
         } catch(Exception e){
-            System.out.println("Error al actualizar el libro");
+            LOGGER.log(Level.SEVERE, "Error al actualizar el libro", e);
         }
     }  
 
@@ -128,7 +131,7 @@ public class GestorLibros {
             LibroBL.del(id);
             return true;
         } catch (Exception e) {
-            System.out.println("Error al eliminar al Libro");
+            LOGGER.log(Level.SEVERE, "Error al eliminar al Libro", e);
         }
         return false;
     }
@@ -210,8 +213,7 @@ public class GestorLibros {
                 return portadaaux;
             }
         } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al obtener la portada", e);
         }
         return portadaaux;
     }
@@ -221,8 +223,7 @@ public class GestorLibros {
         try {
             portadaDAO.create(new PortadaDTO(ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
         } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al crear la portada", e);
         }
     }
 
@@ -231,8 +232,7 @@ public class GestorLibros {
         try {
             portadaDAO.update(new PortadaDTO(portada.getIdPortada(), ImageUtilities.imageIconToBytes(portada.getPortada(), "png"), portada.getIdLibro()));
         } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al actualizar la portada", e);
         }
     }
 

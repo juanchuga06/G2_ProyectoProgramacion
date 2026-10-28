@@ -95,8 +95,10 @@ public class GestorAlquileres {
     }
 
     public boolean actualizarAlquiler(Alquiler alquiler){
-        if(alquiler == null)
+        if(alquiler == null){
             return false;
+        }
+            
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), null, alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 1));
@@ -109,8 +111,10 @@ public class GestorAlquileres {
     }
 
     public boolean eliminarAlquiler(Integer id) throws Exception{
-        if(id == null || id <= 0)
+        if(id == null || id <= 0){
             return false;
+        }
+            
         try{
             AlquilerBL.del(id);
             return true;
@@ -121,8 +125,9 @@ public class GestorAlquileres {
     }
     
     public boolean marcarDevuelto(Alquiler alquiler){
-        if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 1)
-        return false;
+        if(alquiler == null || alquiler.getEstadoAlquiler().getIdEstadoAlquiler() != 1){
+            return false;
+        }
         try{
             AlquilerBL.upd(new AlquilerDTO(alquiler.getIdAlquiler(), alquiler.getFechaAlquiler(), LocalDate.now().toString(), alquiler.getLibro().getIdLibro(), 
                                            alquiler.getCliente().getIdPersona(), alquiler.getBibliotecario().getIdPersona(), 2));
